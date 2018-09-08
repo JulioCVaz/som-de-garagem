@@ -1,0 +1,14 @@
+{
+  "name": "project-som-de-garagem",
+  "version": "1.0.0",
+  "description": "projeto de tcc som de garagem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mstream": "^3.6.2"
+  }
+}
