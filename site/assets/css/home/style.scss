@@ -7,10 +7,50 @@
 .home{
     background-image: url('../img/home-background.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
     height: 100vh;
     width: 100%;
 }
 
 .navbar-home{
-    
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    padding-top: 10%;
+    font-size: 16px;
+    text-decoration: none;
+    .navbar-wrapper{
+        padding-right: 30px;
+    }
+    .navbar-color{
+        padding-right: 20px;
+        li{
+            padding-left: 15px;
+            padding-right: 15px;
+            a{
+                color: white!important;
+            }
+        }
+    }
+}
+
+.content-home {
+    height: 100%;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    img{
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.wrapper-content-home{
+    width: 100%;
+    // justify-content: space-evenly;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
 }

@@ -6,7 +6,42 @@
 .home {
   background-image: url("../img/home-background.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   width: 100%; }
+
+.navbar-home {
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  padding-top: 10%;
+  font-size: 16px;
+  text-decoration: none; }
+  .navbar-home .navbar-wrapper {
+    padding-right: 30px; }
+  .navbar-home .navbar-color {
+    padding-right: 20px; }
+    .navbar-home .navbar-color li {
+      padding-left: 15px;
+      padding-right: 15px; }
+      .navbar-home .navbar-color li a {
+        color: white !important; }
+
+.content-home {
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 20px; }
+  .content-home img {
+    width: 80px;
+    height: 80px; }
+
+.wrapper-content-home {
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  display: flex; }
 
 /*# sourceMappingURL=style.css.map */

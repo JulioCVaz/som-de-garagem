@@ -7,22 +7,22 @@
     <title>som de garagem</title>
     <!-- bootstrap e css -->
     <link rel="stylesheet" href="assets/components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
+    <!-- <link rel="stylesheet" href="assets/css/normalize.css" type="text/css"> -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
     <!--  -->
 </head>
 <body>
-    <section class="main">
-        <!-- inicio home -->
-        <section class="home">
-        <nav class="navbar navbar-expand-lg navbar-home">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <!-- inicio home -->
+    <section class="home">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-home">
+            <!-- aqui vai ficar a logo -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse navbar-wrapper justify-content-end" id="navbarNav">
+            <ul class="navbar-nav navbar-color">
             <li class="nav-item active">
                 <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
             </li>
@@ -41,24 +41,31 @@
             </ul>
         </div>
         </nav>
-        </section>
-        <!-- fim home -->
-        <!-- inicio descricao -->
-        <section class="descricao">
-        
-        </section>
-        <!-- fim descricao -->
-        <!-- inicio vendas -->
-        <section class="vendas">
-
-        </section>
-        <!-- fim vendas -->
-        <!-- inicio app -->
-        <section class="app">
-        
-        </section>
-        <!-- fim app -->
+        <!-- scroll down -->
+        <div class="content-home">
+            <div class="wrapper-content-home">
+                <h4>lorem ipsum dolor sit amet</h4>
+                <img src="assets/img/scrolldown.gif" alt="gif scroll down">
+                <h4>lorem ipsum dolor sit amet</h4>
+            </div>
+        </div>
     </section>
+    <!-- fim home -->
+    <!-- inicio descricao -->
+    <section class="descricao">
+    
+    </section>
+    <!-- fim descricao -->
+    <!-- inicio vendas -->
+    <section class="vendas">
+
+    </section>
+    <!-- fim vendas -->
+    <!-- inicio app -->
+    <section class="app">
+    
+    </section>
+    <!-- fim app -->
 
     <!-- scripts -->
     <script src="assets/components/jquery/dist/jquery.min.js"></script>
