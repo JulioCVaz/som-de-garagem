@@ -45,15 +45,23 @@
         <div class="content-home">
             <div class="wrapper-content-home">
                 <h4>lorem ipsum dolor sit amet</h4>
-                <img src="assets/img/scrolldown.gif" alt="gif scroll down">
+                <a href="#description"><img src="assets/img/scrolldown.gif" alt="gif scroll down"></a>
                 <h4>lorem ipsum dolor sit amet</h4>
             </div>
         </div>
     </section>
     <!-- fim home -->
     <!-- inicio descricao -->
-    <section class="descricao">
-    
+    <section id="description" class="descricao">
+        <h1>lorem ipsum</h1>
+        <div class="wrapper-circle">
+            <div class="circle-one"></div>
+            <div class="circle-two"></div>
+            <div class="circle-three"></div>
+        </div>
+        <div class="content-descricao">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt ipsum voluptates laboriosam corrupti quia officiis quis minima, vero nesciunt accusantium fugiat suscipit maiores consequatur dolor. Nesciunt sit laboriosam veniam? Quidem!
+        </div>
     </section>
     <!-- fim descricao -->
     <!-- inicio vendas -->
