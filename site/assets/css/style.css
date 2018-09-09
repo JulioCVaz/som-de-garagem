@@ -1,14 +1,12 @@
 /*
 *
-*   Components com estilos globais do site
+*   estilo da home
 *
 */
-.home,
-.descricao,
-.vendas,
-.app {
-  width: 100%;
-  border: 1px solid #000;
-  height: 100vh; }
+.home {
+  background-image: url("../img/home-background.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */
