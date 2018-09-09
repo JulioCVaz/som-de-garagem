@@ -1,0 +1,14 @@
+/*
+*
+*   Components com estilos globais do site
+*
+*/
+.home,
+.descricao,
+.vendas,
+.app {
+  width: 100%;
+  border: 1px solid #000;
+  height: 100vh; }
+
+/*# sourceMappingURL=style.css.map */

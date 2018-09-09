@@ -1,0 +1,45 @@
+/*
+Error: Invalid CSS after "...eurl }}/images'": expected "{", was ";"
+        on line 5 of assets/components/popper.js/docs/css/main.scss
+
+1: ---
+2: # Only the main Sass file needs front matter (the dashes are enough)
+3: ---
+4: 
+5: $baseurl: '{{ site.baseurl }}/images';
+6: 
+7: @import 'libs/vars';
+8: @import 'libs/functions';
+9: @import 'libs/mixins';
+10: @import 'font-awesome.min.css';
+
+Backtrace:
+assets/components/popper.js/docs/css/main.scss:5
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1179:in `expected'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1115:in `expected'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1110:in `tok!'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:654:in `block'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:647:in `ruleset'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:673:in `block_child'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:663:in `block_contents'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:123:in `stylesheet'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:39:in `parse'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:403:in `_to_tree'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:378:in `_render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:295:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:490:in `update_stylesheet'
+/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:209:in `each'
+/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:293:in `watch'
+/usr/lib/ruby/vendor_ruby/sass/plugin.rb:109:in `method_missing'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:379:in `watch_or_update'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:51:in `process_result'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:52:in `parse'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:19:in `parse!'
+/usr/bin/sass:8:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...eurl }}/images'\": expected \"{\", was \";\"\A         on line 5 of assets/components/popper.js/docs/css/main.scss\A \A 1: ---\A 2: # Only the main Sass file needs front matter (the dashes are enough)\A 3: ---\A 4: \A 5: $baseurl: '{{ site.baseurl }}/images';\A 6: \A 7: @import 'libs/vars';\A 8: @import 'libs/functions';\A 9: @import 'libs/mixins';\A 10: @import 'font-awesome.min.css';"; }
