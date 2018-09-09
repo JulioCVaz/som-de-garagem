@@ -1,0 +1,32 @@
+{
+  "name": "somdegaragem.app",
+  "description": "Site para a plataforma som de garagem",
+  "main": "assets/scripts/main.js",
+  "authors": [
+    "equipe som de garagem dev"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "som",
+    "de",
+    "garagem",
+    "app",
+    "julio",
+    "guilherme",
+    "gustavo"
+  ],
+  "homepage": "https://github.com/JulioCVaz/som-de-garagem",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.1.3",
+    "popper.js": "^1.14.4"
+  }
+}
