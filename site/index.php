@@ -66,12 +66,19 @@
     <!-- fim descricao -->
     <!-- inicio vendas -->
     <section class="vendas">
-
+        <div class="wrapper-plan-free">
+            <div class="content-free"></div>
+            <div class="sign-free">EXPERIENTE O FREE</div>
+        </div>
+        <div class="wrapper-plan-premium">
+            <div class="content-premium"></div>
+            <div class="sign-premium">OBTER PREMIUM</div>
+        </div>
     </section>
     <!-- fim vendas -->
     <!-- inicio app -->
     <section class="app">
-    
+        
     </section>
     <!-- fim app -->
 
