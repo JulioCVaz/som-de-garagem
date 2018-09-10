@@ -11,6 +11,16 @@
     width: 100%;
 }
 
+.wrapper-all{
+    height: 100%;
+}
+
+.wrapper-content-circle{
+    align-self: center;    
+}
+.wrapper-content-descricao{
+    align-self: flex-end;
+}
 
 .home{
     background-image: url('../img/home-background.jpg');
@@ -20,7 +30,6 @@
 
 .navbar-home{
     justify-content: flex-end;
-    position: absolute;
     width: 100%;
     padding-top: 10%;
     font-size: 16px;
@@ -45,11 +54,17 @@
     color: white;
     display: flex;
     align-items: flex-end;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     img{
         width: 80px;
         height: 80px;
     }
+}
+
+.wrapper-content{
+    height: 80%;
+    display: flex;
+    justify-content: center;
 }
 
 .wrapper-content-home{
@@ -64,10 +79,6 @@
 // tarefa - executar o sass watch em outras pastas, se der e componentizar esses arquivos sass
 
 
-.descricao{
-    display: flex;
-    flex-direction: column;
-}
 
 .descricao > h1{
     padding-top: 20px;
@@ -75,8 +86,6 @@
 }
 
 .wrapper-circle{
-    width: 80%;
-    height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,10 +106,8 @@
 }
 
 .content-descricao{
-    display: flex;
+    width: 100%;
     align-self: center;
-    width: 60%;
-    height: 20%;
     text-align: center;
 }
 
