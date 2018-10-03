@@ -35,7 +35,7 @@ class CreateListenerTable extends Migration
             ->onDelete('cascade');
             $table->timestamps();
 
-        })
+        });
     }
 
     /**
@@ -45,6 +45,6 @@ class CreateListenerTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('listener');
     }
 }

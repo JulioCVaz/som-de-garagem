@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFollowTable extends Migration
+class CreateGenderlistenerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,19 @@ class CreateFollowTable extends Migration
      */
     public function up()
     {
-        Schema::create('follow', function(Blueprint $table){
+        Schema::create('genderlistener', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('artistsID')->unsigned();
-            $table->foreign('artistsID')
-            ->references('id')
-            ->on('artists')
-            ->onDelete('cascade');
             $table->integer('listenerID')->unsigned();
             $table->foreign('listenerID')
             ->references('id')
             ->on('listener')
             ->onDelete('cascade');
+            $table->integer('genderID')->unsigned();
+            $table->foreign('genderID')
+            ->references('id')
+            ->on('genders')
+            ->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -36,6 +35,6 @@ class CreateFollowTable extends Migration
      */
     public function down()
     {
-        Schema::drop('follow');
+        Schema::drop('genderlistener');
     }
 }

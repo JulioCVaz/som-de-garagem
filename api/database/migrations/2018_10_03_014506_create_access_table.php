@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlansTable extends Migration
+class CreateAccessTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function(Blueprint $table){
+        Schema::create('access', function(Blueprint $table){
             $table->increments('id');
-            $table->string('desc_plan');
-            $table->integer('value_plan');
+            $table->string('desc_access');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +27,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plans');
+        Schema::drop('access');
     }
 }

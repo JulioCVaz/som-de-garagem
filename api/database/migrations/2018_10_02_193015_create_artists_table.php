@@ -20,7 +20,7 @@ class CreateArtistsTable extends Migration
             ->on('access')
             ->onDelete('cascade');
             $table->integer('followers');
-            $table->datetime('foundation');
+            $table->dateTime('foundation');
             $table->integer('plan')->unsigned();
             $table->foreign('plan')
             ->references('id')
@@ -37,12 +37,13 @@ class CreateArtistsTable extends Migration
             ->on('albuns')
             ->onDelete('cascade');
             $table->integer('genderID')->unsigned();
-            $table->references('id')
+            $table->foreign('genderID')
+            ->references('id')
             ->on('genders')
             ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
-        })
+        });
     }
 
     /**
@@ -52,6 +53,6 @@ class CreateArtistsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('artists');
     }
 }
