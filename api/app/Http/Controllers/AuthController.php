@@ -8,6 +8,7 @@ use App\Company;
 use App\Http\Controllers\Controller;
 use JWTAuth;
 use Hash;
+use App\Http\Requests\AuthenticateRequest;
 
 class AuthController extends Controller
 
