@@ -30,7 +30,8 @@
   width: 100%;
   padding-top: 10%;
   font-size: 16px;
-  text-decoration: none; }
+  text-decoration: none;
+  transition: .1s ease-in-out; }
   .navbar-home .navbar-wrapper {
     padding-right: 30px; }
   .navbar-home .navbar-color {
@@ -143,11 +144,14 @@
 
 .content-free,
 .content-premium {
-  width: 80%;
-  height: 200px;
-  margin: 30px;
-  -webkit-box-shadow: 1px 1px 1px ;
-  box-shadow: 1px 1px 1px #a8a6a6; }
+    width: 80%;
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px;
+    align-items: center;
+    -webkit-box-shadow: 1px 1px 1px;
+    box-shadow: 1px 1px 1px #a8a6a6; }
 
 #description{
   margin-bottom: 160px; }
@@ -159,8 +163,6 @@
 .color{
   color:#eb244e;
   font-weight: bold; }
-
-.content-free{ }
 
 .circle-border{
   background: #dadada;
@@ -211,7 +213,7 @@
   border:none; }
 
 .garage{
-  margin: 70px ;
+  display: inline-flex;
   width: 80px;
   font-size: 15px;
   font-weight: 500;
@@ -221,12 +223,40 @@
 .garage-free-premium{
   font-size: 30px;
   font-weight: 800; 
+  align-self: flex-end; 
+  padding-right: 30px; }
+
+.garage p:last-child{
+  color: #eb244e; 
   align-self: flex-end; }
 
-.free{
+.garage-free-premium .free{
+  padding-right: 200px; }
 
-}
 
-.premium{ 
-  color:#eb244e; }
+.garagem-left{
+  padding-left: 70px; }
+
+.app{
+  margin-bottom: 200px;
+  align-self: center;
+  text-align: center;
+  justify-content: space-evenly; }
+
+.logo-mockup{
+  width: 100px; }
+
+.logo-google{
+  width: 250px;
+  margin-top: 10px; }
+
+.mockup-color{
+  font-weight: bold;
+  color:black; }
+
+.download{
+  color:#656565;  }
+
+.mockup-principal{
+  width:180px; }
 /*# sourceMappingURL=style.css.map */
