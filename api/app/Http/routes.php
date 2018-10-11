@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(array('prefix' => 'api'),function(){
+    Route::get('/', function(){
+        return response()->json(['message' => 'SOM DE GARAGEM API', 'status' => 'Conectado']);
+    });
+    Route::resource('/planos', 'PlansController');
+    Route::resource('/acessos', 'AccessController');
+});
+
