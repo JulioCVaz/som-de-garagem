@@ -337,5 +337,49 @@
       flex-direction: column; }
 }
 
+@media (max-width: 371px){
+  .garage{
+    display: flex;
+    flex-direction: column; 
+    justify-content: normal;
+    margin: 15px;}
+
+  .garagem-left{
+    padding:0; }
+
+  .wrapper-plan-free {
+    margin-top: 50px; }
+
+  .app{
+    margin-top: 170px; }
+
+  .garage p:last-child{
+    display: flex;
+    align-self: flex-start;
+    margin-top: -20px; }
+
+  .content-free, .content-premium{
+    height: 220px;
+    align-items: normal; }
+}
+
+@media (min-width: 372px){
+  .garage{
+    display: inline-flex;
+    margin: 15px; }
+
+  .garage p:last-child{
+    display: flex;
+    align-self: flex-end;
+    margin-top: -20px; }
+
+  .garagem-left{
+    padding-left:0; }
+
+  .content-free, .content-premium{
+    height: 220px;
+    align-items: center; }
+}
+
 
 /*# sourceMappingURL=style.css.map */
