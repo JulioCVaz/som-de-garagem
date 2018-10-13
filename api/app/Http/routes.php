@@ -21,5 +21,8 @@ Route::group(array('prefix' => 'api'),function(){
     });
     Route::resource('/planos', 'PlansController');
     Route::resource('/acessos', 'AccessController');
+    Route::resource('/artista', 'ArtistController');
+    Route::resource('/musica', 'MusicController');
+    Route::resource('/album', 'AlbumController');
 });
 
