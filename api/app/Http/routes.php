@@ -1,29 +1,30 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+/**
+ * 
+ *  Arquivo de Rotas som de garamge - api
+ *  grupo: Júlio, Gustavo e Guilherme
+ *  Etec zona leste
+ */
 
 Route::group(array('prefix' => 'api'),function(){
     Route::get('/', function(){
         return response()->json(['message' => 'SOM DE GARAGEM API', 'status' => 'Conectado']);
     });
+    // routes only artistas
+    Route::get('/artista/{string}', 'ArtistController@showmetadata'); // retorna artistas pelo nome
+    Route::resource('/artistas', 'ArtistController'); // get all artistas, delete and update
+    
+    // routes only musics
+    Route::get('/musicas/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
+    Route::resource('/musicas', 'MusicController'); // get all musicas, delete and update
+    
+    // routes only planos
     Route::resource('/planos', 'PlansController');
+
+    // routes only acessos
     Route::resource('/acessos', 'AccessController');
-    Route::resource('/artista', 'ArtistController'); // tras somente pelo ID
-    Route::resource('/artistas/{string}', 'ArtistController@showmetadata');
-    Route::resource('/musica', 'MusicController');
+
+    // routes only albums
     Route::resource('/album', 'AlbumController');
 });
 
