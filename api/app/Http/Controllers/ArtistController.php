@@ -40,8 +40,8 @@ class ArtistController extends Controller
         $data = $artistalike->id;
         
         $metadata = DB::table('artistas')
-                    ->join('album', 'album.id', '=', 'artistas.id')->where('artistas.id', '=', $data)
-                    ->join('musica', 'musica.id', '=', 'artistas.id')->where('artistas.id', '=', $data)
+                    ->join('album', 'album.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
+                    ->join('musica', 'musica.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
                     ->select('artistas.nomeartista', 'artistas.desc_artista',
                     'artistas.filepath',
                     'album.titulo_album',
@@ -63,7 +63,7 @@ class ArtistController extends Controller
         $artista = Artistas::find($id);
         if(!$artista){
             return response()->json([
-                'message' => 'Música não encontrada'
+                'message' => 'Artista não encontrado'
             ], 404);
         };
         return response()->json($artista);
