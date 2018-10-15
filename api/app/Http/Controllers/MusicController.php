@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\DB;
 
 class MusicController extends Controller
 {
+     // retorna todas as ocurrencias segundo a busca
+    public function showbylike($string){
+        $musiclike = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string .'%')->first();
+        
+        if(!$musiclike){
+            return response()->json([
+                'message' => 'Nenhum resultado para: ' . $string
+            ], 404);
+        }
+        return response()->json($musiclike);
+    }
+    
     // retorna apenas o id selecionado
     public function show($id){
         $musica = Musica::find($id);
@@ -22,6 +34,7 @@ class MusicController extends Controller
 
         return response()->json($musica);
     }
+
     // retorna todos os dados
     public function showmetadata($string){
         $musicas = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string . '%')->first();
@@ -38,10 +51,13 @@ class MusicController extends Controller
                 ->join('album', 'album.musicaID', '=', 'musica.albumID')->where('musica.id', '=', $data)
                 ->join('artistas', 'artistas.musicasID', '=', 'musica.artistaID')->where('musica.id', '=', $data)
                 ->select('musica.nomemusica',
+                    'musica.filepath',
                     'musica.created_at',
-                    'musica.id',
+                    'musica.id as idmusica',
                     'album.titulo_album',
-                    'artistas.nomeartista')->distinct()
+                    'artistas.nomeartista',
+                    'artistas.id as artistaid'
+                    )->distinct()
                     ->get();
 
         if(!$metadata){

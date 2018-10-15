@@ -40,23 +40,45 @@ class ArtistController extends Controller
         $data = $artistalike->id;
         
         $metadata = DB::table('artistas')
-                    ->join('album', 'album.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
-                    ->join('musica', 'musica.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
-                    ->select('artistas.nomeartista', 'artistas.desc_artista',
-                    'artistas.filepath',
-                    'album.titulo_album',
-                    'album.desc_album',
-                    'album.filepath_avatar',
-                    'musica.nomemusica')->distinct()
+                    ->select(
+                    'nomeartista',
+                    'desc_artista',
+                    'filepath'
+                    )->where('nomeartista', 'LIKE', '%' . $string . '%')
                     ->get();
-            
+
+        $metaalbum = DB::table('artistas')
+                    ->join('album', 'album.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
+                    ->select(
+                        'album.titulo_album',
+                        'album.desc_album',
+                        'album.filepath_avatar'
+                    )
+                    ->get();
+        
+        $metamusica = DB::table('artistas')
+                    ->join('musica', 'musica.artistaID', '=', 'artistas.id')->where('artistas.id', '=', $data)
+                    ->select(
+                        'musica.id',
+                        'musica.nomemusica',
+                        'musica.filepath',
+                        'musica.created_at'
+                    )
+                    ->get();
+                    
                     if(!$metadata){
                         return response()->json([
                             'message' => 'Nenhum resultado para: ' . $string
                         ], 404);
                     }
 
-                    return response()->json($metadata);
+                    return response()->json([
+                        'artista' => $metadata,
+                        'data' => [
+                            'album'=>$metaalbum,
+                            'musicas'=>$metamusica
+                        ]
+                    ]);
     }
     // metodo retorna apenas 1
     public function show($id){    

@@ -15,16 +15,18 @@ Route::group(array('prefix' => 'api'),function(){
     Route::resource('/artistas', 'ArtistController'); // get all artistas, delete and update
     
     // routes only musics
-    Route::get('/musicas/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
+    Route::get('/musica/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
     Route::resource('/musicas', 'MusicController'); // get all musicas, delete and update
     
+    // routes only albums
+    Route::get('/album/{string}', 'AlbumController@showbylike'); // arrumar
+    Route::resource('/albums', 'AlbumController');
+
     // routes only planos
     Route::resource('/planos', 'PlansController');
 
     // routes only acessos
     Route::resource('/acessos', 'AccessController');
 
-    // routes only albums
-    Route::resource('/album', 'AlbumController');
 });
 
