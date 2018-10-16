@@ -1,0 +1,34 @@
+.main{
+    min-height: 100vh;
+}
+
+.wrapper{
+    padding-top: 10px;
+}
+
+.perfil-artists{
+    height: 100%;
+    border: 1px solid #ced4da;
+}
+
+.player{
+    color: black;
+    position: absolute;
+    bottom: 0;
+    background-color: #f1f3f4;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.titulo-musica{
+    width: 35%;
+    text-align: center;
+}
+
+.player-musica{
+    width: 65%;
+}
+.control-song{
+    width: 80%;
+}
