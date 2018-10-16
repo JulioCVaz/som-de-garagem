@@ -6,6 +6,9 @@
  *  Etec zona leste
  */
 
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
+
 Route::group(array('prefix' => 'api'),function(){
     Route::get('/', function(){
         return response()->json(['message' => 'SOM DE GARAGEM API', 'status' => 'Conectado']);
