@@ -7,7 +7,7 @@
  */
 
 header('Access-Control-Allow-Origin: *');
-header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
+header( 'Access-Coxntrol-Allow-Headers: Authorization, Content-Type' );
 
 Route::group(array('prefix' => 'api'),function(){
     Route::get('/', function(){

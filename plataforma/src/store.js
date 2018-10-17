@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
-import listen from './reducers/listen'; // converter para reducers
 
-const store = createStore(listen);
+import reducers from './reducers';
+
+const store = createStore(reducers);
 
 export default store;

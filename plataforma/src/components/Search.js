@@ -1,45 +1,49 @@
 import React, {Component} from 'react';
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+
+import * as Actions from '../actions/listen';
 
 
-export default class Search extends Component{
+class Search extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            hello: 'Bem vindo ao Som de Garagem'
-        };
+    };
+
+    state = {
+        hello: 'Bem vindo ao Som de Garagem',
+        musicas: []
     }
 
+    addMusic = () => {
+        return this.props.listenMusic(this.state.musicas);
+    }
+
+
     buscaMusica = async (e) => {
-        
+
         e.preventDefault();
 
         let data = document.querySelector('.input-musica').value;
 
         fetch(`http://localhost:8000/api/musica/${data}`)
-        .then(response => response.json())
-        .then(json => console.log(json))
-        .catch(error=>console.error(error));
+        .then(
+            response => response.json()
+            )
+        .then(
+            response => {
+                this.setState({musicas:response})
+                this.addMusic();
+            }
+        )
+        .catch(
+            error=>console.error(error)
+        );
+    } 
 
-    }
-
-    // postData = async (url='', data={}) => {
-    //     return fetch(url, {
-    //         method: 'POST',
-    //         mode:'cors',
-    //         cache: 'no-cache',
-    //         credentials: 'same-origin',
-    //         headers: {"Content-Type": "application/json; charset=utf-8"},
-    //         body: JSON.stringify(data)
-    //     })
-    //     .then(response => response.json())
-    // }
-
-    
-
-
-
+   
     render(){
         return(
             <div>
@@ -53,3 +57,13 @@ export default class Search extends Component{
         );
     }
 }
+
+const mapStateToProps = state => ({
+    musicas: state.musicas,
+  });
+  
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(Actions, dispatch);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

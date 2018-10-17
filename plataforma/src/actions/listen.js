@@ -1,6 +1,6 @@
-export function listen(musica){
+export function listenMusic(musicas){
     return{
         type:'LISTEN_MUSIC',
-        musica,
+        musicas
     }
 }
