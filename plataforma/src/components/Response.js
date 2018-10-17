@@ -10,8 +10,11 @@ import { connect } from 'react-redux';
 class Response extends Component{
     constructor(props){
         super(props);
-    }
+    };
+    
     render(){
+        console.log(this.props);
+        console.log(this.state);
         return(
         <Container>
             <Col sm={4}>
@@ -32,8 +35,11 @@ class Response extends Component{
 };
 
 
-const mapStateToProps = state => ({
-    musicas:state.musicas
-});
+const mapStateToProps = state => {
+    console.log(state);
+    return {
+        musicas: state.listen
+    }
+};
 
 export default connect(mapStateToProps)(Response);

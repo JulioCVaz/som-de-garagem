@@ -1,9 +1,11 @@
 export default function listen(state=[], action){
+    console.log(state);
+    console.log(action);
     switch (action.type){
         case 'LISTEN_MUSIC':
             return [...state, {
-                id: action.musicas[0].idmusica,
-                musicas: action.musicas[0].nomemusica
+                id: 2,
+                musicas: 'TESTE'
             }]
         default:
             return state;

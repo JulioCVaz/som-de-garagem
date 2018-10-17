@@ -35,7 +35,9 @@ class Search extends Component{
         .then(
             response => {
                 this.setState({musicas:response})
-                this.addMusic();
+                setTimeout(()=> {
+                    this.addMusic();
+                }, 500);
             }
         )
         .catch(
