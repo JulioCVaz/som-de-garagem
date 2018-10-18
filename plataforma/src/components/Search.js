@@ -14,7 +14,7 @@ class Search extends Component{
 
     state = {
         hello: 'Bem vindo ao Som de Garagem',
-        musicas: []
+        musicas: ''
     }
 
     addMusic = () => {
@@ -35,9 +35,7 @@ class Search extends Component{
         .then(
             response => {
                 this.setState({musicas:response})
-                setTimeout(()=> {
-                    this.addMusic();
-                }, 500);
+                this.addMusic();
             }
         )
         .catch(

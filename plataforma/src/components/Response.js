@@ -8,20 +8,36 @@ import { connect } from 'react-redux';
 
 
 class Response extends Component{
-    constructor(props){
-        super(props);
-    };
     
+    state = {
+        musicas: []
+    };
+
+    static getDerivedStateFromProps(props, state){
+        let  nexState = {};
+        if(props.musicas !== state.musicas){
+            nexState = {
+                musicas:props.musicas
+            }
+        }
+        return nexState
+    }
+
     render(){
-        console.log(this.props);
         console.log(this.state);
+
         return(
         <Container>
             <Col sm={4}>
-                <Card key={this.props.id}>
+                <Card>
                     <CardImg top width="30%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                    <CardBody>   
-                    <CardTitle>{this.props.musicas}</CardTitle>
+                    <CardBody>
+                        {
+                            this.state.musicas.map((musica) =>
+                                <CardTitle>{musica.musicas}</CardTitle>
+
+                            )
+                        }   
                     <CardSubtitle>Card subtitle</CardSubtitle>
                     <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                     <Button>Button</Button>
@@ -35,11 +51,8 @@ class Response extends Component{
 };
 
 
-const mapStateToProps = state => {
-    console.log(state);
-    return {
-        musicas: state.listen
-    }
-};
+const mapStateToProps = state => ({
+    musicas: state.listen
+});
 
 export default connect(mapStateToProps)(Response);
