@@ -1,11 +1,17 @@
 import React ,{ Component }from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+// import { Card, CardImg, CardText, CardBody,
+//     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../styles/Style.css';
-import { Col } from 'reactstrap';
-import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import Grid from '@material-ui/core/Grid';
 
 class Response extends Component{
     
@@ -27,27 +33,44 @@ class Response extends Component{
         console.log(this.state);
 
         return(
-        <Container>
+        <div>
+            <Grid container spacing={8}>
             {
                 this.state.musicas.map((musica)=>
-                    <Col sm={4}>
-                        <Card>
-                            <CardImg top width="30%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle>{musica.musicas}</CardTitle>   
-                            <CardSubtitle>Card subtitle</CardSubtitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <Button>Button</Button>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                
-
-                
+                <Grid item xs={4}>
+                    <Card >
+                        <div >
+                            <CardContent >
+                            <Typography component="h5" variant="h5">
+                                {musica.musicas}
+                            </Typography>
+                            <Typography variant="subtitle1" color="textSecondary">
+                                Mac Miller
+                            </Typography>
+                            </CardContent>
+                            <div >
+                            <IconButton aria-label="Previous">
+                                <SkipPreviousIcon />
+                            </IconButton>
+                            <IconButton aria-label="Play/pause">
+                                <PlayArrowIcon  />
+                            </IconButton>
+                            <IconButton aria-label="Next">
+                                <SkipNextIcon />
+                            </IconButton>
+                            </div>
+                        </div>
+                        <CardMedia
+                            
+                            // image="/static/images/cards/live-from-space.jpg"
+                            // title="Live from space album cover"
+                        />
+                    </Card>
+                </Grid>
                 )
             }
-        </Container>
-
+            </Grid>
+        </div>
         );
     }
 };

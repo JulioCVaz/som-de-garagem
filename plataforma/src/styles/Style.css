@@ -32,3 +32,11 @@
 .control-song{
     width: 80%;
 }
+
+.remove-display{
+    display: block!important;
+}
+
+.fix-index{
+    position: fixed;
+}
