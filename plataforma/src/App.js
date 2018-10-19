@@ -9,7 +9,7 @@ import Player from './components/Player';
 class App extends Component {
   render() {
     return (
-        <div id="root" className="main">
+      <div id="root" className="main">
             <div className="wrapper">
               <Container fluid>
                 <Row>

@@ -4,3 +4,11 @@ export function listenMusic(musicas){
         musicas
     }
 }
+
+
+export function addArtist(artistas){
+    return{
+        type: 'ADD_ARTISTS',
+        artistas
+    }
+}

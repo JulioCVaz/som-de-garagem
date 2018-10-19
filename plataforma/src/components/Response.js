@@ -28,22 +28,24 @@ class Response extends Component{
 
         return(
         <Container>
-            <Col sm={4}>
-                <Card>
-                    <CardImg top width="30%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                    <CardBody>
-                        {
-                            this.state.musicas.map((musica) =>
-                                <CardTitle>{musica.musicas}</CardTitle>
+            {
+                this.state.musicas.map((musica)=>
+                    <Col sm={4}>
+                        <Card>
+                            <CardImg top width="30%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                            <CardBody>
+                                <CardTitle>{musica.musicas}</CardTitle>   
+                            <CardSubtitle>Card subtitle</CardSubtitle>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                            <Button>Button</Button>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                
 
-                            )
-                        }   
-                    <CardSubtitle>Card subtitle</CardSubtitle>
-                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                    <Button>Button</Button>
-                    </CardBody>
-                </Card>
-            </Col>
+                
+                )
+            }
         </Container>
 
         );
