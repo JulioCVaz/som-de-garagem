@@ -8,6 +8,10 @@ import Icon from '@material-ui/core/Icon';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 import * as Actions from '../actions/listen';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
 
 
 class Search extends Component{
@@ -82,19 +86,38 @@ class Search extends Component{
             <div>
                 <Grid container justify="center">
                     <Grid item xs={6}>
-                    <TextField
-                        id="input-musica"
-                        label="Busque por um título"
-                        type="text"
-                        margin="normal"
-                        fullWidth
-                        className={this.state.style.class}
+                    <FormControl fullWidth>
+                        <InputLabel htmlFor="adornment-password">Buscar</InputLabel>
+                        <Input
+                            id="input-musica"
+                            type="text"
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
+                                    <Icon><SearchIcon className={this.state.style.icon}/></Icon>
+                                </Button>
+                            </InputAdornment>
+                            }
                         />
-                    </Grid>
-                    <Grid item xs={2} align="left">
-                        <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
-                            <Icon><SearchIcon className={this.state.style.icon}/></Icon>
-                        </Button>
+                    </FormControl>
+                    {/* 
+                    
+                    <FormControl>
+                        <InputLabel htmlFor="adornment-password">Buscar</InputLabel>
+                        <Input
+                            id="input-musica"
+                            type={text}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
+                                    <Icon><SearchIcon className={this.state.style.icon}/></Icon>
+                                </Button>
+                            </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                    
+                    */}
                     </Grid>
                 </Grid>
             </div>
