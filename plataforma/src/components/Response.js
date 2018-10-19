@@ -34,7 +34,7 @@ class Response extends Component{
 
         return(
         <div>
-            <Grid container spacing={8}>
+            <Grid container spacing={8} alignItems="center" justify="center">
             {
                 this.state.musicas.map((musica)=>
                 <Grid item xs={4}>

@@ -91,7 +91,7 @@ class Search extends Component{
                         className={this.state.style.class}
                         />
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} align="left">
                         <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
                             <Icon><SearchIcon className={this.state.style.icon}/></Icon>
                         </Button>

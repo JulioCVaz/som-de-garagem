@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Grid from '@material-ui/core/Grid'
+
 import Divider from '@material-ui/core/Divider';
 import '../styles/Style.css';
 
@@ -11,11 +15,13 @@ class Artists extends Component{
 
 
 https://material-ui.com/demos/drawers/
+https://material-ui.com/style/color/
 
 
 */
     state = {
         artista: [],
+        cliqueperfil: 'profile-toggle',
         top: false,
         left: false,
         bottom: false,
@@ -38,17 +44,25 @@ https://material-ui.com/demos/drawers/
         });
       };
 
+    sideList = data => (
+        <div>
+            <p>{data}</p>
+            <Divider />
+        </div>
+    );
     render(){
-        const sideList = (
-            <div>
-              <Divider />
-            </div>
-          );
         return(
             <div className="fix-index">
             {this.state.artista.map((artista) =>
                 <div>
-                    <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
+                    <Button className={this.state.cliqueperfil} onClick={this.toggleDrawer('right', true)}>
+                        <Grid>
+                            <AccountCircle />
+                            <Typography variant="caption" color="inherit" gutterBottom>
+                                Perfil
+                            </Typography>
+                        </Grid>
+                    </Button>
                     <SwipeableDrawer
                         anchor="right"
                         open={this.state.right}
@@ -61,7 +75,7 @@ https://material-ui.com/demos/drawers/
                             onClick={this.toggleDrawer('right', false)}
                             onKeyDown={this.toggleDrawer('right', false)}
                         >
-                        {sideList}
+                        {this.sideList(artista.nomeartista)}
                         </div>
                     </SwipeableDrawer>
                 </div>

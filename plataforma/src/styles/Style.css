@@ -39,4 +39,12 @@
 
 .fix-index{
     position: fixed;
+    text-align: center;
+    padding: 5px;
+    right: 0;
+}
+
+.profile-toggle{
+    right: 0;
+    border-radius: 50px 0 0 50px!important;
 }
