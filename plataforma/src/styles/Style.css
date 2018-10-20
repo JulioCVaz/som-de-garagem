@@ -1,9 +1,7 @@
-.main{
-    min-height: 100vh;
-}
-
 .wrapper{
-    padding-top: 10px;
+    padding-top: 60px;
+    background-color: #212121;
+    min-height: 85vh;
 }
 
 .perfil-artists{
@@ -33,8 +31,12 @@
     width: 80%;
 }
 
-.remove-display{
+/* .remove-display{
     display: block!important;
+} */
+
+.color-icon{
+    color: white;
 }
 
 .fix-index{

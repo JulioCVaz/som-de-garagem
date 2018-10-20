@@ -12,7 +12,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-
+import red from '@material-ui/core/colors/red';
 
 class Search extends Component{
 
@@ -26,7 +26,7 @@ class Search extends Component{
         musicas: '',
         artistas: '',
         style: {
-            icon:'remove-display',
+            icon:'color-icon',
             class:'input-musica'
         }
     }
@@ -82,19 +82,38 @@ class Search extends Component{
 
    
     render(){
+        const search = red[800];
         return(
             <div>
                 <Grid container justify="center">
                     <Grid item xs={6}>
                     <FormControl fullWidth>
-                        <InputLabel htmlFor="adornment-password">Buscar</InputLabel>
+                        <InputLabel 
+                        style={{color:"white"}}
+                        FormLabelClasses={{
+                            root:search,
+                            focused: search
+                        }}
+                        htmlFor="adornment-password">Buscar</InputLabel>
                         <Input
+                            error
                             id="input-musica"
                             type="text"
+                            style={{
+                                color:'white'
+                            }}
                             endAdornment={
                             <InputAdornment position="end">
-                                <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
-                                    <Icon><SearchIcon className={this.state.style.icon}/></Icon>
+                                <Button
+                                onClick={this.buscaMusica}
+                                variant="fab"
+                                aria-label="Search"
+                                style={{
+                                    background:search,
+                                    opacity: 'none'}}>
+                                    <Icon>
+                                        <SearchIcon className={this.state.style.icon}/>
+                                    </Icon>
                                 </Button>
                             </InputAdornment>
                             }

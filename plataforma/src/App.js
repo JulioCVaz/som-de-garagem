@@ -4,12 +4,20 @@ import Response from './components/Response';
 import Artists from './components/Artists';
 import './styles/Style.css';
 import Player from './components/Player';
+import Navbar from './components/Navbar';
 import Grid from '@material-ui/core/Grid';
+import grey from '@material-ui/core/colors/grey';
+
 
 class App extends Component {
   render() {
+
+    const background = grey[800];
+
     return (
-            <div className="wrapper">
+        <React.Fragment>
+          <Navbar/>
+          <div className="wrapper" style={{background: background}}>
               <Grid container spacing={8}
                     justify="center"
                     alignItems="center">
@@ -23,9 +31,10 @@ class App extends Component {
                 <Grid item>
                   <Artists/>
                 </Grid>
-                {/* <Player/> */}
+                <Player/>
               </Grid>
             </div>
+        </React.Fragment>
     );
   }
 }

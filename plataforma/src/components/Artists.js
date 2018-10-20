@@ -55,10 +55,21 @@ https://material-ui.com/style/color/
             <div className="fix-index">
             {this.state.artista.map((artista) =>
                 <div>
-                    <Button className={this.state.cliqueperfil} onClick={this.toggleDrawer('right', true)}>
+                    <Button style={{
+                        color:'white',
+                        fontWeight:'bold'
+                        }} 
+                        className={this.state.cliqueperfil}
+                        onClick={this.toggleDrawer('right', true)}>
                         <Grid>
                             <AccountCircle />
-                            <Typography variant="caption" color="inherit" gutterBottom>
+                            <Typography
+                            style={{
+                                fontWeight:'bold'
+                            }}
+                            variant="button"
+                            gutterBottom={true}
+                            color="inherit">
                                 Perfil
                             </Typography>
                         </Grid>
