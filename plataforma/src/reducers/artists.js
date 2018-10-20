@@ -1,4 +1,5 @@
 export default function artists(state=[], action){
+    console.log(action);
     switch (action.type){
         case 'ADD_ARTISTS' :
             return [...state,{

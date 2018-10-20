@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
-import Avatar from '@material-ui/core/Avatar';
 import logo from '../img/logo-som-de-garagem.png';
 
 

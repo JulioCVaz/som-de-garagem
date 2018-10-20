@@ -1,6 +1,4 @@
 import React ,{ Component }from 'react';
-// import { Card, CardImg, CardText, CardBody,
-//     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../styles/Style.css';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
@@ -12,6 +10,8 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from '@material-ui/core/Grid';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions/listen';
 
 class Response extends Component{
     
@@ -29,6 +29,10 @@ class Response extends Component{
         return nexState
     }
 
+    play = () => {
+        return this.props.playMusic(this.state.musicas)
+    }
+
     render(){
         console.log(this.state);
 
@@ -42,10 +46,10 @@ class Response extends Component{
                         <div >
                             <CardContent >
                             <Typography component="h5" variant="h5">
-                                {musica.musicas}
+                                {musica.nomemusica}
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
-                                Mac Miller
+                                {musica.nomeartista}
                             </Typography>
                             </CardContent>
                             <div >
@@ -53,7 +57,7 @@ class Response extends Component{
                                 <SkipPreviousIcon />
                             </IconButton>
                             <IconButton aria-label="Play/pause">
-                                <PlayArrowIcon  />
+                                <PlayArrowIcon  onClick={this.play}/>
                             </IconButton>
                             <IconButton aria-label="Next">
                                 <SkipNextIcon />
@@ -80,4 +84,7 @@ const mapStateToProps = state => ({
     musicas: state.listen
 });
 
-export default connect(mapStateToProps)(Response);
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(Actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Response);

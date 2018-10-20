@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../styles/Style.css';
+import ReactAudioPlayer from 'react-audio-player';
+import contato from '../musicas/contato.mpeg';
+import pandora from '../musicas/pandora.mpeg';
 
 
 class Player extends Component{
@@ -20,27 +23,38 @@ class Player extends Component{
     }
     
     render(){
+        console.log(this.props);
         return(
             <div className="player">
-                <div className="titulo-musica">
                 {
-                    this.state.musicas.map((musica) => musica.musicas)
+                    (this.state.musicas) ?
+                    this.state.musicas.map((musica, key) =>
+                    <React.Fragment>
+                    <div className="titulo-musica">
+                        {musica.nomemusica}
+                    </div>
+                    <ReactAudioPlayer
+                    style={{
+                        width:'60%'
+                    }}
+                    src=
+                    {
+                        (musica.nomemusica == 'Contato') ? contato : (musica.nomemusica == 'Júlia e a caixa de pandora') ? pandora : ''
+                    }
+                    autoPlay
+                    controls
+                    />
+                    </React.Fragment>
+                    )
+                    : ''
                 }
-                </div>
-                <div className="player-musica">
-                    <audio className="control-song" controls>
-                        <source src="horse.ogg" type="audio/ogg"/>
-                        <source src="horse.mp3" type="audio/mpeg"/>
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
             </div>
         );
     }
 };
 
 const mapStateToProps = state => ({
-    musicas:state.listen
+    musicas:state.play
 });
 
 export default connect(mapStateToProps)(Player);

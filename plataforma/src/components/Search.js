@@ -119,24 +119,6 @@ class Search extends Component{
                             }
                         />
                     </FormControl>
-                    {/* 
-                    
-                    <FormControl>
-                        <InputLabel htmlFor="adornment-password">Buscar</InputLabel>
-                        <Input
-                            id="input-musica"
-                            type={text}
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <Button onClick={this.buscaMusica} variant="fab" aria-label="Search" color="primary">
-                                    <Icon><SearchIcon className={this.state.style.icon}/></Icon>
-                                </Button>
-                            </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    
-                    */}
                     </Grid>
                 </Grid>
             </div>

@@ -4,7 +4,9 @@ export default function listen(state=[], action){
         case 'LISTEN_MUSIC':
             return [...state, {
                 id: action.musicas[0].idmusica,
-                musicas: action.musicas[0].nomemusica
+                nomemusica: action.musicas[0].nomemusica,
+                nomeartista: action.musicas[0].nomeartista,
+                filepath: action.musicas[0].filepath
             }]
         default:
             return state;
