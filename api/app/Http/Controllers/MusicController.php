@@ -52,6 +52,7 @@ class MusicController extends Controller
                 ->join('artistas', 'artistas.musicasID', '=', 'musica.artistaID')->where('musica.id', '=', $data)
                 ->select('musica.nomemusica',
                     'musica.filepath',
+                    'musica.filepath_avatar',
                     'musica.created_at',
                     'musica.id as idmusica',
                     'album.titulo_album',

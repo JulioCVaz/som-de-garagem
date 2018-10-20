@@ -12,6 +12,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions/listen';
+import decaidos from '../img/decaidos_logo.jpeg';
 
 class Response extends Component{
     
@@ -41,9 +42,10 @@ class Response extends Component{
             <Grid container spacing={8} alignItems="center" justify="center">
             {
                 this.state.musicas.map((musica)=>
-                <Grid item xs={4}>
+                <React.Fragment>
+                <Grid item xs={6}>
                     <Card >
-                        <div >
+                        <div>
                             <CardContent >
                             <Typography component="h5" variant="h5">
                                 {musica.nomemusica}
@@ -64,13 +66,20 @@ class Response extends Component{
                             </IconButton>
                             </div>
                         </div>
-                        <CardMedia
-                            
-                            // image="/static/images/cards/live-from-space.jpg"
-                            // title="Live from space album cover"
-                        />
                     </Card>
                 </Grid>
+                {
+                    (musica.nomemusica == 'Contato' || musica.nomemusica == 'Júlia e a caixa de pandora') ?
+                    <Grid item xs={2}>
+                        <Card>
+                            <div className="img-card">
+                                {/* img */}
+                            </div>
+                        </Card>
+                    </Grid> : ''
+
+                }
+                </React.Fragment>
                 )
             }
             </Grid>

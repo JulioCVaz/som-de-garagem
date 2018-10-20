@@ -54,3 +54,10 @@
 .logo img{
     width: 120px;
 }
+
+.img-card{
+    background: url('../img/decaidos_logo.jpeg')no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 151px;
+}
