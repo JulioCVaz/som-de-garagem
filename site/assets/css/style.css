@@ -41,20 +41,29 @@
       padding-right: 15px; }
         .navbar-home .navbar-color li:last-child{
           background-color: #eb244e;
-          border-radius: 10px;
-        }
+          border-radius: 13px; }
       .navbar-home .navbar-color li a {
         color: white !important;
-        text-shadow: 1px 1px 12px #000; }
+         }
         .navbar-home .navbar-color li a:hover {
-          background:#eb244e;
-          border-radius: 10px; }
+          background: #eb244e;
+          border-radius: 13px;
+          text-shadow: 3px 3px 12px #000;
+          -webkit-box-shadow: 1px 2px 2px #000000;
+          box-shadow: 1px 2px 2px #000000; }
+
+.microphone{
+  margin-top: -9px;
+  margin-bottom: -5px;
+  margin-left: -13px;
+  padding-right: 5px;
+  height: 26px; }
 
 .logo{
   height: 100px;
-  width: 100px;
+  width: 306px;
   margin-top: -50px;
-  background-image: url("../img/logo.jpeg");
+  background-image: url("../img/logo-som-de-garagem.png");
   background-size: cover;
 }
 
@@ -65,9 +74,12 @@
   align-items: flex-end;
   padding-bottom: 50px;
   text-shadow: 1px 1px 12px #000; }
+  
   .content-home img {
     width: 80px;
-    height: 80px; }
+    height: 80px;
+    margin-right: 20px;
+    margin-left: 20px; }
 
 .wrapper-content {
   height: 80%;
@@ -292,14 +304,10 @@
 
     .wrapper-plan-free{
       margin-top: 10px; }
-
     
     .app{
       margin-top: 115px;
       margin-bottom: 40px; }
-
-    .wrapper-content-home{
-      display: none; }
 
     .mockup-principal{
       display: none;  }
@@ -313,7 +321,8 @@
 
     .circle-one, .circle-two, .circle-three {
       width: 90px;
-      height: 90px;}
+      height: 90px;
+      background-repeat: no-repeat; }
 
     .home {
       background-image: url("../img/home-background.jpg");
@@ -335,6 +344,12 @@
       width: 100%;
       display: flex;
       flex-direction: column; }
+
+    .circle-one, .circle-two, .circle-three {
+      background-repeat: no-repeat; }
+
+    .wrapper-content-home{
+      display: none; }
 }
 
 @media (max-width: 371px){
@@ -361,6 +376,9 @@
   .content-free, .content-premium{
     height: 220px;
     align-items: normal; }
+  
+  .circle-one, .circle-two, .circle-three {
+    background-repeat: no-repeat; }
 }
 
 @media (min-width: 372px){
@@ -379,6 +397,9 @@
   .content-free, .content-premium{
     height: 220px;
     align-items: center; }
+
+  .circle-one, .circle-two, .circle-three {
+      background-repeat: no-repeat; }
 }
 
 
