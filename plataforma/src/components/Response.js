@@ -38,7 +38,7 @@ class Response extends Component{
         console.log(this.state);
 
         return(
-        <div>
+        <div className="wrapper-response">
             <Grid container spacing={8} alignItems="center" justify="center">
             {
                 this.state.musicas.map((musica)=>

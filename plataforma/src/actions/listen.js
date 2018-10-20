@@ -18,3 +18,9 @@ export function playMusic(musica){
         musica
     }
 }
+
+export function resetApp(){
+    return{
+        type: 'RESET'
+    }
+}

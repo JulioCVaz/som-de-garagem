@@ -3,12 +3,15 @@ import {connect} from 'react-redux';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grid from '@material-ui/core/Grid'
-
+import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import '../styles/Style.css';
+import decaidosPerfil from '../img/decaidos.jpeg';
 
 class Artists extends Component{
 /* 
@@ -46,8 +49,44 @@ https://material-ui.com/style/color/
 
     sideList = data => (
         <div>
-            <p>{data}</p>
-            <Divider />
+            <Grid 
+            container
+            spacing={10}
+            justify="center"
+            alignItems="center"
+            >
+                <Grid item xs={8}>
+                <List component="nav">
+                <Avatar
+                    alt="Foto perfil"
+                    src={
+                        (data.nomeartista == "Decaídos de Plutão") ? 
+                        decaidosPerfil: ''}
+                    style={{
+                        width: 150,
+                        height: 150,
+                        marginLeft: '25%'
+                    }}
+                />
+                <ListItem>
+                    <Typography variant="title">{data.nomeartista}</Typography>
+                </ListItem>
+                <ListItem>
+                    <Typography variant="subheading">{data.descartista}</Typography>
+                </ListItem>
+                </List>
+                <Divider />
+                <List component="nav">
+                <ListItem>
+                    <Typography variant="subheading">Album:</Typography>
+                    <ListItemText primary={data.tituloalbum} />
+                </ListItem>
+                <ListItem>
+                    <Typography variant="subheading">{data.descalbum}</Typography>
+                </ListItem>
+                </List>
+                </Grid>
+            </Grid>
         </div>
     );
     render(){
@@ -86,7 +125,7 @@ https://material-ui.com/style/color/
                             onClick={this.toggleDrawer('right', false)}
                             onKeyDown={this.toggleDrawer('right', false)}
                         >
-                        {this.sideList(artista.nomeartista)}
+                        {this.sideList(artista)}
                         </div>
                     </SwipeableDrawer>
                 </div>

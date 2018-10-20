@@ -4,7 +4,7 @@ export default function artists(state=[], action){
         case 'ADD_ARTISTS' :
             return [...state,{
                 nomeartista: action.artistas.artista[0].nomeartista,
-                descartista: action.artistas.artista[0].descartista,
+                descartista: action.artistas.artista[0].desc_artista,
                 filepath: action.artistas.artista[0].filepath,
                 descalbum: action.artistas.data.album[0].desc_album,
                 filepathavatar: action.artistas.data.album[0].filepath_avatar,

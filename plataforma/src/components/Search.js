@@ -39,6 +39,10 @@ class Search extends Component{
         return this.props.addArtist(this.state.artistas);
     }
 
+    reset = () => {
+        return this.props.resetApp();
+    }
+
     addArtists = () => {
         let nomeartista = this.state.musicas[0].nomeartista;
         let trocanome = nomeartista.split(" ");
@@ -70,6 +74,7 @@ class Search extends Component{
             )
         .then(
             response => {
+                this.reset();
                 this.setState({musicas:response})
                 this.addMusic();
                 this.addArtists();
