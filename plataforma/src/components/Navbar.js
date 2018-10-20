@@ -3,6 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
+import Avatar from '@material-ui/core/Avatar';
+import logo from '../img/logo-som-de-garagem.png';
 
 
 
@@ -20,14 +22,12 @@ export default class Navbar extends Component{
     
     render(){
         const nav = grey[900];
-        
+
         return(
         <div>
             <AppBar position="static" style={{background:nav}}>
                 <Toolbar>
-                <Typography variant="h6" color="inherit">
-                    Photos
-                </Typography>
+                    <div className="logo"><img src={logo}/></div>
                 </Toolbar>
             </AppBar>
         </div>
