@@ -3,9 +3,7 @@
 *   estilo da home
 *
 */
-.home,
-.descricao,
-.vendas {
+.home, .descricao, .vendas, .banner {
   height: 100vh;
   width: 100%; }
 
@@ -20,16 +18,17 @@
   padding-top: 70px;}
 
 .home {
-  background-image: url("../img/home-background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
   font-style:bold; }
+
+.blur{
+  filter: blur(3px);
+}
 
 .navbar-home {
   justify-content: flex-end;
   width: 100%;
   padding-top: 10%;
-  font-size: 16px;
+  font-size: 16px;  
   text-decoration: none;
   transition: .1s ease-in-out; }
   .navbar-home .navbar-wrapper {
@@ -38,21 +37,30 @@
     padding-right: 20px; }
       .navbar-home .navbar-color li {
       padding-left: 15px;
-      padding-right: 15px; }
+      padding-right: 15px;
+      border-radius: 13px;
+      transition: 0.3s; }
         .navbar-home .navbar-color li:last-child{
           background-color: #eb244e;
-          border-radius: 13px; }
-      .navbar-home .navbar-color li a {
-        color: white !important;
-         }
-        .navbar-home .navbar-color li a:hover {
-          background: #eb244e;
           border-radius: 13px;
-          text-shadow: 3px 3px 12px #000;
-          -webkit-box-shadow: 1px 2px 2px #000000;
-          box-shadow: 1px 2px 2px #000000; }
+          margin-left: 5px; }
+      .navbar-home .navbar-color li a {
+        color: white !important; }
+        
+.banner{
+  background-image: url("../img/home-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute; }
 
-.microphone{
+.nav-item:hover{
+  background-color:#eb244e;
+  transform: translate(-3px,-3px); 
+  text-shadow: 1px 1px 8px #000;
+  -webkit-box-shadow: 1px 2px 2px #000000;
+  box-shadow: 1px 2px 2px #731328;  }
+
+  .microphone{
   margin-top: -9px;
   margin-bottom: -5px;
   margin-left: -13px;
@@ -64,8 +72,7 @@
   width: 306px;
   margin-top: -50px;
   background-image: url("../img/logo-som-de-garagem.png");
-  background-size: cover;
-}
+  background-size: cover; }
 
 .content-home {
   height: 100%;
@@ -109,9 +116,13 @@
   width: 200px;
   height: 200px;
   border-radius: 100%; 
+  background-position: center;
   -webkit-box-shadow: 0px 3px 2px #868686;
   box-shadow: 0px 3px 2px #868686;
-  background-position: center; }
+  transition: 0.3s; }
+
+.item:hover{
+  -webkit-transform: scale(1.1); }
 
 .descricao .wrapper-circle {
   align-self: center;
@@ -123,6 +134,14 @@
   font-weight: 500;
   color: #656565;
   margin-top: 20px; }
+  
+.circle-border{
+  background: #dadada;
+  width: 225px;
+  height: 225px;
+  padding: 13px;
+  border-radius: 100%;
+  transition: 0.3s; }
 
 .circle-one {
   background-image: url("../img/circle-one.jpg");
@@ -174,12 +193,6 @@
   color:#eb244e;
   font-weight: bold; }
 
-.circle-border{
-  background: #dadada;
-  width: 225px;
-  height: 225px;
-  padding: 13px;
-  border-radius: 100%; }
 
 .btn-color{
   width: 280px;
@@ -192,15 +205,7 @@
   background:#ce123b;
   border:none; }
 
-#owl-demo .item{
-  margin: 3px; }
-
-#owl-demo .item img{
-  display: block;
-  width: 100%;
-  height: auto; }
-
-.rodape{
+#rodape{
   height: 100%;
   width: 100%; 
   background: black; }
@@ -243,7 +248,6 @@
 .garage-free-premium .free{
   padding-right: 200px; }
 
-
 .garagem-left{
   padding-left: 70px; }
 
@@ -276,80 +280,80 @@
     margin-right: auto;
     margin-top:10px; }
 
-    .descricao > h1{
-      padding-bottom: 0;
-      padding-top: 25px;}
-    
-    .wrapper-circle{
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding-top: 10px; }
+  .descricao > h1{
+    padding-bottom: 0;
+    padding-top: 25px;}
+  
+  .wrapper-circle{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 10px; }
 
-    .circle-border{
-      margin: 5px;
-      margin-top: 15px;
-      padding:5px; }
+  .circle-border{
+    margin: 5px;
+    margin-top: 15px;
+    padding:5px; }
 
-    .content-descricao{
-      margin-top: 50px; }
+  .content-descricao{
+    margin-top: 50px; }
 
-    .wrapper-content-descricao{
-      padding-top: 0;  }
-    
-    .wrapper-plan-free, .wrapper-plan-premium{
-      display: flex;
-      flex-direction: column;
-      margin-top: 40px;}
+  .wrapper-content-descricao{
+    padding-top: 0;  }
+  
+  .wrapper-plan-free, .wrapper-plan-premium{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;}
 
-    .wrapper-plan-free{
-      margin-top: 10px; }
-    
-    .app{
-      margin-top: 115px;
-      margin-bottom: 40px; }
+  .wrapper-plan-free{
+    margin-top: 10px; }
+  
+  .app{
+    margin-top: 115px;
+    margin-bottom: 40px; }
 
-    .mockup-principal{
-      display: none;  }
+  .mockup-principal{
+    display: none;  }
 
-    .logo-google{
-      margin-top: 25px;  }
+  .logo-google{
+    margin-top: 25px;  }
 
-    .circle-border{
-      width: 100px;
-      height: 100px; }
+  .circle-border{
+    width: 100px;
+    height: 100px; }
 
-    .circle-one, .circle-two, .circle-three {
-      width: 90px;
-      height: 90px;
-      background-repeat: no-repeat; }
+  .circle-one, .circle-two, .circle-three {
+    width: 90px;
+    height: 90px;
+    background-repeat: no-repeat; }
 
-    .home {
-      background-image: url("../img/home-background.jpg");
-      background-size: ;
-      background-repeat: no-repeat;
-      background-position:center; }
+  .banner {
+    background-image: url("../img/home-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center; }
 
-    #description{
-      margin-bottom: -40px;
-    }
+  #description{
+    margin-bottom: -40px;
+  }
 }
 
 @media (max-width: 991px){
-    .logo{
-      margin-top: -10px; 
-      margin-right: auto; }
-    
-    .content-free, .content-premium{
-      width: 100%;
-      display: flex;
-      flex-direction: column; }
+  .logo{
+    margin-top: -10px; 
+    margin-right: auto; }
+  
+  .content-free, .content-premium{
+    width: 100%;
+    display: flex;
+    flex-direction: column; }
 
-    .circle-one, .circle-two, .circle-three {
-      background-repeat: no-repeat; }
+  .circle-one, .circle-two, .circle-three {
+    background-repeat: no-repeat; }
 
-    .wrapper-content-home{
-      display: none; }
+  .wrapper-content-home{
+    display: none; }
 }
 
 @media (max-width: 371px){
@@ -402,5 +406,11 @@
       background-repeat: no-repeat; }
 }
 
+@media (max-width: 440px){
+  .logo{
+    background-image: url("../img/logo.jpeg");
+    height: 118px;
+    width: 115px;  }
+}
 
 /*# sourceMappingURL=style.css.map */

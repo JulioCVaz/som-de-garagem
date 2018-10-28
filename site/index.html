@@ -15,13 +15,13 @@
 <body>
     <!-- inicio home -->
     <section class="home">
+        <div class="banner"></div>
         <div class="container wrapper-all">
             <div class="row">
                 <div class="col col-md-12">
                     <!-- navbar -->
                     <nav class="navbar navbar-expand-lg navbar-light navbar-home">
                         <div class="logo">
-                            
                         </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -29,19 +29,19 @@
                     <div class="collapse navbar-collapse navbar-wrapper justify-content-end" id="navbarNav">
                         <ul class="navbar-nav navbar-color" id="link">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                            <a class="nav-link scroll" href="#home">HOME <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">SOBRE</a>
+                            <a class="nav-link scroll" href="#description">SOBRE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">PREMIUM</a>
+                            <a class="nav-link scroll" href="#vendas">PREMIUM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">INSCREVA-SE</a>
+                            <a class="nav-link scroll" href="#">INSCREVA-SE</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:3000/"><img src="assets/img/microphone.png" class="microphone">ACESSAR</a>
+                        <li class="nav-item teste">
+                            <a class="nav-link scroll" href="http://localhost:3000/"><img src="assets/img/microphone.png" class="microphone">ACESSAR</a>
                         </li>
                         </ul>
                     </div>
@@ -55,7 +55,7 @@
                             <div class="content-home">
                                 <div class="wrapper-content-home">
                                     <h2>SAIBA</h2>
-                                    <a href="#description"><img src="assets/img/scrolldown.gif" alt="gif scroll down"></a>
+                                    <a href="#description" class="scroll"><img src="assets/img/scrolldown.gif" alt="gif scroll down"></a>
                                     <h2>MAIS</h2>
                                 </div>
                             </div>
@@ -74,14 +74,14 @@
                 <div class="row">
                     <div class="col col-md-12">
                         <div class="wrapper-circle">
-                            <div class="circle-border">
-                                <div class="circle-one item" id="owl-demo"></div>
+                            <div class="circle-border item">
+                                <div class="circle-one item"></div>
                             </div>
-                            <div class="circle-border item" id="owl-demo">
-                                <div class="circle-two"></div>
+                            <div class="circle-border item">
+                                <div class="circle-two item"></div>
                             </div>
-                            <div class="circle-border item" id="owl-demo">
-                                <div class="circle-three"></div>
+                            <div class="circle-border item">
+                                <div class="circle-three item"></div>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
     </section>
     <!-- fim descricao -->
     <!-- inicio vendas -->
-    <section class="vendas">
+    <section class="vendas" id="vendas">
         <div class="container">
             <div class="row">
                 <div class="col col-md-12">
@@ -158,7 +158,7 @@
     </section>
     <!-- fim vendas -->
     <!-- inicio app -->
-    <section class="app">
+    <section class="app" id="app">
         <div class="container">
             <div class="row">
                 <div class="col col-md-6">
@@ -180,7 +180,7 @@
     </section>
     <!-- fim app -->
     
-    <footer class="rodape">
+    <footer id="rodape" >
         <div class="">
             <div>Rodapé</div>
             
@@ -191,5 +191,6 @@
     <script src="assets/components/jquery/dist/jquery.min.js"></script>
     <script src="assets/components/popper.js/dist/popper.min.js"></script>
     <script src="assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 </html>
