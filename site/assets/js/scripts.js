@@ -10,3 +10,7 @@ jQuery(document).ready(function($) {
      $('html,body').animate({scrollTop:$(this.hash).offset().top}, 1200);
     });
 });
+
+function plans(){
+    alert("Falta terminar a tela de cadastros :X (culpa do Guilherme)");
+}
