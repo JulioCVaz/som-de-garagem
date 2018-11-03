@@ -3,23 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Validator, DB, Hash, Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
@@ -39,6 +31,35 @@ class AuthController extends Controller
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
+
+
+
+    public function register(Request $request){
+        $credentials = $request->only('name', 'email', 'password');
+
+        $rules = array(
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users'
+        );
+
+        $validator = Validator::make($credentials, $rules);
+        if($validator->fails()){
+            return response()->json(array(
+                'success' => false,
+                'error' => $validator->messages()
+            ), 500);
+        }
+
+        $name = $request->name;
+        $email = $request->email;
+        $password = $request->password;
+
+
+
+    }
+
+
+
 
     /**
      * Get a validator for an incoming registration request.

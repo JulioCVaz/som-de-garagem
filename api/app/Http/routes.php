@@ -6,12 +6,17 @@
  *  Etec zona leste
  */
 
+// arrumar permissao do cors
 header('Access-Control-Allow-Origin: *');
 header( 'Access-Coxntrol-Allow-Headers: Authorization, Content-Type' );
 
-Route::get('/', 'LoginController@index');
+// email de confirmação
+Route::get('user/verify/{verification_code', 'AuthController@verifyUser');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::get('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
-Route::group(array('prefix' => 'api'),function(){
+// rotas da api
+Route::group(array('prefix' => 'api', 'middleware' => ['jwt.auth']), function(){
     Route::get('/', function(){
         return response()->json(['message' => 'SOM DE GARAGEM API', 'status' => 'Conectado']);
     });
@@ -32,6 +37,16 @@ Route::group(array('prefix' => 'api'),function(){
 
     // routes only acessos
     Route::resource('/acessos', 'AccessController');
+
+    //logout
+    Route::get('/logout', 'AuthController@logout');
+
+    // tests
+    Route::get('/test', function(){
+        return response()->json([
+            'response' => 'responsido'
+        ]);
+    });
 
 });
 
