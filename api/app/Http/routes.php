@@ -9,6 +9,8 @@
 header('Access-Control-Allow-Origin: *');
 header( 'Access-Coxntrol-Allow-Headers: Authorization, Content-Type' );
 
+Route::get('/', 'LoginController@index');
+
 Route::group(array('prefix' => 'api'),function(){
     Route::get('/', function(){
         return response()->json(['message' => 'SOM DE GARAGEM API', 'status' => 'Conectado']);
