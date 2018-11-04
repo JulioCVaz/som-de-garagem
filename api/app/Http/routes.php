@@ -8,7 +8,8 @@
 
 // arrumar permissao do cors
 header('Access-Control-Allow-Origin: *');
-header( 'Access-Coxntrol-Allow-Headers: Authorization, Content-Type' );
+header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type');
+header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
 
 // email de confirmação
 Route::get('user/verify/{verification_code}', 'Auth\AuthController@verifyUser');
@@ -44,6 +45,8 @@ Route::group(array('prefix' => 'api/'), function(){
     Route::get('logout', 'AuthController@logout');
 
     Route::post('register', 'AuthController@register');
+
+    Route::post('login', 'AuthController@login');
 
     // tests
     Route::get('test', function(){

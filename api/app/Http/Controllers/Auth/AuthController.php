@@ -15,7 +15,6 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     // melhorar nome das funcoes
@@ -79,6 +78,8 @@ class AuthController extends Controller
      * */
     public function login(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
+
         $credentials = $request->only('email', 'password');
         
         $rules = [

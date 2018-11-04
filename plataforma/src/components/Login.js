@@ -5,6 +5,7 @@ import { FormControl, Checkbox, FormGroup, FormControlLabel} from '@material-ui/
 import Button from '@material-ui/core/Button';
 import '../styles/Style.css';
 import logo from '../img/logo-som-de-garagem.png';
+import {isAuthenticated} from '../auth.js';
 
 
 export default class Login extends Component{
@@ -17,8 +18,17 @@ export default class Login extends Component{
         this.setState({ checked: event.target.checked });
       };
 
-    handleSubmit = () => {
-        
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let user = document.querySelector('#email').value;
+        let password = document.querySelector('#senha').value;
+        let arr = {
+            'email': user,
+            'password': password
+        };
+        console.log(arr);
+
+        isAuthenticated(arr);
     }
 
     render(){
@@ -32,7 +42,7 @@ export default class Login extends Component{
                         <form onSubmit={this.handleSubmit} className="teste" noValidate autoComplete="off">
                             <FormControl fullWidth>
                                 <TextField
-                                id="standard-name"
+                                id="email"
                                 label="Email"
                                 margin="normal"
                                 variant="outlined"
@@ -42,7 +52,7 @@ export default class Login extends Component{
                             </FormControl>
                             <FormControl fullWidth>
                                 <TextField
-                                id="standard-email"
+                                id="senha"
                                 name="password"
                                 label="Senha"
                                 type="password"
@@ -65,7 +75,7 @@ export default class Login extends Component{
                             <Grid style={{
                                 "display": "flex"
                             }} justify="center">
-                                <Button variant="contained" color="secondary">
+                                <Button type="submit" variant="contained" color="secondary">
                                     Acessar Plataforma
                                 </Button>
                             </Grid>
