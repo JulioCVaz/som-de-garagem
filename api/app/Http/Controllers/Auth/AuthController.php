@@ -18,14 +18,13 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    // melhorar nome das funcoes
     public function telaregister(){
         return view('auth.register');
     }
 
     public function register(Request $request){
-
         $credentials = $request->only('name', 'email', 'password');
-        
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
@@ -48,7 +47,7 @@ class AuthController extends Controller
                 $mail->to($email, $name);
                 $mail->subject($subject);
             });
-        return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.']);
+        return response()->json(['success'=> true, 'message'=> 'Obrigado por inscrever-se! Por favor, verifique seu email para completar seu cadastro.']);
     
     }
 
@@ -73,9 +72,11 @@ class AuthController extends Controller
         }
         return response()->json(['success'=> false, 'error'=> "Verification code is invalid."]);
     }
-
-    // login 
-
+    /**
+     * 
+     * Login no sistema
+     * @param Request $request
+     * */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -84,6 +85,9 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ];
+
+        $validator = Validator::make($credentials, $rules);
+
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
@@ -103,10 +107,7 @@ class AuthController extends Controller
         return response()->json(['success' => true, 'data' => [ 'token' => $token ]], 200);
     }
     /**
-     * Log out
-     * Invalidate the token, so user cannot use it anymore
-     * They have to relogin to get a new token
-     *
+     * Logout no sistema
      * @param Request $request
      */
     public function logout(Request $request) {
@@ -114,10 +115,10 @@ class AuthController extends Controller
         
         try {
             JWTAuth::invalidate($request->input('token'));
-            return response()->json(['success' => true, 'message'=> "You have successfully logged out."]);
+            return response()->json(['success' => true, 'message'=> "Deslogado com sucesso."]);
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['success' => false, 'error' => 'Failed to logout, please try again.'], 500);
+            return response()->json(['success' => false, 'error' => 'Erro ao sair, por favor tente novamente.'], 500);
         }
     }
 
@@ -126,12 +127,12 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            $error_message = "Your email address was not found.";
+            $error_message = "Seu email não foi localizado.";
             return response()->json(['success' => false, 'error' => ['email'=> $error_message]], 401);
         }
         try {
             Password::sendResetLink($request->only('email'), function (Message $message) {
-                $message->subject('Your Password Reset Link');
+                $message->subject('Link para reset de senha.');
             });
         } catch (\Exception $e) {
             //Return with error
@@ -139,40 +140,7 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'error' => $error_message], 401);
         }
         return response()->json([
-            'success' => true, 'data'=> ['message'=> 'A reset email has been sent! Please check your email.']
-        ]);
-    }
-
-
-
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'success' => true, 'data'=> ['message'=> 'Foi encaminhado para o seu email o link para reset de sua senha, por favor acessar link para efetuar o reset.']
         ]);
     }
 }

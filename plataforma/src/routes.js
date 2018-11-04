@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Login from './components/Login';
-import {isAuthenticated} from './auth';
+import {isAuthenticated} from './Auth.js';
 import Home from './Home';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
