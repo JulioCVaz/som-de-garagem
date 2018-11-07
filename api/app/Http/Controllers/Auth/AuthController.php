@@ -78,34 +78,40 @@ class AuthController extends Controller
      * */
     public function login(Request $request)
     {
-        header("Access-Control-Allow-Origin: *");
 
+        header("Access-Control-Allow-Origin: *"); 
+
+        
         $credentials = $request->only('email', 'password');
         
         $rules = [
             'email' => 'required|email',
             'password' => 'required',
+            'token' => 'required'
         ];
 
         $validator = Validator::make($credentials, $rules);
-
+        //dd($validator);
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
         
-        $credentials['is_verified'] = 1;
+        // $credentials['is_verified'] = 1;
         
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::fromUser($credentials)) {
+        
                 return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
+            return response()->json(['success' => false, 'error' => 'Falha no login, tente novamente.'], 500);
         }
+        dd(JWTAuth::attempt($credentials));
         // all good so return the token
         return response()->json(['success' => true, 'data' => [ 'token' => $token ]], 200);
+
     }
     /**
      * Logout no sistema
@@ -142,6 +148,12 @@ class AuthController extends Controller
         }
         return response()->json([
             'success' => true, 'data'=> ['message'=> 'Foi encaminhado para o seu email o link para reset de sua senha, por favor acessar link para efetuar o reset.']
+        ]);
+    }
+
+    public function token(){
+        return response()->json([
+            'token' => csrf_token()
         ]);
     }
 }

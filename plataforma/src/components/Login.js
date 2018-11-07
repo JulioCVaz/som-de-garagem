@@ -11,7 +11,8 @@ import {isAuthenticated} from '../auth.js';
 export default class Login extends Component{
 
     state = {
-        checked:false
+        checked:false,
+        token: ''
     }
 
     handleChange = name => event => {
@@ -24,11 +25,21 @@ export default class Login extends Component{
         let password = document.querySelector('#senha').value;
         let arr = {
             'email': user,
-            'password': password
+            'password': password,
+            'token': this.state.token.token
         };
         console.log(arr);
 
         isAuthenticated(arr);
+    }
+
+    componentWillMount(){
+        fetch('http://localhost:8000/api/token')
+        .then(response => response.json())
+        .then(
+            response => this.setState({token:response})
+        )
+        .catch(error => console.log(error))
     }
 
     render(){

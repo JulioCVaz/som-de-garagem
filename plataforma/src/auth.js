@@ -1,17 +1,14 @@
 export const isAuthenticated = (params) => {
 
     if(params){
-        fetch('http://localhost:8000/api/login',{
+        fetch(`http://localhost:8000/api/login/${params['token']}`,{
+            // mode:"no-cors",
             method: 'POST',
-            body: JSON.stringify(params),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-        .then(response => console.log("Success:", JSON.stringify(response)))
-        .catch(error => console.log('Error:', error));
-
+            // credentials: "same-origin",
+            body: params,
+            headers: new Headers()
+        }).then(response => console.log("success:", JSON.stringify(response)))
+        .catch(error => console.log('error:', error));
         return true;
     }
     return true;
