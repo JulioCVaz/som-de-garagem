@@ -12,5 +12,5 @@ jQuery(document).ready(function($) {
 });
 
 function plans(){
-    alert("Falta terminar a tela de cadastros :X (culpa do Guilherme)");
+    alert('TRABALHO EM ANDAMENTO...');
 }

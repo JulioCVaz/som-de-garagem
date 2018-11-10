@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Som de Garagem</title>
+    <link rel="icon" type="image/jpeg" href="assets/img/logo.jpeg">
     <!-- bootstrap e css -->
     <link rel="stylesheet" href="assets/components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
     <!-- <link rel="stylesheet" href="assets/css/normalize.css" type="text/css"> -->
@@ -26,21 +27,21 @@
                         <div class="logo">
                         </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-toggler-icon hamburger">&#9776</span>
                     </button>
                     <div class="collapse navbar-collapse navbar-wrapper justify-content-end" id="navbarNav">
                         <ul class="navbar-nav navbar-color" id="link">
                         <li class="nav-item active">
-                            <a class="nav-link scroll" href="#home">HOME <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll" href="#description">SOBRE</a>
+                            <a class="nav-link scroll" href="#home">HOME<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link scroll" href="#vendas">PLANOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#">INSCREVA-SE</a>
+                            <a class="nav-link scroll" href="#rodape">CONTATO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#" onclick="plans()">INSCREVA-SE</a>
                         </li>
                         <li class="nav-item teste">
                             <a class="nav-link" href="http://localhost:3000/"><img src="assets/img/microphone.png" class="microphone">ACESSAR</a>
@@ -56,9 +57,7 @@
                     <div class="col col-md-12">
                             <div class="content-home">
                                 <div class="wrapper-content-home">
-                                    <h2>SAIBA</h2>
                                     <a href="#description" class="scroll"><img src="assets/img/scrolldown.gif" alt="gif scroll down"></a>
-                                    <h2>MAIS</h2>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +180,7 @@
         </div>
     </section>
     <!-- fim app -->
-    
+    <!-- início rodapé -->
     <footer id="rodape" >
         <div class="container">
             <div class="row">
@@ -196,29 +195,57 @@
                                 ullamcorper libero id risus tristique, vel interdum tortor interdum.</p>
                         </div>
                         <div class="follow">
-                            <h4>Nossa agência</h4>
-                            <p class="mission"><img src="assets/img/local.png" alt="local" class="icns">Av. Águia de Haia, 
-                                2633 - Cidade A.E. Carvalho, São Paulo - SP</p>
-                            <p class="mission"><img src="assets/img/telefone.png" alt="fone" class="icns">
-                                (11) 2045-4000</p>
-                            <div class="social">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
+                            <div class="row">
+                                <div class="col-md-12">                                
+                                    <h4>Nossa agência</h4>
+                                    <p class="mission"><img src="assets/img/local.png" alt="local" class="icns">Av. Águia de Haia, 
+                                        2633 - Cidade A.E. Carvalho, São Paulo - SP</p>
+                                    <p class="mission"><img src="assets/img/telefone.png" alt="fone" class="icns">
+                                        (11) 2045-4000</p>
+                                    <!-- mídias sociais -->
+                                    <div class="social">
+                                        <div class="row">
+                                            <div class="col-md-12">   
+                                                <ul>
+                                                    <li><a href="#rodape"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- mídias sociais - responsivo -->
+                                    <div class="social-resp">
+                                        <div class="row">
+                                            <div class="col-md-12">   
+                                                <ul>
+                                                    <li><a href="#rodape"><i class="fa fa-share-alt" aria-hidden="true"></i></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#rodape"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="image">
-                            <img src="assets/img/logo-som-de-garagem.png" class="img">
-                            <p>©Todos os direitos reservados</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="assets/img/logo-som-de-garagem.png" class="img">
+                                    <p>©Todos os direitos reservados</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+    <!-- fim rodapé -->
     <!-- scripts -->
     <script src="assets/components/jquery/dist/jquery.min.js"></script>
     <script src="assets/components/popper.js/dist/popper.min.js"></script>
