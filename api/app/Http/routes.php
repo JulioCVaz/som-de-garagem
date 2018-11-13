@@ -46,7 +46,7 @@ Route::group(array('prefix' => 'api/'), function(){
 
     Route::post('register', 'AuthController@register');
 
-    Route::resource('login/', 'Auth\AuthController@login');
+    Route::resource('login', 'Auth\AuthController@login');
 
     Route::get('token' , 'Auth\AuthController@token');
 

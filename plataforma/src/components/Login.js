@@ -21,15 +21,15 @@ export default class Login extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        let user = document.querySelector('#email').value;
-        let password = document.querySelector('#senha').value;
-        let arr = {
-            'email': user,
-            'password': password
-        };
-        console.log(arr);
+        var user = document.querySelector('#email').value;
+        var password = document.querySelector('#senha').value;
+        var formData = new FormData();
+        formData.append('email', user);
+        formData.append('password', password);
 
-        isAuthenticated(arr);
+        console.log(formData);
+
+        isAuthenticated(formData);
     }
 
     componentWillMount(){
