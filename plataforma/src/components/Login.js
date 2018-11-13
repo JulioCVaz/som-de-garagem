@@ -25,8 +25,7 @@ export default class Login extends Component{
         let password = document.querySelector('#senha').value;
         let arr = {
             'email': user,
-            'password': password,
-            'token': this.state.token.token
+            'password': password
         };
         console.log(arr);
 
