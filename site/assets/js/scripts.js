@@ -1,8 +1,18 @@
-var nav = $('.navbar-toggler');
+    var nav = $('.navbar-toggler');
 
-$(nav).on('click', () => {
+    $(nav).on('click', () => {
     $('.banner').toggleClass('blur');
-});
+    });
+
+jQuery(documento).ready(function ($){
+
+    if ($('.banner').hasClass('blur')){
+        console.log('xablau');
+    }
+    else{
+        console.log('Não foi dessa vez');
+    }
+})
 
 jQuery(document).ready(function($) {
     $(".scroll").click(function(event){
