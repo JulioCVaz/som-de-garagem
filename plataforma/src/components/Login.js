@@ -5,41 +5,57 @@ import { FormControl, Checkbox, FormGroup, FormControlLabel} from '@material-ui/
 import Button from '@material-ui/core/Button';
 import '../styles/Style.css';
 import logo from '../img/logo-som-de-garagem.png';
-import {isAuthenticated} from '../auth.js';
+import {login} from '../services/auth.js';
+import api from "../services/api";
 
 
 export default class Login extends Component{
 
     state = {
+        email: '',
+        password: '',
+        error: '',
         checked:false,
-        token: ''
     }
 
     handleChange = name => event => {
         this.setState({ checked: event.target.checked });
       };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        var user = document.querySelector('#email').value;
-        var password = document.querySelector('#senha').value;
-        var formData = new FormData();
-        formData.append('email', user);
-        formData.append('password', password);
+        const {email, password} = this.state;
+        console.log(this.state);
+        if(!email || !password){
+            this.setState({erro: "Preencha email e senha para logar"});
+        }else{
+            try{
+                var formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+                const response = await api.post("/login", formData)
+                console.log(response);
+                login(response.data.data.auth_token);
+                this.props.history.push("/sdg");
+            }catch(err){
+                console.log('cai aqui');
+                this.setState({error: "Houve um problema com o login, verifique suas credenciais"});
+            }
+        }
 
-        console.log(formData);
-
-        isAuthenticated(formData);
+        // var user = document.querySelector('#email').value;
+        // var password = document.querySelector('#senha').value;
+        // 
     }
 
-    componentWillMount(){
-        fetch('http://localhost:8000/api/token')
-        .then(response => response.json())
-        .then(
-            response => this.setState({token:response})
-        )
-        .catch(error => console.log(error))
-    }
+    // componentWillMount(){
+    //     fetch('http://localhost:8000/api/token')
+    //     .then(response => response.json())
+    //     .then(
+    //         response => this.setState({token:response})
+    //     )
+    //     .catch(error => console.log(error))
+    // }
 
     render(){
         return(
@@ -58,6 +74,7 @@ export default class Login extends Component{
                                 variant="outlined"
                                 name="email"
                                 multiline
+                                onChange={e => this.setState({ email: e.target.value })}
                                 />
                             </FormControl>
                             <FormControl fullWidth>
@@ -68,6 +85,7 @@ export default class Login extends Component{
                                 type="password"
                                 margin="normal"
                                 variant="outlined"
+                                onChange={e => this.setState({ password: e.target.value })}
                                 />
                             </FormControl>
                             <FormGroup row>

@@ -17,8 +17,7 @@ class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    // melhorar nome das funcoes
-    public function telaregister(){
+    public function cadastro(){
         return view('auth.register');
     }
 
@@ -103,6 +102,7 @@ class AuthController extends Controller
         header("Access-Control-Allow-Origin: *");
         
         $credentials = $request->only('email', 'password');
+        $token = $request->bearerToken();
                 
         $rules = [
             'email' => 'required|email',

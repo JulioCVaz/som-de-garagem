@@ -8,14 +8,16 @@
 
 // arrumar permissao do cors
 header('Access-Control-Allow-Origin: *');
-header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type');
 header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
+header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type, X-Auth-Token');
 
 // email de confirmação
 Route::get('user/verify/{verification_code}', 'Auth\AuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::get('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
-Route::resource('/cadastrar', 'Auth\AuthController@telaregister');
+
+// cadastro de criacao de conta
+Route::resource('/cadastro', 'Auth\AuthController@cadastro');
 Route::post('/register', 'AuthController@register');
 
 // rotas da api
