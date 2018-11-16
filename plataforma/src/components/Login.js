@@ -7,6 +7,8 @@ import '../styles/Style.css';
 import logo from '../img/logo-som-de-garagem.png';
 import {login} from '../services/auth.js';
 import api from "../services/api";
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 
 export default class Login extends Component{
@@ -27,35 +29,24 @@ export default class Login extends Component{
         const {email, password} = this.state;
         console.log(this.state);
         if(!email || !password){
-            this.setState({erro: "Preencha email e senha para logar"});
+            this.setState({error: "Preencha os campos com seu email e senha para logar"});
         }else{
             try{
                 var formData = new FormData();
                 formData.append('email', email);
                 formData.append('password', password);
                 const response = await api.post("/login", formData)
-                console.log(response);
-                login(response.data.data.auth_token);
-                this.props.history.push("/sdg");
+                if(login(response.data.data.auth_token)){
+                    this.props.history.push("/sdg");
+                }else{
+                    this.setState({error: "Login e senha não localizados"});
+                }
             }catch(err){
                 console.log('cai aqui');
                 this.setState({error: "Houve um problema com o login, verifique suas credenciais"});
             }
-        }
-
-        // var user = document.querySelector('#email').value;
-        // var password = document.querySelector('#senha').value;
-        // 
+        } 
     }
-
-    // componentWillMount(){
-    //     fetch('http://localhost:8000/api/token')
-    //     .then(response => response.json())
-    //     .then(
-    //         response => this.setState({token:response})
-    //     )
-    //     .catch(error => console.log(error))
-    // }
 
     render(){
         return(
@@ -108,6 +99,15 @@ export default class Login extends Component{
                                 </Button>
                             </Grid>
                         </form>
+                        {  (this.state.error != '') ?
+                            <div>
+                                <Paper elevation={1}>
+                                <Typography component="p">
+                                    {this.state.error}
+                                </Typography>
+                                </Paper>
+                            </div>
+                        : ''}
                     </Grid>
                 </Grid>
             </React.Fragment>
