@@ -1,6 +1,6 @@
 .wrapper{
     padding-top: 60px;
-    background-color: #212121;
+    /* background-color: #212121; */
     min-height: 85vh;
 }
 
@@ -9,7 +9,7 @@
     border: 1px solid #ced4da;
 }
 
-.player{
+/* .player{
     color: black;
     position: absolute;
     bottom: 0;
@@ -17,7 +17,7 @@
     width: 100%;
     display: inline-flex;
     align-items: center;
-}
+} */
 
 .titulo-musica{
     width: 35%;

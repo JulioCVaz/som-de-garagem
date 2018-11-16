@@ -94,7 +94,7 @@ class Search extends Component{
                     <Grid item xs={6}>
                     <FormControl fullWidth>
                         <InputLabel 
-                        style={{color:"white"}}
+                        style={{color:"black"}}
                         FormLabelClasses={{
                             root:search,
                             focused: search
@@ -105,7 +105,7 @@ class Search extends Component{
                             id="input-musica"
                             type="text"
                             style={{
-                                color:'white'
+                                color:'black'
                             }}
                             endAdornment={
                             <InputAdornment position="end">

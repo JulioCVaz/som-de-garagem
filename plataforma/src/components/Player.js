@@ -28,7 +28,7 @@ class Player extends Component{
         console.log(this.props);
         return(
             // Audio-Player
-            <div className="ap" id="ap">
+            <div className="ap player" id="ap">
               <div className="ap__inner">
                   <div className="ap__item ap__item--playback">
                     <button className="ap__controls ap__controls--prev">

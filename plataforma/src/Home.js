@@ -14,7 +14,7 @@ class Home extends Component{
         return(
             <React.Fragment>
             <Navbar/>
-            <div className="wrapper" style={{background: background}}>
+            <div className="wrapper">
                 <Grid container spacing={8}
                         justify="center"
                         alignItems="center">
