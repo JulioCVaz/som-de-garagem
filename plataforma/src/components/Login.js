@@ -9,7 +9,8 @@ import {login} from '../services/auth.js';
 import api from "../services/api";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import Divider from '@material-ui/core/Divider';
+import '../styles/Style.css';
 
 export default class Login extends Component{
 
@@ -19,6 +20,14 @@ export default class Login extends Component{
         error: '',
         checked:false,
     }
+
+    styles = {
+        button: {
+          '&:hover': {
+            'color': 'white'
+          }
+        }
+      }
 
     handleChange = name => event => {
         this.setState({ checked: event.target.checked });
@@ -51,12 +60,12 @@ export default class Login extends Component{
     render(){
         return(
             <React.Fragment>
-                <Grid container justify="center" xs={12}>
+                <Grid container justify="center" xs={12} className="container-form">
                     <div className="login-faixa">
                         <img src={logo} className="img-faixa"/>
                     </div>
-                    <Grid xs={6} sm={3}>
-                        <form onSubmit={this.handleSubmit} className="teste" noValidate autoComplete="off">
+                    <Grid xs={12} sm={3}>
+                        <form onSubmit={this.handleSubmit} className="form-login" noValidate autoComplete="off">
                             <FormControl fullWidth>
                                 <TextField
                                 id="email"
@@ -92,10 +101,18 @@ export default class Login extends Component{
                                 />
                             </FormGroup>
                             <Grid style={{
-                                "display": "flex"
+                                "display": "flex",
+                                "flex-direction": "column"
                             }} justify="center">
                                 <Button type="submit" variant="contained" color="secondary">
                                     Acessar Plataforma
+                                </Button>
+                                <Divider className="divider-login" style={{
+                                    'margin-top': '10px',
+                                    'margin-bottom': '10px'
+                                }}/>
+                                <Button href="http://localhost:8000/register"  variant="outlined" color="secondary" style={this.styles.button}>
+                                    Cadastre-se
                                 </Button>
                             </Grid>
                         </form>
