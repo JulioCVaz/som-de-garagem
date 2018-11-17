@@ -22,6 +22,9 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
+        
+        // header('Access-Control-Allow-Headers: Authorization, Content-Type, X-Auth-Token', 'X-CSRF-TOKEN');
+
         $credentials = $request->only('name', 'email', 'password');
         $rules = [
             'name' => 'required|max:255',
@@ -98,8 +101,6 @@ class AuthController extends Controller
      * */
     public function login(Request $request)
     {
-
-        header("Access-Control-Allow-Origin: *");
         
         $credentials = $request->only('email', 'password');
         $token = $request->bearerToken();

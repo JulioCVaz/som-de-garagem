@@ -85,3 +85,12 @@
 .button-cadastrar{
     margin-top: 15;
 }
+
+
+.img-register-wrapper{
+    width: 100%;
+    min-height: 100vh;
+    background: url('../img/register-img.jpg')no-repeat;
+    background-size: cover;
+    background-position: center;
+}

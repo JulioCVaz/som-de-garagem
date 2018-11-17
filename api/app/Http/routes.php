@@ -7,9 +7,9 @@
  */
 
 // arrumar permissao do cors
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
-header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type, X-Auth-Token');
+// header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
+// header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type, X-Auth-Token', 'X-CSRF-TOKEN');
 
 // email de confirmação
 Route::get('user/verify/{verification_code}', 'Auth\AuthController@verifyUser');
@@ -18,7 +18,6 @@ Route::get('password/reset', 'Auth\ResetPasswordController@postReset')->name('pa
 
 // cadastro de criacao de conta
 Route::resource('/cadastro', 'Auth\AuthController@cadastro');
-Route::post('/register', 'AuthController@register');
 
 // rotas da api
 Route::group(array('prefix' => 'api/'), function(){
@@ -36,27 +35,26 @@ Route::group(array('prefix' => 'api/'), function(){
     // routes only albums
     Route::get('album/{string}', 'AlbumController@showbylike'); // arrumar
     Route::resource('albums', 'AlbumController');
-
+    
     // routes only planos
     Route::resource('planos', 'PlansController');
-
+    
     // routes only acessos
     Route::resource('acessos', 'AccessController');
-
+    
     //logout
     Route::get('logout', 'AuthController@logout');
 
-    Route::post('register', 'AuthController@register');
-
     Route::resource('login', 'Auth\AuthController@login');
-
+    
     Route::get('token' , 'Auth\AuthController@token');
-
+    
+    Route::post('register', 'Auth\AuthController@register');
     // tests
     Route::get('test', function(){
         return response()->json([
             'response' => 'respondido'
-        ]);
+            ]);
     });
 
 });

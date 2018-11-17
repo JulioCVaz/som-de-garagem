@@ -111,7 +111,7 @@ export default class Login extends Component{
                                     'margin-top': '10px',
                                     'margin-bottom': '10px'
                                 }}/>
-                                <Button href="http://localhost:8000/register"  variant="outlined" color="secondary" style={this.styles.button}>
+                                <Button href="/cadastro"  variant="outlined" color="secondary" style={this.styles.button}>
                                     Cadastre-se
                                 </Button>
                             </Grid>
