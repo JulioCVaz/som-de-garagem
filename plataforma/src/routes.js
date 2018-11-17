@@ -5,6 +5,9 @@ import {isAuthenticated} from './services/auth.js';
 import Home from './Home';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
+
+// animate : https://hackernoon.com/animated-page-transitions-with-react-router-4-reacttransitiongroup-and-animated-1ca17bd97a1a
+
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={ props => (
         isAuthenticated() ? (

@@ -10,38 +10,43 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import '../styles/Style.css';
 import api from "../services/api";
-import {register} from "../services/auth";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 export default class Register extends Component{
 
     state = {
-        password: '',
-        confirme: '',
-        email: '',
-        nome: '',
+        user:{
+            password: '',
+            repeatPassword: '',
+            email: '',
+            nome: ''
+        },
         showPassword: false,
         token_csrf: ''
       };
 
-    handleChange = prop => event => {
-        this.setState({ [prop]: event.target.value });
+    handleChange = (event) => {
+        const { user } = this.state;
+        user[event.target.name] = event.target.value;
+        this.setState({ user });
     };
 
     handleClickShowPassword = () => {
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
 
-    handleRegister = () => {
-        const {nome, email, password, token_csrf} = this.state;
+    handleRegister = (e) => {
+        e.preventDefault();
+        const {user} = this.state;
 
-        if(!nome && !email && !password){
+        if(!user.nome || !user.email || !user.password){
             this.setState({error: "Preencha todos os campos"});
         }else{
             try{
                 var formData = new FormData();
-                    formData.append('name', nome);
-                    formData.append('email', email);
-                    formData.append('password', password);
+                    formData.append('name', user.nome);
+                    formData.append('email', user.email);
+                    formData.append('password', user.password);
                     console.log(document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
                 api.post('/register', formData).then( (response) => {
                     console.log(response);
@@ -68,10 +73,29 @@ export default class Register extends Component{
           .catch((error) => {
             console.log(error);
           })
+    }
 
+    componentDidMount(){
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.user.password) {
+                return false;
+            }
+            return true;
+        });
     }
 
     render(){
+        const {
+            error,
+            errorMessages,
+            validators,
+            requiredError,
+            helperText,
+            validatorListener,
+            withRequiredValidator,
+            ...rest
+        } = this.props;
+        const { user } = this.state;
         return(
             <React.Fragment>
                     <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}"/>
@@ -88,57 +112,53 @@ export default class Register extends Component{
                         container
                         justify="center"
                         direction="column">
-                            <FormControl>
-                                <InputLabel htmlFor="adornment-nome">Nome:</InputLabel>
-                                <Input 
-                                    type="text"
-                                    value={this.state.nome}
-                                    onChange={this.handleChange('nome')}
-                                />
-                            </FormControl>
-                            <FormControl>
-                                <InputLabel htmlFor="adornment-email">Email</InputLabel>
-                                <Input 
-                                    type="text"
-                                    value={this.state.email}
-                                    onChange={this.handleChange('email')}
-                                />
-                            </FormControl>
-                            <FormControl>
-                            <InputLabel htmlFor="adornment-password">Senha</InputLabel>
-                            <Input
-                                id="adornment-password"
-                                type={this.state.showPassword ? 'text' : 'password'}
-                                value={this.state.password}
-                                onChange={this.handleChange('password')}
-                                endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                    aria-label="Toggle password visibility"
-                                    onClick={this.handleClickShowPassword}
-                                    >
-                                    {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                                }
+                        <ValidatorForm
+                            ref="form"
+                            onSubmit={this.handleRegister}
+                            onError={errors => console.log(errors)}
+                        >
+                            <TextValidator
+                                label="Nome"
+                                onChange={this.handleChange}
+                                name="nome"
+                                value={user.nome}
+                                validators={['required', 'isName']}
+                                errorMessages={['this field is required', 'Nome não é válido']}
                             />
-                            </FormControl>
-                            <FormControl>
-                            <InputLabel htmlFor="adornment-password">Confirme a senha</InputLabel>
-                            <Input
-                                id="adornment-password"
-                                type='password'
-                                value={this.state.confirme}
-                                onChange={this.handleChange('confirme')}
+                           <TextValidator
+                                label="Email"
+                                onChange={this.handleChange}
+                                name="email"
+                                value={user.email}
+                                validators={['required', 'isEmail']}
+                                errorMessages={['this field is required', 'email is not valid']}
                             />
-                            </FormControl>
+                            <TextValidator
+                                label="Password"
+                                onChange={this.handleChange}
+                                name="password"
+                                type="password"
+                                validators={['required']}
+                                errorMessages={['this field is required']}
+                                value={user.password}
+                            />
+                            <TextValidator
+                                label="Repeat password"
+                                onChange={this.handleChange}
+                                name="repeatPassword"
+                                type="password"
+                                validators={['isPasswordMatch', 'required']}
+                                errorMessages={['password mismatch', 'this field is required']}
+                                value={user.repeatPassword}
+                            />
                             <div>
-                                <Button onClick={this.handleRegister} variant="contained" style={{
+                                <Button type="submit" onClick={this.handleRegister} variant="contained" style={{
                                     'margin-top': '20px'
                                 }}>
                                     Cadastrar
                                 </Button>
                             </div>
+                            </ValidatorForm>
                         </Grid>
                 </Grid>
             </React.Fragment>
