@@ -21,6 +21,13 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function confirm(){
+        return view('auth.confirm')->with('data', [
+            'success' => true,
+            'message' => "Email verificado com sucesso"
+        ]);
+    }
+
     public function register(Request $request){
         
         // header('Access-Control-Allow-Headers: Authorization, Content-Type, X-Auth-Token', 'X-CSRF-TOKEN');
@@ -41,7 +48,7 @@ class AuthController extends Controller
         $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
         $verification_code = str_random(30); //Generate verification code
         DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
-        $subject = "Please verify your email address.";
+        $subject = "Cadastro plataforma SOM DE GARAGEM";
         Mail::send('auth.emails.verify', ['name' => $name, 'verification_code' => $verification_code],
             function($mail) use ($email, $name, $subject){
                 $mail->from(env("MAIL_USERNAME"), "Equipe som de garagem");
@@ -59,19 +66,20 @@ class AuthController extends Controller
         if(!is_null($check)){
             $user = User::find($check->user_id);
             if($user->is_verified == 1){
-                return response()->json([
+                return view('auth.confirm')->with('data', [
                     'success'=> true,
-                    'message'=> 'Account already verified..'
+                    'message'=> 'Conta já verificada'
                 ]);
             }
             $user->update(['is_verified' => 1]);
             DB::table('user_verifications')->where('token',$verification_code)->delete();
-            return response()->json([
+
+            return view('auth.confirm')->with('data', [
                 'success'=> true,
-                'message'=> 'You have successfully verified your email address.'
+                'message'=> 'Email verificado com sucesso'
             ]);
         }
-        return response()->json(['success'=> false, 'error'=> "Verification code is invalid."]);
+        return view()->with('data', ['success'=> false, 'error'=> "Erro ao verificar conta, contate o TI."]);
     }
 
     private function getToken($email, $password)
@@ -125,27 +133,6 @@ class AuthController extends Controller
           $response = ['success'=>false, 'data'=>'Record doesnt exists'];
             }
         return response()->json($response, 201);
-        
-    
-        
-        
-        // if($validator->fails()) {
-        //     return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
-        // }
-        
-        // $credentials['is_verified'] = 1;
-        
-        // try {
-        //     // attempt to verify the credentials and create a token for the user
-        //     if (!$token = JWTAuth::attempt($credentials)) {
-        //         return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
-        //     }
-        // } catch (JWTException $e) {
-        //     // something went wrong whilst attempting to encode the token
-        //     return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
-        // }
-        // // all good so return the token
-        // return response()->json(['success' => true, 'data'=> [ 'token' => $token ]], 200);
     }
     /**
      * Logout no sistema

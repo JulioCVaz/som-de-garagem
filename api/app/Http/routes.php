@@ -16,6 +16,7 @@ Route::get('user/verify/{verification_code}', 'Auth\AuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::get('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
+Route::resource('confirm', "Auth\AuthController@confirm");
 // cadastro de criacao de conta
 Route::resource('/cadastro', 'Auth\AuthController@cadastro');
 

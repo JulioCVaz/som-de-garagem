@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import '../styles/Style.css';
 import api from "../services/api";
 import logo from '../img/logo-som-de-garagem.png';
+import loadinggif from '../img/loading.gif';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { Checkbox, FormGroup, FormControlLabel} from '@material-ui/core';
 import ReCAPTCHA from "react-google-recaptcha";
@@ -62,34 +63,34 @@ export default class Register extends Component{
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
 
-    handleSpinner(){
-
-    }
-
     handleRegister = (e) => {
         e.preventDefault();
         const {user} = this.state;
 
         this.setState({loading: true})
 
-        // if(!user.nome || !user.email || !user.password){
-        //     this.setState({error: "Preencha todos os campos"});
-        // }else{
-        //     try{
-        //         var formData = new FormData();
-        //             formData.append('name', user.nome);
-        //             formData.append('email', user.email);
-        //             formData.append('password', user.password);
-        //             console.log(document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
-        //         api.post('/register', formData).then( (response) => {
-        //             console.log(response);
-        //         }).catch( (error) => {
-        //             console.log(`Erro:  ${error}`)
-        //         });
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-        // }
+        setTimeout(()=>{
+            if(!user.nome || !user.email || !user.password){
+                this.setState({error: "Preencha todos os campos"});
+            }else{
+                try{
+                    var formData = new FormData();
+                        formData.append('name', user.nome);
+                        formData.append('email', user.email);
+                        formData.append('password', user.password);
+                        console.log(document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
+                    api.post('/register', formData).then( (response) => {
+                        console.log(response);
+                        window.location.href="/mensagem-confirmacao";
+                    }).catch( (error) => {
+                        console.log(`Erro:  ${error}`)
+                    });
+                }catch(err){
+                    console.log(err);
+                }
+            }
+
+        }, 2500);
     }
 
     onChange(value) {
@@ -164,7 +165,6 @@ export default class Register extends Component{
                             onChange={this.handleChange}
                             name="nome"
                             value={user.nome}
-                            validators={['required', 'isName']}
                             errorMessages={['Este campo é obrigatório']}
                         />
                         <TextValidator
@@ -234,17 +234,35 @@ export default class Register extends Component{
                                 sitekey="6LcteHsUAAAAAJbSqU_0hkY7EjPgCafKaaoDsLg1"
                                 onChange={this.onChange}
                             />
-                            <FormGroup row>
+                            <div>
+                                <div style={{
+                                    'float': 'left',
+                                    'width' : '50%'
+                                }}> 
                                 <Button type="submit" onClick={this.handleRegister} variant="contained" color="secondary" style={{
-                                    'margin-top': '20px',
-                                    'width' : '40%'
+                                    'marginTop': '20px',
+                                    'width' : '90%'
                                 }}>
                                     Cadastrar
                                 </Button>
+                                </div>
                                 {
-                                    (this.state.loading) ? <strong> Carregando </strong> : ''
+                                    (this.state.loading) ? 
+                                    <div style={{
+                                        'display': 'inline-flex',
+                                        'justifyContent': 'flex-end',
+                                        'alignItems': 'center',
+                                        'float': 'right',
+                                        'width' : '50%',
+                                        'textAlign': 'right'
+                                    }}>
+                                        <Typography variant="body2" gutterBottom>
+                                            Registrando
+                                        </Typography>
+                                        <img src={loadinggif}/>
+                                    </div> : ''
                                 }
-                            </FormGroup>
+                            </div>
                         </div>
                         </ValidatorForm>
                     </Grid>
