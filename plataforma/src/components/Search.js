@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 // import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import SearchIcon from '@material-ui/icons/Search';
