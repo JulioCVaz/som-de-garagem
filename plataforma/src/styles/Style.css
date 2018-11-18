@@ -66,8 +66,8 @@
     padding-top: 10px;
 }
 
-.login-faixa{
-    margin-top: 5%;
+.login-faixa,
+.login-faixa-register{
     width: 100%;
     height: 100px;
     background-color: #f50057;
@@ -76,6 +76,9 @@
     align-items: center;
 }
 
+.login-faixa{
+    margin-top: 5%;
+}
 .img-faixa{
     height: 85px;
 }
@@ -86,11 +89,16 @@
     margin-top: 15;
 }
 
-
 .img-register-wrapper{
     width: 100%;
     min-height: 100vh;
     background: url('../img/register-img.jpg')no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.termos-politicas{
+    color: blue;
+    cursor: pointer;
+    text-decoration: overline;
 }
