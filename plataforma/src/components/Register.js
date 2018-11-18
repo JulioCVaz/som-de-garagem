@@ -12,8 +12,14 @@ import '../styles/Style.css';
 import api from "../services/api";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
-export default class Register extends Component{
+const style = {
+    width : '80%',
+    root: {
+        width: '100%' 
+    }
+}
 
+export default class Register extends Component{
     state = {
         user:{
             password: '',
@@ -22,7 +28,10 @@ export default class Register extends Component{
             nome: ''
         },
         showPassword: false,
-        token_csrf: ''
+        token_csrf: '',
+        direction: 'row',
+        justify: 'center',
+        alignItems: 'center'
       };
 
     handleChange = (event) => {
@@ -53,16 +62,10 @@ export default class Register extends Component{
                 }).catch( (error) => {
                     console.log(`Erro:  ${error}`)
                 });
-                // if(register(response.data.response)){
-                //     console.log('confirmar no email');
-                // }else{
-                //     this.setState({error: "Erro ao efetuar cadastro"});
-                // }
             }catch(err){
                 console.log(err);
             }
         }
-
     }
 
     componentWillMount(){
@@ -98,68 +101,72 @@ export default class Register extends Component{
         const { user } = this.state;
         return(
             <React.Fragment>
-                    <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}"/>
-                    <Grid container xs={12}
-                    direction="row"
-                    justify="space-evenly"
-                    >
+                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}"/>
+                <Grid container xs={12}
+                justify="space-evenly"
+                >
                     <Grid xs={4}>
                         <div className="img-register-wrapper"></div>
                     </Grid>
-                    {/* <form> */}
-                        <Grid
-                        xs={6}
-                        container
-                        justify="center"
-                        direction="column">
-                        <ValidatorForm
-                            ref="form"
-                            onSubmit={this.handleRegister}
-                            onError={errors => console.log(errors)}
-                        >
-                            <TextValidator
-                                label="Nome"
-                                onChange={this.handleChange}
-                                name="nome"
-                                value={user.nome}
-                                validators={['required', 'isName']}
-                                errorMessages={['this field is required', 'Nome não é válido']}
-                            />
-                           <TextValidator
-                                label="Email"
-                                onChange={this.handleChange}
-                                name="email"
-                                value={user.email}
-                                validators={['required', 'isEmail']}
-                                errorMessages={['this field is required', 'email is not valid']}
-                            />
-                            <TextValidator
-                                label="Password"
-                                onChange={this.handleChange}
-                                name="password"
-                                type="password"
-                                validators={['required']}
-                                errorMessages={['this field is required']}
-                                value={user.password}
-                            />
-                            <TextValidator
-                                label="Repeat password"
-                                onChange={this.handleChange}
-                                name="repeatPassword"
-                                type="password"
-                                validators={['isPasswordMatch', 'required']}
-                                errorMessages={['password mismatch', 'this field is required']}
-                                value={user.repeatPassword}
-                            />
-                            <div>
-                                <Button type="submit" onClick={this.handleRegister} variant="contained" style={{
-                                    'margin-top': '20px'
-                                }}>
-                                    Cadastrar
-                                </Button>
-                            </div>
-                            </ValidatorForm>
-                        </Grid>
+                    <Grid
+                    xs={6}
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column">
+                    <ValidatorForm
+                        style={style}
+                        ref="form"
+                        onSubmit={this.handleRegister}
+                        onError={errors => console.log(errors)}
+                    >
+                        <TextValidator
+                            style={style.root}
+                            label="Nome"
+                            onChange={this.handleChange}
+                            name="nome"
+                            value={user.nome}
+                            validators={['required', 'isName']}
+                            errorMessages={['this field is required', 'Nome não é válido']}
+                        />
+                        <TextValidator
+                            style={style.root}
+                            label="Email"
+                            onChange={this.handleChange}
+                            name="email"
+                            value={user.email}
+                            validators={['required', 'isEmail']}
+                            errorMessages={['this field is required', 'email is not valid']}
+                        />
+                        <TextValidator
+                            style={style.root}
+                            label="Password"
+                            onChange={this.handleChange}
+                            name="password"
+                            type="password"
+                            validators={['required']}
+                            errorMessages={['this field is required']}
+                            value={user.password}
+                        />
+                        <TextValidator
+                            style={style.root}
+                            label="Repeat password"
+                            onChange={this.handleChange}
+                            name="repeatPassword"
+                            type="password"
+                            validators={['isPasswordMatch', 'required']}
+                            errorMessages={['password mismatch', 'this field is required']}
+                            value={user.repeatPassword}
+                        />
+                        <div>
+                            <Button type="submit" onClick={this.handleRegister} variant="contained" style={{
+                                'margin-top': '20px'
+                            }}>
+                                Cadastrar
+                            </Button>
+                        </div>
+                        </ValidatorForm>
+                    </Grid>
                 </Grid>
             </React.Fragment>
         );
