@@ -80,6 +80,7 @@
     margin-top: 5%;
 }
 .img-faixa{
+    cursor: pointer;
     height: 85px;
 }
 

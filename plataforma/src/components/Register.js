@@ -90,6 +90,10 @@ export default class Register extends Component{
         console.log("Captcha value:", value);
       }
 
+    redirectRouter(){
+        window.location.href="/";
+    }
+
     componentWillMount(){
         api.get('/token')
         .then((response) => {
@@ -128,7 +132,7 @@ export default class Register extends Component{
                 justify="space-evenly"
                 >
                     <div className="login-faixa-register">
-                        <img src={logo} className="img-faixa"/>
+                        <img onClick={this.redirectRouter} src={logo} className="img-faixa"/>
                     </div>
                     <Grid xs={4}>
                         <div className="img-register-wrapper"></div>
@@ -212,11 +216,11 @@ export default class Register extends Component{
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={this.handleClose} color="primary">
-                                        Disagree
+                                        <Button onClick={this.handleClose} color="secondary">
+                                        DISCORDO
                                         </Button>
                                         <Button onClick={this.handleClose} color="primary" autoFocus>
-                                        Agree
+                                        CONCORDO
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
