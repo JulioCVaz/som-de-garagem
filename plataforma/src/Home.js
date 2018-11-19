@@ -216,18 +216,7 @@ class Home extends Component{
                 <Typography variant="h6" color="inherit" noWrap>
                 <img src={logo} className={classes.logo}/>
                 </Typography>
-                <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-                <InputBase
-                    placeholder="Procure por música, artista ou gênero"
-                    classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                    }}
-                />
-                </div>
+                <Search/>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton color="inherit">
