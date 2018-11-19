@@ -47,19 +47,23 @@ class MusicController extends Controller
 
         $data = $musicas->id;
 
-        $metadata = DB::table('musica')
-                ->join('album', 'album.musicaID', '=', 'musica.albumID')->where('musica.id', '=', $data)
-                ->join('artistas', 'artistas.musicasID', '=', 'musica.artistaID')->where('musica.id', '=', $data)
-                ->select('musica.nomemusica',
+        $metadata = DB::table('album_has_musica')
+                ->join('album', 'album_has_musica.albumID', '=', 'album.id')->where('album_has_musica.musicaID', '=', $data)
+                // ->join('artistas', 'artistas.musicasID', '=', 'musica.artistaID')->where('musica.id', '=', $data)
+                ->select(
+                    'album.titulo_album'
+                    )->distinct()
+                    ->get();
+
+                    /*
+                    'musica.nomemusica',
                     'musica.filepath',
                     'musica.filepath_avatar',
                     'musica.created_at',
                     'musica.id as idmusica',
-                    'album.titulo_album',
                     'artistas.nomeartista',
                     'artistas.id as artistaid'
-                    )->distinct()
-                    ->get();
+                    */
 
         if(!$metadata){
             return response()->json([
