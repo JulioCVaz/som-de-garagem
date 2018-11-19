@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class MusicController extends Controller
 {
+
+    private $genero;
+
      // retorna todas as ocurrencias segundo a busca
     public function showbylike($string){
         $musiclike = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string .'%')->first();
@@ -42,6 +45,9 @@ class MusicController extends Controller
         $musicageneroid = DB::table('musica_has_genero')->where('musicaID', '=', $id)
                     ->select('generoID')
                     ->first();
+
+        $this->genero = $musicageneroid->generoID;
+
         
         $musicasdiversas = DB::table('musica_has_genero')->where('generoID', '=', $musicageneroid->generoID)
                         ->select('musicaID')
@@ -62,7 +68,21 @@ class MusicController extends Controller
     }
 
     public function retornaArtistasGeneros($id){
+
+        $idmusica = $id;
         
+        $artistagenero = DB::table('artistas_has_generos')->where('generoid', '=', $this->genero)
+                    ->select('artistaid')
+                    ->first();
+
+        $artistas = DB::table('artistas')->where('id', '=', $artistagenero->artistaid)->get();
+
+        if($artistas){
+            return $artistas;
+        }
+
+        return false;
+
     }
 
     // retorna todos os dados
@@ -115,6 +135,7 @@ class MusicController extends Controller
         }
 
         $opcoesmusicas = self::retornaMusicasGeneros($id);
+        $opcoesartistas = self::retornaArtistasGeneros($id);
 
         return response()->json(
             [
@@ -124,7 +145,8 @@ class MusicController extends Controller
                 'artista' => $artista
             ],
             'metadados' => [
-                'musicasgeneros' => $opcoesmusicas
+                'musicasgeneros' => $opcoesmusicas,
+                'artistasgeneros' => $opcoesartistas
             ]
         ]);
     }
