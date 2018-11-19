@@ -34,44 +34,99 @@ class MusicController extends Controller
 
         return response()->json($musica);
     }
+    // retorna metadados de musicas com mesmo genero da busca
+    public function retornaMusicasGeneros($id){
+        
+        $idmusica = $id;
+
+        $musicageneroid = DB::table('musica_has_genero')->where('musicaID', '=', $id)
+                    ->select('generoID')
+                    ->first();
+        
+        $musicasdiversas = DB::table('musica_has_genero')->where('generoID', '=', $musicageneroid->generoID)
+                        ->select('musicaID')
+                        ->get();
+        
+        $arr = [];
+        
+        if($musicasdiversas){
+            foreach($musicasdiversas as $key => $value){
+                $music = DB::table('musica')->where('id', '=', $value->musicaID)->first();
+                if($music){
+                    array_push($arr, $music);
+                }
+            }
+        }
+
+        return $arr;
+    }
+
+    public function retornaArtistasGeneros($id){
+        
+    }
 
     // retorna todos os dados
     public function showmetadata($string){
-        $musicas = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string . '%')->first();
+        $musica = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string . '%')
+        ->select(
+            'id',
+            'nomemusica',
+            'filepath',
+            'filepath_avatar',
+            'created_at',
+            'updated_at'
+        )
+        ->distinct()->get();
 
-        if(!$musicas){
+        if(!$musica){
             return response()->json([
                 'message' => 'Nenhum resultado para: ' . $string
             ], 404);
         };
 
-        $data = $musicas->id;
+        $id = $musica[0]->id;
 
-        $metadata = DB::table('album_has_musica')
-                ->join('album', 'album_has_musica.albumID', '=', 'album.id')->where('album_has_musica.musicaID', '=', $data)
-                // ->join('artistas', 'artistas.musicasID', '=', 'musica.artistaID')->where('musica.id', '=', $data)
+        $album = DB::table('album_has_musica')
+                ->join('album', 'album_has_musica.albumID', '=', 'album.id')->where('album_has_musica.musicaID', '=', $id)
                 ->select(
-                    'album.titulo_album'
-                    )->distinct()
-                    ->get();
+                    'album.id',
+                    'album.titulo_album',
+                    'album.desc_album',
+                    'filepath_avatar',
+                    'created_at',
+                    'updated_at'
+                    )->distinct()->get();
 
-                    /*
-                    'musica.nomemusica',
-                    'musica.filepath',
-                    'musica.filepath_avatar',
-                    'musica.created_at',
-                    'musica.id as idmusica',
-                    'artistas.nomeartista',
-                    'artistas.id as artistaid'
-                    */
+        $artista = DB::table('artistas_has_musicas')
+                    ->join('artistas', 'artistas_has_musicas.artistaID',  '=', 'artistas.id')->where('artistas_has_musicas.musicaID', '=', $id)
+                    ->select(
+                        'artistas.id',
+                        'artistas.nomeartista',
+                        'artistas.desc_artista',
+                        'filepath',
+                        'created_at',
+                        'updated_at'
+                    )->distinct()->get();
 
-        if(!$metadata){
+        if(!$artista && !$album){
             return response()->json([
                 'message' => 'Nenhum dado encontrado para: ' . $string
             ], 404);
         }
 
-        return response()->json($metadata);
+        $opcoesmusicas = self::retornaMusicasGeneros($id);
+
+        return response()->json(
+            [
+            'find' => [
+                'musica' => $musica,
+                'album' => $album,
+                'artista' => $artista
+            ],
+            'metadados' => [
+                'musicasgeneros' => $opcoesmusicas
+            ]
+        ]);
     }
     // metodo all
     public function index(){
