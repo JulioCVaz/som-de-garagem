@@ -72,6 +72,11 @@ class Search extends Component{
         busca: '',
         hello: 'Bem vindo ao Som de Garagem',
         musicas: '',
+        data: {
+            musica:'',
+            album: '',
+            metadados: ''
+        },
         artistas: '',
         style: {
             icon:'color-icon',
@@ -93,7 +98,7 @@ class Search extends Component{
     }
 
     addArtists = () => {
-        let nomeartista = this.state.musicas[0].nomeartista;
+        let nomeartista = this.state.musicas.find.artista[0].nomeartista;
         let trocanome = nomeartista.split(" ");
         fetch(`http://localhost:8000/api/artista/${trocanome[0]}`)
         .then(
@@ -150,44 +155,6 @@ class Search extends Component{
                     }}
                 />
                 </div>
-            // <div>
-            //     <Grid container justify="center">
-            //         <Grid item xs={6}>
-            //         <FormControl fullWidth>
-            //             <InputLabel 
-            //             style={{color:"white"}}
-            //             FormLabelClasses={{
-            //                 root:search,
-            //                 focused: search
-            //             }}
-            //             htmlFor="adornment-password">Buscar</InputLabel>
-            //             <Input
-            //                 error
-            //                 id="input-musica"
-            //                 type="text"
-            //                 style={{
-            //                     color:'white'
-            //                 }}
-            //                 endAdornment={
-            //                 <InputAdornment position="end">
-            //                     <Button
-            //                     onClick={this.buscaMusica}
-            //                     variant="fab"
-            //                     aria-label="Search"
-            //                     style={{
-            //                         background:search,
-            //                         opacity: 'none'}}>
-            //                         <Icon>
-            //                             <SearchIcon className={this.state.style.icon}/>
-            //                         </Icon>
-            //                     </Button>
-            //                 </InputAdornment>
-            //                 }
-            //             />
-            //         </FormControl>
-            //         </Grid>
-            //     </Grid>
-            // </div>
         );
     }
 }
@@ -196,8 +163,6 @@ Search.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
   };
-
-// export default withStyles(styles, { withTheme: true })(Search);
 
 const mapStateToProps = state => ({
     musicas: state.musicas,
