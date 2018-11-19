@@ -68,15 +68,19 @@ class MusicController extends Controller
     }
 
     public function retornaArtistasGeneros($id){
-
-        $idmusica = $id;
         
         $artistagenero = DB::table('artistas_has_generos')->where('generoid', '=', $this->genero)
-                    ->select('artistaid')
-                    ->first();
+                    ->select('artistaid')->distinct()->get();
 
-        $artistas = DB::table('artistas')->where('id', '=', $artistagenero->artistaid)->get();
+        $artistas = [];
 
+        foreach($artistagenero as $key => $value){
+            $art = DB::table('artistas')->where('id', '=', $value->artistaid)->first();
+            if($art){
+                array_push($artistas, $art);
+            }
+        }
+                
         if($artistas){
             return $artistas;
         }
