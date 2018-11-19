@@ -320,4 +320,4 @@ Home.propTypes = {
     theme: PropTypes.object.isRequired,
   };
 
-  export default withStyles(styles, { withTheme: true })(Home);
+export default withStyles(styles, { withTheme: true })(Home);
