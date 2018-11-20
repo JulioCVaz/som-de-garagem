@@ -290,22 +290,17 @@ class Home extends Component{
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <LandingPage/>
-            {/* <Grid container spacing={8}
-                    justify="center"
-                    alignItems="center">
-                <Grid item xs={10}> */}
-                {/* <Search/> */}
-                {/* </Grid>
-                <br/>
-                <Grid item xs={10}>
+            <Grid container spacing={8} justify="center" alignItems="center">
+              <br/>
+              <Grid item xs={10}>
                 <Response/>
-                </Grid>
-                <Grid item>
+              </Grid>
+              <Grid item>
                 <Artists/>
-                </Grid>
-                <Player/>
-            </Grid> */}
+              </Grid>
+              <Player/>
+            </Grid>
+            <LandingPage/>
         </main>
       </div>
             {/* <Navbar/>
