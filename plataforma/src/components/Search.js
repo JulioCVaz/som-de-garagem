@@ -115,22 +115,28 @@ class Search extends Component{
         )
     }
 
+
     buscaMusica = async (e) => {
         if(e.keyCode == '13'){
             let data = this.state.busca;
-            //`http://localhost:8000/api/musica/${data}`
             fetch(`http://localhost:8000/api/data/${data}`)
             .then(
                 response => response.json()
                 )
-            .then(
-                response => {
+            .then((response) => {
+                if(typeof response.find.music !== undefined){
                     this.reset();
                     this.setState({musicas:response})
                     this.addMusic();
                     this.addArtists();
+                }else if(typeof response.find.artist !== undefined){
+                    console.log(response)
+                }else if(typeof response.find.album !== undefined){
+                    console.log(response)
+                }else{
+                    console.log(`Nenhum resultado para ${data}`);
                 }
-            )
+            })
             .catch(
                 error=>console.error(error)
             );
