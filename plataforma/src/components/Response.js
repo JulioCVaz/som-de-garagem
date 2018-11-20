@@ -23,6 +23,7 @@ class Response extends Component{
     static getDerivedStateFromProps(props, state){
         let  nexState = {};
         if(props.musicas !== state.musicas){
+            console.log(state);
             nexState = {
                 musicas:props.musicas
             }
@@ -90,7 +91,9 @@ class Response extends Component{
 
 
 const mapStateToProps = state => ({
-    musicas: state.listen
+    musicas: state.listen,
+    artistas: state.artists,
+    album: state.albums
 });
 
 const mapDispatchToProps = dispatch =>

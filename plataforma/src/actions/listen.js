@@ -12,6 +12,13 @@ export function addArtist(artistas){
     }
 }
 
+export function addAlbums(albums){
+    return{
+        type: 'ADD_ALBUMS',
+        albums
+    }
+}
+
 export function playMusic(musica){
     return{
         type: 'PLAY_MUSIC',

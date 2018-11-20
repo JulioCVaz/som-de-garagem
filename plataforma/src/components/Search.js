@@ -84,7 +84,6 @@ class Search extends Component{
         }
     }
 
-
     addMusic = () => {
         return this.props.listenMusic(this.state.musicas);
     }
@@ -93,30 +92,15 @@ class Search extends Component{
         return this.props.addArtist(this.state.artistas);
     }
 
+    getAlbums = () => {
+        return this.props.addAlbums(this.state.albums);
+    }
+
     reset = () => {
         return this.props.resetApp();
     }
 
-    addArtists = () => {
-        let nomeartista = this.state.musicas.find.artista[0].nomeartista;
-        let trocanome = nomeartista.split(" ");
-        fetch(`http://localhost:8000/api/artista/${trocanome[0]}`)
-        .then(
-            response => response.json()
-        )
-        .then(
-            response => {
-                this.setState({artistas: response})
-                this.getArtists()
-            }
-        )
-        .catch(
-            error => console.log(error)
-        )
-    }
-
-
-    buscaMusica = async (e) => {
+    buscaDados = async (e) => {
         if(e.keyCode == '13'){
             let data = this.state.busca;
             fetch(`http://localhost:8000/api/data/${data}`)
@@ -125,14 +109,18 @@ class Search extends Component{
                 )
             .then((response) => {
                 if(typeof response.find.music !== undefined){
+                    // criar uma funcao para o reset e o setState
                     this.reset();
                     this.setState({musicas:response})
                     this.addMusic();
-                    this.addArtists();
                 }else if(typeof response.find.artist !== undefined){
-                    console.log(response)
+                    this.reset();
+                    this.setState({artistas:response});
+                    this.getArtists();
                 }else if(typeof response.find.album !== undefined){
-                    console.log(response)
+                    this.reset();
+                    this.setState({albums:response});
+                    this.getAlbums();
                 }else{
                     console.log(`Nenhum resultado para ${data}`);
                 }
@@ -155,7 +143,7 @@ class Search extends Component{
                 <InputBase
                     placeholder="Procure por música, artista ou álbum"
                     onChange={e => this.setState({ busca: e.target.value })}
-                    onKeyDown={this.buscaMusica}
+                    onKeyDown={this.buscaDados}
                     classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,

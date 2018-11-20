@@ -38,13 +38,16 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import LandingPage from './views/LandingPage/LandingPage';
 import { withStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    backgroundColor: 'rgb(32,32,32)'
+    // backgroundColor: 'rgb(32,32,32)'
+    backgroundColor: '#000'
   },
   search: {
     position: 'relative',
@@ -300,7 +303,7 @@ class Home extends Component{
               </Grid>
               <Player/>
             </Grid>
-            <LandingPage/>
+            {/* <LandingPage/> */}
         </main>
       </div>
             {/* <Navbar/>
@@ -317,4 +320,11 @@ Home.propTypes = {
     theme: PropTypes.object.isRequired,
   };
 
-export default withStyles(styles, { withTheme: true })(Home);
+const mapStateToProps = state => ({
+  musicas: state.musicas,
+});
+  
+// const mapDispatchToProps = dispatch =>
+//     bindActionCreators(Actions, dispatch);
+
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Home));
