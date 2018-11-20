@@ -36,6 +36,7 @@ import PlaylistPlay from '@material-ui/icons/PlaylistPlay';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import LandingPage from './views/LandingPage/LandingPage';
 import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -92,7 +93,7 @@ const styles = theme => ({
     },
   },
   appBar: {
-    backgroundColor: 'rgba(40, 40, 40, .8)',
+    backgroundColor: '#252525',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -289,12 +290,13 @@ class Home extends Component{
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-            <Grid container spacing={8}
+          <LandingPage/>
+            {/* <Grid container spacing={8}
                     justify="center"
                     alignItems="center">
-                <Grid item xs={10}>
+                <Grid item xs={10}> */}
                 {/* <Search/> */}
-                </Grid>
+                {/* </Grid>
                 <br/>
                 <Grid item xs={10}>
                 <Response/>
@@ -303,7 +305,7 @@ class Home extends Component{
                 <Artists/>
                 </Grid>
                 <Player/>
-            </Grid>
+            </Grid> */}
         </main>
       </div>
             {/* <Navbar/>

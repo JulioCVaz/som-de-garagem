@@ -3,6 +3,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import {isAuthenticated} from './services/auth.js';
 import Home from './Home';
+import Landing from './components/Landing';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import MessageConfirme from './components/MessageConfirme';
 
@@ -27,6 +28,7 @@ const Routes = () => (
             <Route path="/cadastro" component={Register} />
             <Route path="/mensagem-confirmacao" component={MessageConfirme} />
             <PrivateRoute path="/sdg" component={Home}/>
+            <Route path="/landing" component={Landing}/>
             <Route path="*" component={() => <h1>Página não encontrada</h1>}/>
         </Switch>
     </BrowserRouter>
