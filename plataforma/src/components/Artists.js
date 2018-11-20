@@ -49,14 +49,6 @@ const styles = theme => ({
   
 
 class Artists extends Component{
-/* 
-
-
-https://material-ui.com/demos/drawers/
-https://material-ui.com/style/color/
-
-
-*/
 
     state = {
         artista: [],

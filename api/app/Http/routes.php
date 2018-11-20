@@ -30,7 +30,8 @@ Route::group(array('prefix' => 'api/'), function(){
     Route::resource('artistas', 'ArtistController'); // get all artistas, delete and update
     
     // routes only musics
-    Route::get('musica/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
+    // musicas
+    Route::get('data/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
     Route::resource('musicas', 'MusicController'); // get all musicas, delete and update
     
     // routes only albums

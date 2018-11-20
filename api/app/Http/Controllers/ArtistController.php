@@ -72,13 +72,18 @@ class ArtistController extends Controller
                         ], 404);
                     }
 
-                    return response()->json([
-                        'artista' => $metadata,
-                        'data' => [
-                            'album'=>$metaalbum,
-                            'musicas'=>$metamusica
+                    return [
+                        'find' => [
+                            'artist' => [
+                                'artista' => $metadata,
+                                'data' => [
+                                    'album'=>$metaalbum,
+                                    'musicas'=>$metamusica
+                                ]
+
+                            ]
                         ]
-                    ]);
+                    ];
     }
     // metodo retorna apenas 1
     public function show($id){    

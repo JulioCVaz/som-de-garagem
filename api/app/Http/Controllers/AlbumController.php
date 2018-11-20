@@ -21,7 +21,13 @@ class AlbumController extends Controller
             ], 404);
         }
 
-        return response()->json($albumlike);
+        return [
+            'find' => [
+                'album' => [
+                    'album' => $albumlike
+                ]
+            ]
+        ];
     }
 
     public function show($id){

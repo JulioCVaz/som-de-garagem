@@ -118,7 +118,8 @@ class Search extends Component{
     buscaMusica = async (e) => {
         if(e.keyCode == '13'){
             let data = this.state.busca;
-            fetch(`http://localhost:8000/api/musica/${data}`)
+            //`http://localhost:8000/api/musica/${data}`
+            fetch(`http://localhost:8000/api/data/${data}`)
             .then(
                 response => response.json()
                 )
@@ -146,7 +147,7 @@ class Search extends Component{
                     <SearchIcon />
                 </div>
                 <InputBase
-                    placeholder="Procure por música, artista ou gênero"
+                    placeholder="Procure por música, artista ou álbum"
                     onChange={e => this.setState({ busca: e.target.value })}
                     onKeyDown={this.buscaMusica}
                     classes={{

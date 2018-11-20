@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Musica;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\AlbumController;
 
 class MusicController extends Controller
 {
 
     private $genero;
+    private $artistasc;
+    private $albumc;
+
+
+    public function __construct(){
+        $this->artistasc = new ArtistController();
+        $this->albumc = new AlbumController();
+    }
 
      // retorna todas as ocurrencias segundo a busca
     public function showbylike($string){
@@ -80,7 +90,7 @@ class MusicController extends Controller
                 array_push($artistas, $art);
             }
         }
-                
+
         if($artistas){
             return $artistas;
         }
@@ -91,6 +101,20 @@ class MusicController extends Controller
 
     // retorna todos os dados
     public function showmetadata($string){
+        $artista = DB::table('artistas')->where('nomeartista', 'LIKE', '%' . $string . '%')
+        ->select(
+            'id',
+            'nomeartista',
+            'desc_artista',
+            'filepath',
+            'created_at',
+            'updated_at'
+            )
+            ->distinct()->get();
+
+        // retornar isso para album tambem
+                
+
         $musica = DB::table('musica')->where('nomemusica', 'LIKE', '%' . $string . '%')
         ->select(
             'id',
@@ -102,15 +126,39 @@ class MusicController extends Controller
         )
         ->distinct()->get();
 
-        if(!$musica){
+        $album = DB::table('album')->where('titulo_album', 'LIKE', '%' . $string . '%')
+        ->select(
+            'id',
+            'titulo_album',
+            'desc_album',
+            'filepath_avatar',
+            'created_at',
+            'updated_at'
+        )
+        ->distinct()->get();
+
+        if(!$musica && !$album && !$artista){
             return response()->json([
                 'message' => 'Nenhum resultado para: ' . $string
             ], 404);
         };
 
-        $id = $musica[0]->id;
+        $vals = [
+            'musica' => $musica,
+            'artista' => $artista,
+            'album' => $album
+        ];
 
-        $album = DB::table('album_has_musica')
+        foreach($vals as $key => $value){
+            if(count($value) < 1){
+                unset($vals[$key]);
+            }
+        }
+
+        foreach($vals as $key => $value){
+            if($key == 'musica'){
+                $id = $musica[0]->id;
+                $album = DB::table('album_has_musica')
                 ->join('album', 'album_has_musica.albumID', '=', 'album.id')->where('album_has_musica.musicaID', '=', $id)
                 ->select(
                     'album.id',
@@ -121,38 +169,58 @@ class MusicController extends Controller
                     'updated_at'
                     )->distinct()->get();
 
-        $artista = DB::table('artistas_has_musicas')
-                    ->join('artistas', 'artistas_has_musicas.artistaID',  '=', 'artistas.id')->where('artistas_has_musicas.musicaID', '=', $id)
-                    ->select(
-                        'artistas.id',
-                        'artistas.nomeartista',
-                        'artistas.desc_artista',
-                        'filepath',
-                        'created_at',
-                        'updated_at'
-                    )->distinct()->get();
+                $artista = DB::table('artistas_has_musicas')
+                            ->join('artistas', 'artistas_has_musicas.artistaID',  '=', 'artistas.id')->where('artistas_has_musicas.musicaID', '=', $id)
+                            ->select(
+                                'artistas.id',
+                                'artistas.nomeartista',
+                                'artistas.desc_artista',
+                                'filepath',
+                                'created_at',
+                                'updated_at'
+                            )->distinct()->get();
 
-        if(!$artista && !$album){
-            return response()->json([
-                'message' => 'Nenhum dado encontrado para: ' . $string
-            ], 404);
+                if(!$artista && !$album){
+                    return response()->json([
+                        'message' => 'Nenhum dado encontrado para: ' . $string
+                    ], 404);
+                }
+
+                $opcoesmusicas = self::retornaMusicasGeneros($id);
+                $opcoesartistas = self::retornaArtistasGeneros($id);
+
+
+                return response()->json(
+                    [
+                    'find' => [
+                        'music' => [ 
+                            'musica' => $musica,
+                            'album' => $album,
+                            'artista' => $artista
+                        ]
+                    ],
+                    'metadados' => [
+                        'musicasgeneros' => $opcoesmusicas,
+                        'artistasgeneros' => $opcoesartistas
+                    ]
+                ]);
+            }elseif($key == 'artista'){
+                return response()->json(
+                    $this->artistasc->showmetadata($string)
+                );
+            }else{
+                return response()->json(
+                    [
+                        'find' => [
+                            $this->albumc->showbylike($string)
+                        ]
+                    ]
+                );
+            }
         }
 
-        $opcoesmusicas = self::retornaMusicasGeneros($id);
-        $opcoesartistas = self::retornaArtistasGeneros($id);
-
-        return response()->json(
-            [
-            'find' => [
-                'musica' => $musica,
-                'album' => $album,
-                'artista' => $artista
-            ],
-            'metadados' => [
-                'musicasgeneros' => $opcoesmusicas,
-                'artistasgeneros' => $opcoesartistas
-            ]
-        ]);
+        dd($vals);
+        
     }
     // metodo all
     public function index(){
