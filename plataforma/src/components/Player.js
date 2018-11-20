@@ -21,6 +21,20 @@ class Player extends Component{
         }
         return nexState
     }
+
+    componentDidUpdate(){
+        if(this.state.musicas.length > 0){
+            let control = document.querySelector("#playerMusic");
+            if(control != null){
+                console.log();
+                if(this.state.musicas[0].status == "true"){
+                    control.play();
+                }else{
+                    control.pause();
+                }
+            }
+        }
+    }
     
     render(){
         console.log(this.props);
@@ -34,6 +48,7 @@ class Player extends Component{
                         {musica.nomemusica}
                     </div>
                     <ReactAudioPlayer
+                    id = "playerMusic"
                     style={{
                         width:'60%'
                     }}
@@ -41,7 +56,6 @@ class Player extends Component{
                     {
                         (musica.nomemusica == 'Contato') ? contato : (musica.nomemusica == 'Júlia e a caixa de pandora') ? pandora : ''
                     }
-                    autoPlay
                     controls
                     />
                     </React.Fragment>

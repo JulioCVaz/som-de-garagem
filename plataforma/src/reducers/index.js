@@ -2,15 +2,17 @@ import {combineReducers} from 'redux';
 
 import listen from './listen';
 import artists from './artists';
+import albums from './albums';
 import play from './play';
 
 const appReducer = combineReducers({
     listen,
     artists,
-    play
+    play,
+    albums
 });
 
-const initialState = appReducer({}, {}, {});
+const initialState = appReducer({}, {}, {}, {});
 
 const rootReducer = (state, action) => {
     if (action.type === 'RESET') {

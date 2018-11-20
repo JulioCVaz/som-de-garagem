@@ -1,4 +1,5 @@
 export default function albums(state=[], action){
+    console.log(action);
     switch (action.type){
         case 'ADD_ALBUMS' :
             return [...state,{

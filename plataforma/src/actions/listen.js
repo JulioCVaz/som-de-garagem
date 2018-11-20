@@ -19,10 +19,24 @@ export function addAlbums(albums){
     }
 }
 
-export function playMusic(musica){
-    return{
-        type: 'PLAY_MUSIC',
-        musica
+export function playPauseMusic(status, musica){
+    console.log(status);
+    if(status == 'true'){
+        return{
+            type: 'PLAY_MUSIC',
+            data: {
+                status,
+                musica
+            }
+        }
+    }else{
+        return{
+            type: 'PAUSE_MUSIC',
+            data: {
+                status,
+                musica
+            }
+        }
     }
 }
 

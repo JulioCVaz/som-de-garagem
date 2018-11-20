@@ -71,13 +71,7 @@ class Search extends Component{
     state = {
         busca: '',
         hello: 'Bem vindo ao Som de Garagem',
-        musicas: '',
-        data: {
-            musica:'',
-            album: '',
-            metadados: ''
-        },
-        artistas: '',
+        data: '',
         style: {
             icon:'color-icon',
             class:'input-musica'
@@ -85,15 +79,15 @@ class Search extends Component{
     }
 
     addMusic = () => {
-        return this.props.listenMusic(this.state.musicas);
+        return this.props.listenMusic(this.state.data);
     }
 
     getArtists = () => {
-        return this.props.addArtist(this.state.artistas);
+        return this.props.addArtist(this.state.data);
     }
 
     getAlbums = () => {
-        return this.props.addAlbums(this.state.albums);
+        return this.props.addAlbums(this.state.data);
     }
 
     reset = () => {
@@ -108,25 +102,25 @@ class Search extends Component{
                 response => response.json()
                 )
             .then((response) => {
-                if(typeof response.find.music !== undefined){
+                if(typeof response.find.music === 'object'){
                     // criar uma funcao para o reset e o setState
                     this.reset();
-                    this.setState({musicas:response})
+                    this.setState({data:response})
                     this.addMusic();
-                }else if(typeof response.find.artist !== undefined){
+                }else if(typeof response.find.artist === 'object'){
                     this.reset();
-                    this.setState({artistas:response});
+                    this.setState({data:response});
                     this.getArtists();
-                }else if(typeof response.find.album !== undefined){
+                }else if(typeof response.find.album === 'object'){
                     this.reset();
-                    this.setState({albums:response});
+                    this.setState({data:response});
                     this.getAlbums();
                 }else{
                     console.log(`Nenhum resultado para ${data}`);
                 }
             })
             .catch(
-                error=>console.error(error)
+                error => console.error(error)
             );
         }
     }
@@ -160,7 +154,7 @@ Search.propTypes = {
   };
 
 const mapStateToProps = state => ({
-    musicas: state.musicas,
+    data: state.data,
   });
   
 const mapDispatchToProps = dispatch =>

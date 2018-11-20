@@ -210,11 +210,7 @@ class MusicController extends Controller
                 );
             }else{
                 return response()->json(
-                    [
-                        'find' => [
-                            $this->albumc->showbylike($string)
-                        ]
-                    ]
+                    $this->albumc->showbylike($string)
                 );
             }
         }
