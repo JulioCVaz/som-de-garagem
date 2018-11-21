@@ -14,50 +14,60 @@ class Player extends Component{
     }
     state = {
         status :'',
-        musicas: []
+        musicas: this.props.musicas
     };
 
 
-    alteraPlay = () => {
+    alteraPlay = (status) => {
         let control = document.querySelector("#playerMusic");
         if(control != null){
-            let status = "true";
             if(status == "true"){
                 control.play();
-                status = "false";
             }else{
                 control.pause();
-                status="true";
             }
         }
     }
 
-    static getDerivedStateFromProps(props, state){
-        let  nexState = {};
-        if(props.musicas !== state.musicas){
-            if(props.musicas[0] !== undefined){
-                if(props.musicas[0].nomemusica !== undefined){
-                    nexState = {
-                        status: 'true',
-                        musicas:props.musicas
-                    }
-                }else{
-                    nexState = {
-                        status: 'false',
-                        musicas:state.musicas
-                    }
-                }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.musicas[0] != undefined){
+            if(nextProps.musicas[0].status == 'true'){
+                this.setState({musicas:nextProps.musicas});
+                setTimeout(()=>{
+                    this.alteraPlay('true');
+                },100);
+            }else{
+                setTimeout(()=>{
+                    this.alteraPlay('false');
+                }, 100);
             }
         }
-        return nexState
     }
+
+    // static getDerivedStateFromProps(props, state){
+    //     let  nexState = {};
+    //     if(props.musicas !== state.musicas){
+    //         if(props.musicas[0] !== undefined){
+    //             if(props.musicas[0].nomemusica !== undefined){
+    //                 nexState = {
+    //                     status: 'true',
+    //                     musicas:props.musicas
+    //                 }
+    //             }else{
+    //                 nexState = {
+    //                     status: 'false',
+    //                     musicas:state.musicas
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return nexState
+    // }
 
     componentDidUpdate(){
         this.alteraPlay();
     }
-
-   
-    
     
     render(){
         return(
