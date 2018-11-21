@@ -8,36 +8,58 @@ import pandora from '../musicas/pandora.mpeg';
 
 class Player extends Component{
 
+    constructor(props){
+        super(props);
+        this.alteraPlay = this.alteraPlay.bind(this);
+    }
     state = {
+        status :'',
         musicas: []
     };
+
+
+    alteraPlay = () => {
+        let control = document.querySelector("#playerMusic");
+        if(control != null){
+            let status = "true";
+            if(status == "true"){
+                control.play();
+                status = "false";
+            }else{
+                control.pause();
+                status="true";
+            }
+        }
+    }
 
     static getDerivedStateFromProps(props, state){
         let  nexState = {};
         if(props.musicas !== state.musicas){
-            nexState = {
-                musicas:props.musicas
+            if(props.musicas[0] !== undefined){
+                if(props.musicas[0].nomemusica !== undefined){
+                    nexState = {
+                        status: 'true',
+                        musicas:props.musicas
+                    }
+                }else{
+                    nexState = {
+                        status: 'false',
+                        musicas:state.musicas
+                    }
+                }
             }
         }
         return nexState
     }
 
     componentDidUpdate(){
-        if(this.state.musicas.length > 0){
-            let control = document.querySelector("#playerMusic");
-            if(control != null){
-                console.log();
-                if(this.state.musicas[0].status == "true"){
-                    control.play();
-                }else{
-                    control.pause();
-                }
-            }
-        }
+        this.alteraPlay();
     }
+
+   
+    
     
     render(){
-        console.log(this.props);
         return(
             <div className="player">
                 {
