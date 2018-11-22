@@ -6,7 +6,7 @@
                 <div class="col col-md-5">
                     <div class="wrapper-perfil">
                         <div class="foto-profile">
-                            <img src="img/profile.png" alt="imagem perfil comprador"/>
+                            <img src="profile.png" alt="imagem perfil comprador"/>
                             <strong>Fulano da silva</strong>
                         </div>
                         <hr>

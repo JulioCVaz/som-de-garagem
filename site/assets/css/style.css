@@ -35,23 +35,23 @@
   .navbar-home .navbar-wrapper {
     padding-right: 30px; }
   
-    .navbar-home .navbar-color {
-      padding-right: 20px;
-      font-weight: 500; }
-  
-    .navbar-home .navbar-color li {
-      padding-left: 15px;
-      padding-right: 15px;
-      border-radius: 13px;
-      transition: 0.3s; }
-  
-    .navbar-home .navbar-color li:last-child{
-      background-color: #eb244e;
-      border-radius: 13px;
-      margin-left: 5px; }
-     
-    .navbar-home .navbar-color li a {
-      color: white !important; }
+  .navbar-home .navbar-color {
+    padding-right: 20px;
+    font-weight: 500; }
+
+  .navbar-home .navbar-color li {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 13px;
+    transition: 0.3s; }
+
+  .navbar-home .navbar-color li:last-child{
+    background-color: #eb244e;
+    border-radius: 13px;
+    margin-left: 5px; }
+    
+  .navbar-home .navbar-color li a {
+    color: white !important; }
 
 .navbar-toggler .hamburger {
   background: none !important;

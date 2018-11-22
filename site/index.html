@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+    <!-- AOS Framework -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!--  -->
 </head>
 <body>
@@ -69,20 +70,22 @@
     <!-- fim home -->
     <!-- inicio descricao -->
     <section id="description" class="descricao">
-        <h1>Som de Garagem</h1>
+        <h1 class="aos-model" data-aos="fade-up" data-aos-offset="0" data-aos-delay="0" data-aos-duration="500"
+        data-aos-easing="ease-in-out" data-aos-mirror="false" data-aos-once="false" data-aos-anchor-placement="top-center">
+        Som de Garagem</h1>
         <div class="container wrapper-all">
             <div class="wrapper-content-circle" class="bord">
                 <div class="row">
                     <div class="col col-md-12">
                         <div class="wrapper-circle">
-                            <div class="circle-border item">
-                                <div class="circle-one "></div>
+                            <div class="circle-border item" data-aos="fade-up" data-aos-offset="0" data-aos-delay="100" data-aos-duration="1000">
+                                <div class="circle-one"></div>
                             </div>
-                            <div class="circle-border item">
-                                <div class="circle-two "></div>
+                            <div class="circle-border item" data-aos="fade-up" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
+                                <div class="circle-two"></div>
                             </div>
-                            <div class="circle-border item">
-                                <div class="circle-three "></div>
+                            <div class="circle-border item" data-aos="fade-up" data-aos-offset="0" data-aos-delay="300" data-aos-duration="1000">
+                                <div class="circle-three"></div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,7 @@
             <div class="wrapper-content-descricao">
                 <div class="row d-flex justify-content-center">
                     <div class="col col-md-8">
-                        <div class="content-descricao">
+                        <div class="content-descricao" data-aos="fade-up" data-aos-offset="0" data-aos-delay="300" data-aos-duration="1000">
                             Descubra, faça <span class="color">streaming</span> e compartilhe um mix em constante expansão de músicas de artistas <span class="color">estabelecidos</span> e <span class="color">emergentes</span> de todo o mundo.
                         </div>
                     </div>
@@ -106,7 +109,7 @@
             <div class="row">
                 <div class="col col-md-12">
                     <div class="wrapper-plan-free">
-                        <div class="content-free">
+                        <div class="content-free" data-aos="fade-up" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
                             <div class="garage">
                                 <p>SOM DE <span class="garage-free-premium">GARAGEM</span></p>
                                 <p class="garage-free-premium">FREE</p>
@@ -125,14 +128,14 @@
                                     </ul>
                                 </div>
                         </div>
-                        <button class="btn btn-primary btn-color" onclick="plans()">EXPERIMENTE O FREE</button>
+                        <button class="btn btn-primary btn-color" onclick="plans()" data-aos="fade-up" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">EXPERIMENTE O FREE</button>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col col-md-12">
                     <div class="wrapper-plan-premium">
-                        <div class="content-free">
+                        <div class="content-free" data-aos="fade-up" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
                             <div class="garage garagem-left">
                                 <p>SOM DE <span class="garage-free-premium">GARAGEM</span></p>
                                 <p class="garage-free-premium">PREMIUM</p>
@@ -140,7 +143,7 @@
                             <div class="plan-type">
                                     <ul>
                                         <li>
-                                            Anúncios ocasionais
+                                            Sem anúncios
                                         </li>
                                         <li>
                                             Escuta aleatória
@@ -151,7 +154,7 @@
                                     </ul>
                                 </div>
                         </div>
-                        <button class="btn btn-primary btn-color" onclick="plans()">OBTER PREMIUM</button>
+                        <button class="btn btn-primary btn-color" onclick="plans()" data-aos="fade-up" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">OBTER PREMIUM</button>
                     </div>
                 </div>
             </div>
@@ -163,16 +166,16 @@
         <div class="container">
             <div class="row">
                 <div class="col col-md-6">
-                    <img src="assets/img/logo.jpeg" alt="" class="logo-mockup">
-                    <div class="find">
+                    <img src="assets/img/logo.jpeg" alt="" class="logo-mockup" data-aos="fade-right" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="find" data-aos="fade-right" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
                         <p>ENCONTRE SEU SOM</p>
                     </div>
-                    <div>
+                    <div data-aos="fade-right" data-aos-offset="0" data-aos-delay="300" data-aos-duration="1000">
                         <p class="download">Baixe Gratuitamente o app <span class="mockup-color">Som de Garagem</span></p>
                     </div> 
-                    <a href="http://play.google.com/store/apps"><img src="assets/img/googleplay.png" alt="Download no Google Play" class="logo-google"></a>
+                    <a href="http://play.google.com/store/apps" data-aos="fade-right" data-aos-offset="0" data-aos-delay="300" data-aos-duration="1000"><img src="assets/img/googleplay.png" alt="Download no Google Play" class="logo-google"></a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" data-aos="fade-left" data-aos-offset="0" data-aos-delay="200" data-aos-duration="1000">
                     <img src="assets/img/mockup.png" alt="Baixe o app" class="mockup-principal">           
                 </div>          
             </div>
@@ -251,5 +254,7 @@
     <script src="assets/components/popper.js/dist/popper.min.js"></script>
     <script src="assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>AOS.init();</script>
 </body>
 </html>
