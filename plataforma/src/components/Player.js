@@ -14,7 +14,8 @@ class Player extends Component{
     }
     state = {
         status :'',
-        musicas: this.props.musicas
+        musicas: this.props.musicas,
+        playpause: this.props.playpause
     };
 
 
@@ -31,18 +32,37 @@ class Player extends Component{
 
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.musicas[0] != undefined){
-            if(nextProps.musicas[0].status == 'true'){
+        
+        console.log(nextProps.playpause);
+        if(nextProps.musicas !== this.state.musicas){
+            if(nextProps.playpause[0] !== undefined){
                 this.setState({musicas:nextProps.musicas});
+                this.setState({playpause:nextProps.playpause[0].status});
                 setTimeout(()=>{
-                    this.alteraPlay('true');
+                    this.alteraPlay(this.state.playpause);
                 },100);
-            }else{
-                setTimeout(()=>{
-                    this.alteraPlay('false');
-                }, 100);
             }
+        }else if(nextProps.playpause[0] !== undefined){
+            this.setState({playpause:nextProps.playpause[0].status});
+            setTimeout(()=>{
+                this.alteraPlay(this.state.playpause);
+            },100);
+        }else{
+            console.log('erro');
         }
+
+        // if(props.musicas !== state.musicas){
+        //     if(nextProps.musicas[0].status == 'true'){
+        //         this.setState({musicas:nextProps.musicas});
+        //         setTimeout(()=>{
+        //             this.alteraPlay('true');
+        //         },100);
+        //     }else{
+        //         setTimeout(()=>{
+        //             this.alteraPlay('false');
+        //         }, 100);
+        //     }
+        // }
     }
 
     // static getDerivedStateFromProps(props, state){
@@ -65,9 +85,9 @@ class Player extends Component{
     //     return nexState
     // }
 
-    componentDidUpdate(){
-        this.alteraPlay();
-    }
+    // componentDidUpdate(){
+    //     this.alteraPlay();
+    // }
     
     render(){
         return(
@@ -100,7 +120,8 @@ class Player extends Component{
 };
 
 const mapStateToProps = state => ({
-    musicas:state.play
+    musicas:state.playMusic,
+    playpause: state.playPause
 });
 
 export default connect(mapStateToProps)(Player);

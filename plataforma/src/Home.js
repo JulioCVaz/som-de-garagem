@@ -302,7 +302,7 @@ class Home extends Component{
                 <Artists/>
               </Grid>
               <Player/>
-            </Grid>
+            </Grid> 
             {/* <LandingPage/> */}
         </main>
       </div>

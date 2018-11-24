@@ -8,10 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions/listen';
@@ -78,17 +76,21 @@ class Response extends Component{
         if(this.state.status == 'false'){
             this.setState({status:'true'});
             setTimeout(()=> {
-                return this.props.playPauseMusic(this.state.status, this.state.musicas);
+                this.playPause(this.state.status);
+                return this.props.playMusic(this.state.musicas);
             }, 100);
         }else{
             this.setState({status:'false'});
             setTimeout(()=> {
-                return this.props.playPauseMusic(this.state.status, this.state.musicas);
+                this.playPause(this.state.status);
+                // return this.props.playMusic(this.state.musicas);
             }, 100);
         }
-        
     };
 
+    playPause = (status) => {
+         return this.props.playPause(status);
+    };
 
     render(){
         const { classes, theme } = this.props;
