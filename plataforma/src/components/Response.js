@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
@@ -83,7 +84,6 @@ class Response extends Component{
             this.setState({status:'false'});
             setTimeout(()=> {
                 this.playPause(this.state.status);
-                // return this.props.playMusic(this.state.musicas);
             }, 100);
         }
     };
@@ -94,82 +94,49 @@ class Response extends Component{
 
     render(){
         const { classes, theme } = this.props;
+        console.log(this.state.musicas);
         return(
         <div className="wrapper-response">
             <Grid container>
-                <Grid xs={4} spacing={8} alignItems="center" justify="center">
-            {/* 
-            {
-                this.state.musicas.map((musica)=>
-                <React.Fragment>
-                <Grid item xs={6}>
-                    <Card >
-                        <div>
-                            <CardContent >
-                            <Typography component="h5" variant="h5">
-                                {musica.nomemusica}
-                            </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
-                                {musica.nomeartista}
-                            </Typography>
-                            </CardContent>
-                            <div >
-                            <IconButton aria-label="Previous">
-                                <SkipPreviousIcon />
-                            </IconButton>
-                            <IconButton aria-label="Play/pause">
-                                <PlayArrowIcon  onClick={this.play}/>
-                            </IconButton>
-                            <IconButton aria-label="Next">
-                                <SkipNextIcon />
-                            </IconButton>
-                            </div>
-                        </div>
-                    </Card>
-                </Grid>
-                {
-                    (musica.nomemusica == 'Contato' || musica.nomemusica == 'Júlia e a caixa de pandora') ?
-                    <Grid item xs={2}>
-                        <Card>
-                            <div className="img-card"> */}
-                                {/* img */}
-                            {/* </div>
-                        </Card>
-                    </Grid> : ''
-
-                }
-                </React.Fragment>
-                )
-            }
-            </Grid> */}
              { this.state.musicas.map((musica)=>
-                    <Card className={classes.card}>
-                        <div className={classes.details}>
-                            <CardContent className={classes.content}>
-                            <Typography component="h5" variant="h5">
-                                {musica.nomemusica}
-                            </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
-                                {musica.nomeartista}
-                            </Typography>
-                            </CardContent>
-                            <div className={classes.controls}>
-                            <IconButton aria-label="Play/pause">
-                                {
-                                    (this.state.status == 'false') ? <PlayCircleOutlineIcon className={classes.playIcon} onClick={this.play}/> :
-                                    <PauseCircleOutlineIcon className={classes.playIcon} onClick={this.play}/>
-                                }
-                            </IconButton>
+                <Grid xs={12} spacing={8} alignItems="center" justify="center">
+                    <Grid xs={4}>
+                        <Card className={classes.card}>
+                            <div className={classes.details}>
+                                <CardContent className={classes.content}>
+                                <Typography component="h5" variant="h5">
+                                    {musica.nomemusica}
+                                </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {musica.nomeartista}
+                                </Typography>
+                                </CardContent>
+                                <div className={classes.controls}>
+                                <IconButton aria-label="Play/pause">
+                                    {
+                                        (this.state.status == 'false') ? <PlayCircleOutlineIcon className={classes.playIcon} onClick={this.play}/> :
+                                        <PauseCircleOutlineIcon className={classes.playIcon} onClick={this.play}/>
+                                    }
+                                </IconButton>
+                                </div>
                             </div>
+                            <CardMedia
+                                className={classes.cover}
+                                image={decaidos}
+                                title="Live from space album cover"
+                            />
+                        </Card>
+                    </Grid>
+                    <hr style={{
+                        backgroundColor: 'white'
+                    }}/>
+                        <div>
+                            {musica.metadados.artistas_metadados.map((artistas) => 
+                            <p>{artistas.desc_artista}</p>
+                            )}
                         </div>
-                        <CardMedia
-                            className={classes.cover}
-                            image={decaidos}
-                            title="Live from space album cover"
-                        />
-                    </Card>
+                </Grid>
                 )}
-            </Grid>
         </Grid>
         </div>
         );

@@ -1,5 +1,4 @@
 export default function playPause(state=[], action){
-    console.log(action);
     switch (action.type){
         case 'PLAY':
             return [{

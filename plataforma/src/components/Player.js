@@ -31,9 +31,7 @@ class Player extends Component{
     }
 
 
-    componentWillReceiveProps(nextProps){
-        
-        console.log(nextProps.playpause);
+    componentWillReceiveProps(nextProps){        
         if(nextProps.musicas !== this.state.musicas){
             if(nextProps.playpause[0] !== undefined){
                 this.setState({musicas:nextProps.musicas});
