@@ -8,8 +8,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
@@ -19,8 +23,23 @@ import decaidos from '../img/decaidos_logo.jpeg';
 
 
 const styles = theme => ({
-    card: {
+    root: {
+        flexGrow: 1,
+      },
+    cardPlayer: {
       display: 'flex',
+    },
+    card: {
+        maxWidth: 200,
+        height: 350,
+      },
+
+      titulos: {
+          color: 'white'
+      },
+    media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
     },
     details: {
       display: 'flex',
@@ -99,9 +118,9 @@ class Response extends Component{
         <div className="wrapper-response">
             <Grid container>
              { this.state.musicas.map((musica)=>
-                <Grid xs={12} spacing={8} alignItems="center" justify="center">
+                <Grid xs={12} alignItems="center" justify="center">
                     <Grid xs={4}>
-                        <Card className={classes.card}>
+                        <Card className={classes.cardPlayer}>
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
                                 <Typography component="h5" variant="h5">
@@ -130,11 +149,81 @@ class Response extends Component{
                     <hr style={{
                         backgroundColor: 'white'
                     }}/>
-                        <div>
-                            {musica.metadados.artistas_metadados.map((artistas) => 
-                            <p>{artistas.desc_artista}</p>
-                            )}
-                        </div>
+                    <Typography variant="h6" className={classes.titulos}>
+                        Outras músicas do mesmo gênero
+                    </Typography>
+                    <br/>
+                    <Grid container className={classes.root} spacing={16}>
+                        {musica.metadados.musicas_metadados.map((musicas)=>
+                            <Grid item xs={3}>
+                                <Card className={classes.cardPlayer}>
+                                    <div className={classes.details}>
+                                        <CardContent className={classes.content}>
+                                        <Typography component="h5" variant="h5">
+                                            {musicas.nomemusica}
+                                        </Typography>
+                                        </CardContent>
+                                        <div className={classes.controls}>
+                                        <IconButton aria-label="Play/pause">
+                                            <PlayArrowIcon className={classes.playIcon} />
+                                        </IconButton>
+                                        </div>
+                                    </div>
+                                    <CardMedia
+                                        className={classes.cover}
+                                        image="/static/images/cards/live-from-space.jpg"
+                                        title="Live from space album cover"
+                                    />
+                                </Card>
+                            </Grid>
+                        )}
+                    </Grid>
+                    <hr style={{
+                        backgroundColor: 'white'
+                    }}/>
+                    <Typography variant="h6" className={classes.titulos}>
+                        Outros artistas do mesmo gênero
+                    </Typography>
+                    <br/>
+                    <Grid container className={classes.root} spacing={16}>
+                        {musica.metadados.artistas_metadados.map((artistas) =>
+                        <Grid item xs={3}>
+                            <Grid container className={classes.demo} justify="center" spacing={12}>
+                                <Card className={classes.card}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        component="img"
+                                        alt="Contemplative Reptile"
+                                        className={classes.media}
+                                        height="140"
+                                        image="/static/images/cards/contemplative-reptile.jpg"
+                                        title="Contemplative Reptile"
+                                        />
+                                        <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {artistas.nomeartista}
+                                        </Typography>
+                                        <Typography component="p">
+                                            {artistas.desc_artista}
+                                        </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                    <CardActions>
+                                        <Button size="small" color="primary">
+                                        Share
+                                        </Button>
+                                        <Button size="small" color="primary">
+                                        Learn More
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                        )}
+                    </Grid>
+                    <hr style={{
+                        backgroundColor: 'white'
+                    }}/>
                 </Grid>
                 )}
         </Grid>
