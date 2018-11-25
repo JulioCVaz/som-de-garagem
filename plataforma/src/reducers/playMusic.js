@@ -1,5 +1,4 @@
 export default function playMusic(state=[], action){
-    console.log(action);
     switch (action.type){
         case 'PLAY_MUSIC':
             return [{

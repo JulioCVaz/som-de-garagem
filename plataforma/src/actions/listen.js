@@ -40,9 +40,15 @@ export function playPause(status){
     }
 }
 
-
 export function resetApp(){
     return{
         type: 'RESET'
+    }
+}
+
+export function ProfileApplication(profile){
+    return{
+        type: 'LOGIN',
+        profile
     }
 }

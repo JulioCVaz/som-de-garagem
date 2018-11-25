@@ -11,8 +11,29 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import '../styles/Style.css';
+import * as Actions from '../actions/listen';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
-export default class Login extends Component{
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+      },
+
+    cardPlayer: {
+      display: 'flex',
+    },
+
+    button: {
+    '&:hover': {
+        'color': 'black'
+        }
+    }
+});
+
+class Login extends Component{
 
     state = {
         email: '',
@@ -21,17 +42,15 @@ export default class Login extends Component{
         checked:false,
     }
 
-    styles = {
-        button: {
-          '&:hover': {
-            'color': 'white'
-          }
-        }
-      }
+   
 
     handleChange = name => event => {
         this.setState({ checked: event.target.checked });
       };
+
+    responseProfile = profile => {
+        this.props.ProfileApplication(profile);
+    }
 
     handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,18 +65,21 @@ export default class Login extends Component{
                 formData.append('password', password);
                 const response = await api.post("/login", formData)
                 if(login(response.data.data.auth_token)){
-                    this.props.history.push("/sdg");
+                    this.responseProfile(response.data.data);
+                    setTimeout(()=>{
+                        this.props.history.push("/sdg");
+                    }, 150);
                 }else{
                     this.setState({error: "Login e senha não localizados"});
                 }
             }catch(err){
-                console.log('cai aqui');
                 this.setState({error: "Houve um problema com o login, verifique suas credenciais"});
             }
         } 
     }
 
     render(){
+        const { classes, theme } = this.props;
         return(
             <React.Fragment>
                 <Grid container justify="center" xs={12} className="container-form">
@@ -111,7 +133,7 @@ export default class Login extends Component{
                                     'margin-top': '10px',
                                     'margin-bottom': '10px'
                                 }}/>
-                                <Button href="/cadastro"  variant="outlined" color="secondary" style={this.styles.button}>
+                                <Button href="/cadastro"  variant="outlined" color="secondary" className={classes.button}>
                                     Cadastre-se
                                 </Button>
                             </Grid>
@@ -131,3 +153,18 @@ export default class Login extends Component{
         );
     }
 }
+
+Login.propTypes = {
+    theme: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
+  };
+
+const mapStateToProps = state => ({
+    profile: state.profile
+});
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(Actions, dispatch);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Login));

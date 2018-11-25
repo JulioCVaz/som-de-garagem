@@ -18,7 +18,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Badge from '@material-ui/core/Badge';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -27,13 +26,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 import CommentIcon from '@material-ui/icons/Comment';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PersonIcon from '@material-ui/icons/Person';
 import PlaylistPlay from '@material-ui/icons/PlaylistPlay';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import Avatar from '@material-ui/core/Avatar';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import LandingPage from './views/LandingPage/LandingPage';
@@ -42,6 +40,8 @@ import {connect} from 'react-redux';
 import {logout} from './services/auth';
 import * as Actions from './actions/listen';
 import { bindActionCreators } from 'redux';
+import nofoto from './img/nofoto.png';
+
 
 const drawerWidth = 240;
 
@@ -157,6 +157,16 @@ const styles = theme => ({
   },
   logo: {
       width: '150px'
+  },
+  bigAvatar: {
+    width: 40,
+    height: 40,
+  },
+  profilewrapper: {
+    paddingLeft: 18
+  },
+  profilemargin: {
+    marginRight: 5
   }
 });
 
@@ -167,6 +177,7 @@ class Home extends Component{
     };
 
     state = {
+        profile: [],
         musicas: [],
         open: false,
         anchorEl: null,
@@ -290,18 +301,23 @@ class Home extends Component{
         >
           <div className={classes.toolbar}>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />
+              }
             </IconButton>
           </div>
           <Divider />
           <List>
+              <ListItem button className={classes.profilewrapper}>
+                <ListItemIcon className={classes.profilemargin}><Avatar
+                    alt="Adelle Charles"
+                    src={nofoto}
+                    className={classNames(classes.avatar, classes.bigAvatar)}
+                  /></ListItemIcon>
+                <ListItemText primary={'Meu Perfil'}/>
+              </ListItem>
               <ListItem button>
                 <ListItemIcon onClick={this.resetHome}><HomeRoundedIcon/></ListItemIcon>
                 <ListItemText primary={'Início'}/>
-              </ListItem>
-              <ListItem button>
-                <ListItemIcon><PersonIcon/></ListItemIcon>
-                <ListItemText primary={'Meu Perfil'}/>
               </ListItem>
               <ListItem button>
                 <ListItemIcon><PlaylistPlay/></ListItemIcon>
@@ -341,11 +357,7 @@ class Home extends Component{
              
         </main>
       </div>
-            {/* <Navbar/>
-            <div className="wrapper" style={{background: background}}>
-                
-                </div> */}
-            </React.Fragment>
+      </React.Fragment>
         );
     }
 }
@@ -356,6 +368,7 @@ Home.propTypes = {
   };
 
 const mapStateToProps = state => ({
+  profile: state.profile,
   musicas: state.listen,
   artistas: state.artists,
   album: state.albums
