@@ -39,6 +39,8 @@ import PropTypes from 'prop-types';
 import LandingPage from './views/LandingPage/LandingPage';
 import { withStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
+import {logout} from './services/auth';
+import * as Actions from './actions/listen';
 import { bindActionCreators } from 'redux';
 
 const drawerWidth = 240;
@@ -159,10 +161,16 @@ const styles = theme => ({
 });
 
 class Home extends Component{
+
+    constructor(props){
+      super(props);
+    };
+
     state = {
+        musicas: [],
         open: false,
         anchorEl: null,
-    mobileMoreAnchorEl: null,
+        mobileMoreAnchorEl: null,
       };
 
       handleProfileMenuOpen = event => {
@@ -189,6 +197,27 @@ class Home extends Component{
       handleDrawerClose = () => {
         this.setState({ open: false });
       };
+
+      exitApp = () => {
+        logout();
+        setTimeout(()=>{
+          this.props.history.push("/");
+        }, 100);
+      }
+
+      reset = () => {
+        return this.props.resetApp();
+      }
+
+      resetHome = () => {
+        this.reset();
+      }
+
+      componentWillReceiveProps(nextProps){
+        if(nextProps.musicas !== this.state.musicas){
+              this.setState({musicas:nextProps.musicas});
+        }
+      }
 
     render(){
         const { classes, theme } = this.props;
@@ -239,7 +268,7 @@ class Home extends Component{
                     onClick={this.handleProfileMenuOpen}
                     color="inherit"
                 >
-                    <ExitToApp />
+                    <ExitToApp onClick={this.exitApp}/>
                 </IconButton>
                 </div>
             </div>
@@ -267,7 +296,7 @@ class Home extends Component{
           <Divider />
           <List>
               <ListItem button>
-                <ListItemIcon><HomeRoundedIcon/></ListItemIcon>
+                <ListItemIcon onClick={this.resetHome}><HomeRoundedIcon/></ListItemIcon>
                 <ListItemText primary={'Início'}/>
               </ListItem>
               <ListItem button>
@@ -293,17 +322,23 @@ class Home extends Component{
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-            <Grid container spacing={8} justify="center" alignItems="center">
-              <br/>
-              <Grid item xs={10}>
-                <Response/>
-              </Grid>
-              <Grid item>
-                <Artists/>
-              </Grid>
-              <Player/>
-            </Grid> 
-            {/* <LandingPage/> */}
+
+            {
+              (this.state.musicas.length > 0) ?
+                <Grid container spacing={8} justify="center" alignItems="center">
+                  <br/>
+                  <Grid item xs={10}>
+                    <Response/>
+                  </Grid>
+                  <Grid item>
+                    <Artists/>
+                  </Grid>
+                  <Player/>
+                </Grid>
+              :
+                <LandingPage/>
+              }
+             
         </main>
       </div>
             {/* <Navbar/>
@@ -321,10 +356,12 @@ Home.propTypes = {
   };
 
 const mapStateToProps = state => ({
-  musicas: state.musicas,
+  musicas: state.listen,
+  artistas: state.artists,
+  album: state.albums
 });
-  
-// const mapDispatchToProps = dispatch =>
-//     bindActionCreators(Actions, dispatch);
 
-export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Home));
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(Actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Home));
