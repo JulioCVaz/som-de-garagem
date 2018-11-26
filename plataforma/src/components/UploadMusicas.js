@@ -1,12 +1,33 @@
 import React, {Component} from 'react';
+import HeaderLayout from './HeaderLayout';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  paddingWrapper: {
+    marginTop: 100
+  }
+});
 
-export default class UploadMusicas extends Component{
-    render(){
+class UploadMusicas extends Component{
+  render(){
+      const {classes, theme} = this.props;
         return(
           <React.Fragment>
-            <h1>Upload músicas</h1>
+            <HeaderLayout/>
+            <div className={classes.paddingWrapper}>
+              <h1>UploadMusicas</h1>
+            </div>
           </React.Fragment>  
         );
     }
 }
+
+
+UploadMusicas.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(UploadMusicas);
