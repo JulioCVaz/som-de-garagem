@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import api from "../services/api";
 
 const styles = theme => ({
   paddingWrapper: {
@@ -31,7 +32,20 @@ class UploadMusicas extends Component{
 
   handleSend = (e) => {
     e.preventDefault();
-    console.log('fui clicado');
+
+    var n = this.state.file;
+    var formdata = new FormData();
+    formdata.append("audio", this.state.file, this.state.file.name);
+    api.post('/upload', formdata)
+      .then(
+          response => {
+            console.log(response);
+          }
+      ).catch(
+        error => {
+          console.log(error);
+        }
+      )
   }
 
 
@@ -49,7 +63,7 @@ class UploadMusicas extends Component{
                 </Grid>
                 <Grid xs={6} direction="row">
                   <input
-                    accept="image/*"
+                    accept="audio/*"
                     className={classes.input}
                     id="contained-button-file"
                     multiple

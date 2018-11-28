@@ -6,11 +6,6 @@
  *  Etec zona leste
  */
 
-// arrumar permissao do cors
-// header('Access-Control-Allow-Origin: *');
-// header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
-// header('Access-Coxntrol-Allow-Headers: Authorization, Content-Type, X-Auth-Token', 'X-CSRF-TOKEN');
-
 // email de confirmação
 Route::get('user/verify/{verification_code}', 'Auth\AuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');

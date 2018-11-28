@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Musica;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 
@@ -224,8 +226,43 @@ class MusicController extends Controller
     // metodo upload musicas
     public function uploadMusicas(Request $request){
         
+        // $sound = $request->file('audio');
+
+        // dd($sound);
+        // $new_sound = $sound->getClientOriginalName();
+
+        $this->validate($request, [
+            'audio' => 'max:15000'
+        ]);
+
+        $sound = $request->file('audio');
+
+        // return Validator::make($request->all(), [
+        //     'your_file_input' => 'required|file|size:5000',
+        // ])->validate();
+
+        $filename = $sound->getClientOriginalName();
+
+        // This will return /audio/mp3
+        $location = public_path('audio/' . $filename);
+
+        // This will move the file to /public/audio/mp3/
+        // and save it as "mp3" (not what you want)
+        // example: /public/audio/mp3/mp3 (without extension)
+        $sound->move($location,$filename);
+
+        
+        // Storage::disk('local')->put($new_sound, $new_sound);
+
+        // $path = $sound->storeAs('musicas', $new_sound);
+
+        // FILE STORAGE LARAVEL
+        // https://laravel.com/docs/5.7/filesystem
+
+        // $files = Storage::files($directory);
+        // $sound->move(public_path("img"), $new_sound);
         return response()->json([
-            'response' => 'dados recebidos com sucesso'
+            'response' => 'OK'
         ]);
     }
 }
