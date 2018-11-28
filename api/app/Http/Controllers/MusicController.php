@@ -213,14 +213,19 @@ class MusicController extends Controller
                     $this->albumc->showbylike($string)
                 );
             }
-        }
-
-        dd($vals);
-        
+        }        
     }
     // metodo all
     public function index(){
         $musica = Musica::all();
         return response()->json($musica);
+    }
+
+    // metodo upload musicas
+    public function uploadMusicas(Request $request){
+        
+        return response()->json([
+            'response' => 'dados recebidos com sucesso'
+        ]);
     }
 }

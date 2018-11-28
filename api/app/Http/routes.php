@@ -43,6 +43,9 @@ Route::group(array('prefix' => 'api/'), function(){
     
     // routes only acessos
     Route::resource('acessos', 'AccessController');
+
+    // upload file
+    Route::post('upload', 'MusicController@uploadMusicas');
     
     //logout
     Route::get('logout', 'AuthController@logout');
