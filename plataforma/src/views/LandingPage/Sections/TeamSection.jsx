@@ -4,6 +4,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
+
 // @material-ui/icons
 
 // core components
@@ -20,6 +21,8 @@ import team1 from "../../../assets/img/faces/avatar.jpg";
 import team2 from "../../../assets/img/faces/christian.jpg";
 import team3 from "../../../assets/img/faces/kendall.jpg";
 
+
+
 class TeamSection extends React.Component {
   render() {
     const { classes } = this.props;
@@ -30,7 +33,7 @@ class TeamSection extends React.Component {
     );
     return (
       <div className={classes.section}>
-        <h2 className={classes.title}>Here is our team</h2>
+        <h2 className={classes.title}>Destaques da Semana</h2>
         <div>
           <GridContainer>
             <GridItem xs={12} sm={12} md={4}>

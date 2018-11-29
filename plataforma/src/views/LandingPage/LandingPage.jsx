@@ -12,22 +12,156 @@ import GridContainer from "../../components-landing/Grid/GridContainer.jsx";
 import GridItem from "../../components-landing/Grid/GridItem.jsx";
 import Button from "../../components-landing/CustomButtons/Button.jsx";
 import Parallax from "../../components-landing/Parallax/Parallax.jsx";
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+// import tileData from './tileData';
+
+import axé from '../../assets/img/examples/axe.jpg';
+import blues from '../../assets/img/examples/blues.jpg';
+import country from '../../assets/img/examples/country.jpg';
+import eletronica from '../../assets/img/examples/eletronica.jpg';
+import forró from '../../assets/img/examples/forró.jpg';
+import funk from '../../assets/img/examples/funk.jpg';
+import gospel from '../../assets/img/examples/gospel.jpg';
+import hiphop from '../../assets/img/examples/hip-hop.jpg';
+import jazz from '../../assets/img/examples/jazz.jpg';
+import MPB from '../../assets/img/examples/MPB.jpg';
+import musica_classica from '../../assets/img/examples/musica_classica.jpg';
+import pagode from '../../assets/img/examples/pagode.jpg';
+import pop from '../../assets/img/examples/pop.jpg';
+import rap from '../../assets/img/examples/rap.jpg';
+import reggae from '../../assets/img/examples/reggae.jpg';
+import rock from '../../assets/img/examples/rock.jpg';
+import samba from '../../assets/img/examples/samba.jpg';
+import sertanejo from '../../assets/img/examples/sertanejo.jpg';
+
 
 import landingPageStyle from "../../assets/jss/material-kit-react/views/landingPage.jsx";
 
 // Sections for this page
-import ProductSection from "./Sections/ProductSection.jsx";
 import TeamSection from "./Sections/TeamSection.jsx";
 import WorkSection from "./Sections/WorkSection.jsx";
 
 const dashboardRoutes = [];
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+});
+
+/**
+ * The example data is structured as follows:
+ *
+ * import image from 'path/to/image.jpg';
+ * [etc...]
+ *
+ * const tileData = [
+ *   {
+ *     img: image,
+ *     title: 'Image',
+ *     author: 'author',
+ *   },
+ *   {
+ *     [etc...]
+ *   },
+ * ];
+ */
+
+const tileData = [
+     {
+       img: axé,
+       title: 'Axé',
+     },
+     {
+      img: blues,
+      title: 'Blues',
+    },
+    {
+      img: country,
+      title: 'Country',
+    },
+    {
+      img: eletronica,
+      title: 'Eletrônica',
+    },
+    {
+      img: forró,
+      title: 'Forró'
+    },
+    {
+      img: funk,
+      title: 'Funk'
+    },
+    {
+      img: gospel,
+      title: 'Gospel'
+    },
+    {
+      img: hiphop,
+      title: 'Hip Hop'
+    },
+    {
+      img: jazz,
+      title: 'Jazz'
+    },
+    {
+      img: MPB,
+      title: 'MPB'
+    },
+    {
+      img: musica_classica,
+      title: 'Música Clássica'
+    },
+    {
+      img: pagode,
+      title: 'Pagode'
+    },
+    {
+      img: pop,
+      title: 'Pop'
+    },
+    {
+      img: rap,
+      title: 'Rap'
+    },
+    {
+      img: reggae,
+      title: 'Reggae'
+    },
+    {
+      img: rock,
+      title: 'Rock'
+    },
+    {
+      img: samba,
+      title: 'Samba'
+    },
+    {
+      img: sertanejo,
+      title: 'Sertanejo'
+    }
+   ];
 
 class LandingPage extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
       <div>
-       
         <Parallax filter image={require("../../assets/img/landing-bg.jpg")}>
           <div className={classes.container}>
             <GridContainer>
@@ -52,12 +186,30 @@ class LandingPage extends React.Component {
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
-            <ProductSection />
             <TeamSection />
+            <div className={classes.root}>
+              <GridList cellHeight={180} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                  <ListSubheader component="div">December</ListSubheader>
+                </GridListTile>
+                {tileData.map(tile => (
+                  <GridListTile key={tile.img}>
+                    <img src={tile.img} alt={tile.title} />
+                    <GridListTileBar
+                      title={tile.title}
+                      actionIcon={
+                        <IconButton className={classes.icon}>
+                          <InfoIcon />
+                        </IconButton>
+                      }
+                    />
+                  </GridListTile>
+                ))}
+              </GridList>
+            </div>
             <WorkSection />
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

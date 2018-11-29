@@ -18,6 +18,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import ListIcon from '@material-ui/icons/List';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -325,16 +326,23 @@ class Home extends Component{
                 <ListItemText primary={'Início'}/>
               </ListItem>
               <ListItem button>
-                <ListItemIcon><PlaylistPlay/></ListItemIcon>
-                <ListItemText primary={'Minha Playlist'}/>
-              </ListItem>
-              {/* TODO: fazer a logica do tipo de perfil */}
-              <ListItem button>
                 <ListItemIcon>
                   <LibraryMusicIcon onClick={this.goToUpload}/>
                 </ListItemIcon>
                 <ListItemText primary={'Upload de Músicas'}/>
               </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <ListIcon/>
+                </ListItemIcon>
+                <ListItemText primary={'Lista de Músicas'}/>
+              </ListItem>
+              <Divider />
+              <ListItem button>
+                <ListItemIcon><PlaylistPlay/></ListItemIcon>
+                <ListItemText primary={'Minha Playlist'}/>
+              </ListItem>
+              {/* TODO: fazer a logica do tipo de perfil */}
               <ListItem button>
                 <ListItemIcon><CommentIcon/></ListItemIcon>
                 <ListItemText primary={'Mensagens'}/>
