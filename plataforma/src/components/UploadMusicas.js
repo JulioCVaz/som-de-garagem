@@ -74,7 +74,7 @@ class UploadMusicas extends Component{
 
     var formdata = new FormData();
     formdata.append("audio", this.state.file, this.state.file.name);
-    formdata.append('iduser', n);
+    formdata.append('id_user', n);
     api.post('/upload', formdata, {
       onUploadProgress: progressEvent => {
         this.setState({completed: Math.round((progressEvent.loaded / progressEvent.total) * 100)})

@@ -226,41 +226,22 @@ class MusicController extends Controller
     // metodo upload musicas
     public function uploadMusicas(Request $request){
         
-        // $sound = $request->file('audio');
-
-        // dd($sound);
-        // $new_sound = $sound->getClientOriginalName();
-
-        $this->validate($request, [
-            'audio' => 'max:15000'
-        ]);
-
+        // get audio da request
+        $id = $request->input('id_user');
+        // get id da request
         $sound = $request->file('audio');
-
-        // return Validator::make($request->all(), [
-        //     'your_file_input' => 'required|file|size:5000',
-        // ])->validate();
 
         $filename = $sound->getClientOriginalName();
 
-        // This will return /audio/mp3
-        $location = public_path('audio/' . $filename);
+        $count = DB::table('musica')
+        ->select(DB::raw('count(id) as count'))->where('artistaID', '=', 3)->get();
 
-        // This will move the file to /public/audio/mp3/
-        // and save it as "mp3" (not what you want)
-        // example: /public/audio/mp3/mp3 (without extension)
+        $convert = (int)$count[0]->count + 1;
+        
+        $location = public_path('sdg/audio/' . (string)$id . '/');
+             
         $sound->move($location,$filename);
 
-        
-        // Storage::disk('local')->put($new_sound, $new_sound);
-
-        // $path = $sound->storeAs('musicas', $new_sound);
-
-        // FILE STORAGE LARAVEL
-        // https://laravel.com/docs/5.7/filesystem
-
-        // $files = Storage::files($directory);
-        // $sound->move(public_path("img"), $new_sound);
         return response()->json([
             'response' => 'OK'
         ]);
