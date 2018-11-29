@@ -31,13 +31,13 @@ const styles = theme => ({
 class UploadMusicas extends Component{
 
   state = {
+    user: '',
     file: 0,
     completed: 0,
     responseComplete: false
   };
 
   handleFile = (e) => {
-    console.log(e.target.files);
     if(e.target.files.length > 0){
       this.setState({file:e.target.files[0]});
     }else{
@@ -68,9 +68,13 @@ class UploadMusicas extends Component{
   handleSend = (e) => {
     e.preventDefault();
 
-    var n = this.state.file;
+    let data = localStorage.getItem('user');
+    let new_data = JSON.parse(data);
+    let n = new_data.id;
+
     var formdata = new FormData();
     formdata.append("audio", this.state.file, this.state.file.name);
+    formdata.append('iduser', n);
     api.post('/upload', formdata, {
       onUploadProgress: progressEvent => {
         this.setState({completed: Math.round((progressEvent.loaded / progressEvent.total) * 100)})
@@ -87,6 +91,7 @@ class UploadMusicas extends Component{
   }
   render(){
       const {classes, theme} = this.props;
+      console.log(this.state.profile);
         return(
           <React.Fragment>
             <HeaderLayout/>
@@ -106,7 +111,9 @@ class UploadMusicas extends Component{
                         Título: {(this.state.file != 0) ? this.state.file.name : ''}
                       </Typography>
                       <Typography component="p">
-                        Tamanho do arquivo: {(this.state.file != 0) ? this.state.file.size : ''}
+                        Tamanho do arquivo: {(this.state.file != 0) ?
+                          (this.state.file.size).toString().substring(0,1) + ' MB'
+                          : ''}
                       </Typography>
                       <Typography component="p">
                         Tipo Arquivo: {(this.state.file != 0) ? this.state.file.type : ''}
@@ -153,4 +160,4 @@ UploadMusicas.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UploadMusicas);
+export default withStyles(styles, { withTheme: true })(UploadMusicas);

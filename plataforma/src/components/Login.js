@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, useReducer} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { FormControl, Checkbox, FormGroup, FormControlLabel} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import '../styles/Style.css';
 import logo from '../img/logo-som-de-garagem.png';
-import {login} from '../services/auth.js';
+import {login, user} from '../services/auth.js';
 import api from "../services/api";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -65,6 +65,16 @@ class Login extends Component{
                 formData.append('password', password);
                 const response = await api.post("/login", formData)
                 if(login(response.data.data.auth_token)){
+                    user(response.data.data);
+                    console.log();
+                    /**auth_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNTQzNDU3ODg2LCJleHAiOjE1NDM0NjE0ODYsIm5iZiI6MTU0MzQ1Nzg4NiwianRpIjoiWDN2THFqTnpHOVhobFdFdSIsInN1YiI6MTd9.8oSvcIYpOx41FplcG6Yd-uJHdlNdkUonv02vCt1BPYA"
+email: "julio.oliveiravaz0@gmail.com"
+id: 17
+name: "Júlio César de Oliveira Vaz"
+                     * 
+                     * 
+                     */
+                    // user(response.data.data);
                     this.responseProfile(response.data.data);
                     setTimeout(()=>{
                         this.props.history.push("/sdg");

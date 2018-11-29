@@ -113,7 +113,6 @@ class Response extends Component{
 
     render(){
         const { classes, theme } = this.props;
-        console.log(this.state.musicas);
         return(
         <div className="wrapper-response">
             <Grid container>
