@@ -31,13 +31,20 @@ const styles = theme => ({
 class UploadMusicas extends Component{
 
   state = {
-    file: [],
+    file: 0,
     completed: 0,
     responseComplete: false
   };
 
   handleFile = (e) => {
-    this.setState({file:e.target.files[0]});
+    console.log(e.target.files);
+    if(e.target.files.length > 0){
+      this.setState({file:e.target.files[0]});
+    }else{
+      if(!this.state.file == 0){
+        this.setState({file:0})
+      }
+    }
   }
 
   componentDidMount() {
@@ -96,13 +103,13 @@ class UploadMusicas extends Component{
                   <div>
                     <Paper className={classes.root} elevation={1}>
                       <Typography variant="h5" component="h3">
-                        Título: {this.state.file.name}
+                        Título: {(this.state.file != 0) ? this.state.file.name : ''}
                       </Typography>
                       <Typography component="p">
-                        Tamanho do arquivo: {this.state.file.size}
+                        Tamanho do arquivo: {(this.state.file != 0) ? this.state.file.size : ''}
                       </Typography>
                       <Typography component="p">
-                        Tipo Arquivo: {this.state.file.type}
+                        Tipo Arquivo: {(this.state.file != 0) ? this.state.file.type : ''}
                       </Typography>
                     </Paper>
                   </div>
@@ -123,7 +130,6 @@ class UploadMusicas extends Component{
                     </label>
                     <br/>
                     { 
-                      
                       (this.state.completed > 0) ?
                         <LinearProgress color="secondary" value={this.state.completed} />
                         :

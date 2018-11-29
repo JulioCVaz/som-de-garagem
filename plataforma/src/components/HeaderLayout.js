@@ -123,7 +123,10 @@ const styles = theme => ({
     minHeight: '100vh'
   },
   logo: {
-      width: '150px'
+      width: '150px',
+      '&:hover': {
+        'cursor': 'pointer'
+        }
   },
   bigAvatar: {
     width: 40,
@@ -172,6 +175,10 @@ class HeaderLayout extends Component{
       handleDrawerClose = () => {
         this.setState({ open: false });
       };
+
+      redirectRouter(){
+        window.location.href="/sdg";
+      }
     render(){
         const { classes, theme } = this.props;
         return(
@@ -184,7 +191,7 @@ class HeaderLayout extends Component{
                     <Toolbar disableGutters={!this.state.open}>
                         <div className={classes.searchWrapper}>
                             <Typography variant="h6" color="inherit" noWrap>
-                            <img src={logo} className={classes.logo}/>
+                            <img src={logo} className={classes.logo} onClick={this.redirectRouter}/>
                             </Typography>
                         </div>
                     </Toolbar>
