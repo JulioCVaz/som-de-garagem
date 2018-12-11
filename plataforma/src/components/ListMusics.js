@@ -9,6 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import api from "../services/api";
 
 
@@ -24,6 +28,14 @@ const styles = theme => ({
     table: {
       minWidth: 700,
     },
+    hoverButton:{
+        '&:hover' : {
+            'cursor': 'pointer'
+        }
+    },
+    progress: {
+        flexGrow: 1,
+    }
   });
 
   class ListMusic extends Component{
@@ -33,13 +45,22 @@ const styles = theme => ({
         renderizer: false
     }
 
+    editMusic = () => {
+        // TODO
+    }
+
+    removeMusic = () => {
+        // TODO
+    }
     componentWillMount(){
             let data = localStorage.getItem('user');
             let new_data = JSON.parse(data);
             let n = new_data.id;
-            api.get(`/musicas/artista/${n}`).then(
+            // api.get(`/musicas/artista/${n}`).then(
+            // passar caminho de cima
+            api.get(`/musicas/artista/3`).then(
                   response => {
-                    console.log(response);
+                    this.setState({musicas:response.data.musicas});
                   }
               ).catch(
                 error => {
@@ -53,40 +74,60 @@ const styles = theme => ({
 
     render(){
         const { classes } = this.props;
+        console.log(this.state.musicas);
         return(
             <React.Fragment>
                 <HeaderLayout/>
                 <div className={classes.paddingWrapper}>
-                    <Grid container>
+                    <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    >
                         { (this.state.renderizer) ?
                         <Grid xs={8}>
+                            <Typography variant="h3" gutterBottom>
+                                Minhas músicas
+                            </Typography>
                             <Paper className={classes.root}>
                                 <Table className={classes.table}>
                                     <TableHead>
                                     <TableRow>
-                                        <TableCell>Dessert (100g serving)</TableCell>
-                                        <TableCell numeric>Calories</TableCell>
-                                        <TableCell numeric>Fat (g)</TableCell>
-                                        <TableCell numeric>Carbs (g)</TableCell>
-                                        <TableCell numeric>Protein (g)</TableCell>
+                                        <TableCell>Título Música</TableCell>
+                                        <TableCell numeric>Criado em</TableCell>
+                                        <TableCell numeric>Ícone</TableCell>
+                                        <TableCell numeric>Editar</TableCell>
+                                        <TableCell numeric>Remover</TableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        <TableRow key="">
-                                            <TableCell component="th" scope="row">
-                                                Teste
-                                            </TableCell>
-                                            <TableCell>1</TableCell>
-                                            <TableCell>2</TableCell>
-                                            <TableCell>3</TableCell>
-                                            <TableCell>4</TableCell>
-                                        </TableRow>
+                                        {
+                                            this.state.musicas.map(musica => (
+                                                <TableRow key={musica.id}>
+                                                    <TableCell component="th" scope="row">
+                                                        {musica.nomemusica}
+                                                    </TableCell>
+                                                    <TableCell>{musica.created_at}</TableCell>
+                                                    <TableCell>{musica.filepath_avatar}</TableCell>
+                                                    <TableCell className={classes.hoverButton} onClick={this.editMusic}><EditIcon/></TableCell>
+                                                    <TableCell className={classes.hoverButton} onClick={this.removeMusic}><DeleteIcon/></TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
                                     </TableBody>
                                 </Table>
                             </Paper>
                         </Grid>
                         :
-                        'Carregando informações' 
+                        <Grid xs={8}>
+                            <Typography component="h2" variant="display1" gutterBottom>
+                                    Carregando Músicas
+                            </Typography>
+                            <div className={classes.progress}>
+                                <LinearProgress color="secondary"/>
+                            </div>
+                        </Grid>
                     }
                     </Grid>
                 </div>
