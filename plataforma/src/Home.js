@@ -230,6 +230,10 @@ class Home extends Component{
         this.props.history.push(`${window.location.pathname}/upload`);
       }
 
+      goToList = () => {
+        this.props.history.push(`${window.location.pathname}/lista-musicas`);
+      }
+
       componentWillReceiveProps(nextProps){
         if(nextProps.musicas !== this.state.musicas){
               this.setState({musicas:nextProps.musicas});
@@ -333,7 +337,7 @@ class Home extends Component{
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
-                  <ListIcon/>
+                  <ListIcon onClick={this.goToList}/>
                 </ListItemIcon>
                 <ListItemText primary={'Lista de Músicas'}/>
               </ListItem>

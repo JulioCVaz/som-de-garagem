@@ -18,6 +18,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 // import tileData from './tileData';
 
 import axé from '../../assets/img/examples/axe.jpg';
@@ -47,7 +49,15 @@ import TeamSection from "./Sections/TeamSection.jsx";
 import WorkSection from "./Sections/WorkSection.jsx";
 
 const dashboardRoutes = [];
+
 const styles = theme => ({
+  titlegender: {
+    textAlign: 'center'
+  },
+
+  subtitle: {
+    color: '#0000!important'
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -187,25 +197,35 @@ class LandingPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <TeamSection />
+            <Grid xs={12} style={{
+              'text-align': 'center',
+              'padding-bottom': 80
+            }}>
+              <Typography variant="h4">
+                O que você quer ouvir agora ?
+              </Typography>
+              <Typography variant="subtitle" style={{
+                'color': "#999999"
+              }}>
+                Escolha entre os mais variados gêneros musicais dentro da plataforma!
+              </Typography>
+            </Grid>
             <div className={classes.root}>
-              <GridList cellHeight={180} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                  <ListSubheader component="div">December</ListSubheader>
-                </GridListTile>
-                {tileData.map(tile => (
-                  <GridListTile key={tile.img}>
-                    <img src={tile.img} alt={tile.title} />
-                    <GridListTileBar
-                      title={tile.title}
-                      actionIcon={
-                        <IconButton className={classes.icon}>
-                          <InfoIcon />
-                        </IconButton>
-                      }
-                    />
-                  </GridListTile>
-                ))}
-              </GridList>
+                <GridList cols={3} spacing={12} spacellHeight={180} className={classes.gridList}>
+                  {tileData.map(tile => (
+                    <GridListTile key={tile.img}>
+                      <img src={tile.img} alt={tile.title} />
+                      <GridListTileBar
+                        title={tile.title}
+                        actionIcon={
+                          <IconButton className={classes.icon}>
+                            <InfoIcon />
+                          </IconButton>
+                        }
+                      />
+                    </GridListTile>
+                  ))}
+                </GridList>
             </div>
             <WorkSection />
           </div>
