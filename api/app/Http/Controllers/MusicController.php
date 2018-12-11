@@ -52,11 +52,16 @@ class MusicController extends Controller
 
     // retorna músicas de um id(artista) especifico
 
-    public function retornaMusicasArtista(Request $request){
-        $idartista = $request->input('id_user');
+    public function retornaMusicasArtista($id){
+
+        $idartista = $id;
+
+        $musicas = DB::table('musica')->where('artistaID', '=', $idartista)
+                        ->select('*')
+                        ->get();  
 
         return response()->json([
-            'message' => 'Recebido'
+            'musicas' => $musicas
         ]);
     }
     // retorna metadados de musicas com mesmo genero da busca
