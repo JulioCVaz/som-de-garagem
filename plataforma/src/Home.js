@@ -234,13 +234,29 @@ class Home extends Component{
         this.props.history.push(`${window.location.pathname}/lista-musicas`);
       }
 
+      componentWillMount(){
+
+        let data = localStorage.getItem('user');
+        let new_data = JSON.parse(data);
+        var name = new_data.name;
+        // arrumar isso aqui amanhã
+         
+        var arrayNomes = name.split(" ");
+        let nname = `Olá ${arrayNomes[0]} ${arrayNomes[1]}`;
+        this.setState({profile:nname});
+      }
+
       componentWillReceiveProps(nextProps){
         if(nextProps.musicas !== this.state.musicas){
               this.setState({musicas:nextProps.musicas});
         }
+        if(nextProps.profile !== this.state.profile){
+              this.setState({profile:nextProps.profile});
+        }
       }
 
     render(){
+      console.log(this.props);
         const { classes, theme } = this.props;
         const { anchorEl, mobileMoreAnchorEl } = this.state;
         const background = grey[800];
@@ -323,7 +339,7 @@ class Home extends Component{
                     src={nofoto}
                     className={classNames(classes.avatar, classes.bigAvatar)}
                   /></ListItemIcon>
-                <ListItemText primary={'Meu Perfil'}/>
+                <ListItemText primary={this.state.profile}/>
               </ListItem>
               <ListItem button>
                 <ListItemIcon onClick={this.resetHome}><HomeRoundedIcon/></ListItemIcon>
