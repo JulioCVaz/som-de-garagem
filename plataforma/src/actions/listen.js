@@ -19,6 +19,13 @@ export function addAlbums(albums){
     }
 }
 
+export function addNFound(error){
+    return{
+        type: 'ADD_NOTFOUND',
+        error
+    }
+}
+
 export function playMusic(musica){
     return{
         type: 'PLAY_MUSIC',

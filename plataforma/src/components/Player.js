@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../styles/Style.css';
 import ReactAudioPlayer from 'react-audio-player';
-import contato from '../musicas/contato.mpeg';
-import pandora from '../musicas/pandora.mpeg';
 
 
 class Player extends Component{
@@ -102,10 +100,7 @@ class Player extends Component{
                     style={{
                         width:'60%'
                     }}
-                    src=
-                    {
-                        (musica.nomemusica == 'Contato') ? contato : (musica.nomemusica == 'Júlia e a caixa de pandora') ? pandora : ''
-                    }
+                    src='audios/9/06 Vida Boa (ao vivo).mp3'
                     controls
                     />
                     </React.Fragment>

@@ -168,7 +168,7 @@ class MusicController extends Controller
         if(!$musica && !$album && !$artista){
             return response()->json([
                 'message' => 'Nenhum resultado para: ' . $string
-            ], 404);
+            ]);
         };
 
         $vals = [

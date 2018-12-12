@@ -179,6 +179,7 @@ class Home extends Component{
     };
 
     state = {
+        error: '',
         profile: [],
         musicas: [],
         open: false,
@@ -247,16 +248,19 @@ class Home extends Component{
       }
 
       componentWillReceiveProps(nextProps){
+        console.log(nextProps);
         if(nextProps.musicas !== this.state.musicas){
-              this.setState({musicas:nextProps.musicas});
+            this.setState({musicas:nextProps.musicas});
         }
-        if(nextProps.profile !== this.state.profile){
-              this.setState({profile:nextProps.profile});
+        if(nextProps.error !== this.state.error){
+            console.log(nextProps.error);
+            this.setState({error:nextProps.error});
         }
+        
       }
 
     render(){
-      console.log(this.props);
+        console.log(this.state);
         const { classes, theme } = this.props;
         const { anchorEl, mobileMoreAnchorEl } = this.state;
         const background = grey[800];
@@ -391,10 +395,20 @@ class Home extends Component{
                   </Grid>
                   <Player/>
                 </Grid>
+              : (this.state.error.length > 0) ?
+                <Grid container spacing={8} justify="center" alignItems="center">
+                  <br/>
+                  <Grid item xs={10}>
+                    <h1 style={{
+                      'color': 'white'
+                    }}>
+                      {this.state.error[0].error}
+                    </h1>
+                  </Grid>
+                </Grid>
               :
                 <LandingPage/>
               }
-             
         </main>
       </div>
       </React.Fragment>
@@ -409,6 +423,7 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  error: state.notfound,
   musicas: state.listen,
   artistas: state.artists,
   album: state.albums

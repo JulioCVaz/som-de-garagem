@@ -90,6 +90,9 @@ class Search extends Component{
         return this.props.addAlbums(this.state.data);
     }
 
+    addNotFound = () => {
+        return this.props.addNFound(this.state.data);
+    }
     reset = () => {
         return this.props.resetApp();
     }
@@ -102,21 +105,29 @@ class Search extends Component{
                 response => response.json()
                 )
             .then((response) => {
-                if(typeof response.find.music === 'object'){
-                    // criar uma funcao para o reset e o setState
-                    this.reset();
-                    this.setState({data:response})
-                    this.addMusic();
-                }else if(typeof response.find.artist === 'object'){
+                console.log(response);
+                if(response.message){
                     this.reset();
                     this.setState({data:response});
-                    this.getArtists();
-                }else if(typeof response.find.album === 'object'){
-                    this.reset();
-                    this.setState({data:response});
-                    this.getAlbums();
+                    this.addNotFound();
                 }else{
-                    console.log(`Nenhum resultado para ${data}`);
+                    if(typeof response.find.music === 'object'){
+                        // criar uma funcao para o reset e o setState
+                        this.reset();
+                        this.setState({data:response})
+                        this.addMusic();
+                    }else if(typeof response.find.artist === 'object'){
+                        this.reset();
+                        this.setState({data:response});
+                        this.getArtists();
+                    }else if(typeof response.find.album === 'object'){
+                        this.reset();
+                        this.setState({data:response});
+                        this.getAlbums();
+                    }else{
+                        console.log(`Nenhum resultado para ${data}`);
+                        this.setState({data:response});
+                    }
                 }
             })
             .catch(
