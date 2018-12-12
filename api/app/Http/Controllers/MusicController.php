@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Musica;
+use Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 
@@ -48,6 +49,16 @@ class MusicController extends Controller
         };
 
         return response()->json($musica);
+    }
+
+    // retorna diretorios
+    public function retornaMusicaById($id){
+        
+        $directories = Storage::disk('custom')->allFiles($id);
+
+        return response()->json([
+            $directories
+        ]);
     }
 
     // retorna músicas de um id(artista) especifico
@@ -240,7 +251,6 @@ class MusicController extends Controller
 
     // metodo upload musicas
     public function uploadMusicas(Request $request){
-        
         // get audio da request
         $id = $request->input('id_user');
         // get id da request
@@ -253,12 +263,52 @@ class MusicController extends Controller
 
         $convert = (int)$count[0]->count + 1;
         
-        $location = public_path('sdg/audio/' . (string)$id . '/');
+        $location = storage_path('app/sdg/audio/' . (string)$id . '/');
              
         $sound->move($location,$filename);
 
+        // insert
+        DB::table('musica')->insert(
+            [
+                'albumID' => 0,
+                'artistaID'=> $id,
+                'filepath' => $id,
+                'filepath_avatar' => $id,
+                'created_at' => date('d/m/y h:i:s a', time()),
+                'updated_at' => '',
+                'deleted_at' => '',
+                'nomemusica' => $filename
+            ]
+        );
+
         return response()->json([
             'response' => 'OK'
+        ]);
+    }
+
+    // remove musicas pelo id do usuario
+    public function removeMusicaById(Request $request){
+
+        $dados = $request->only('idmusica', 'usuario', 'idusuario');
+
+        // fazer select no banco para encontrar nome da musica
+
+        $nmusica = DB::table('musica')->select('nomemusica')->where('id', '=', $dados['idmusica'])->get();
+
+        if(!$nmusica){
+            return response()->json([
+                'error' => 'música não localizada, erro!'
+            ]);
+        }
+
+        DB::table('musica')->where('id', '=', $dados['idmusica'])->delete();
+
+        $musicas = DB::table('musica')->where('artistaID', '=', $dados['idusuario'])
+                        ->select('*')
+                        ->get();
+
+        return response()->json([
+            'musicas' => $musicas
         ]);
     }
 }

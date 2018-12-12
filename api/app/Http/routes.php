@@ -29,6 +29,8 @@ Route::group(array('prefix' => 'api/'), function(){
     Route::get('data/{string}', 'MusicController@showmetadata'); // retorna musicas pelo nome
     Route::resource('musicas', 'MusicController'); // get all musicas, delete and update
     Route::get('musicas/artista/{id}', 'MusicController@retornaMusicasArtista');
+    Route::get('musicas/dir/{id}', 'MusicController@retornaMusicaById');
+    Route::post('musicas/remove', 'MusicController@removeMusicaById');
     
     // routes only albums
     Route::get('album/{string}', 'AlbumController@showbylike'); // arrumar

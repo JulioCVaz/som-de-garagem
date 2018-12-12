@@ -13,6 +13,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 import api from "../services/api";
 
 
@@ -35,35 +37,100 @@ const styles = theme => ({
     },
     progress: {
         flexGrow: 1,
-    }
+    },
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+      },
   });
+
+  function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+  
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
 
   class ListMusic extends Component{
 
     state = {
+        dadosedit: '',
+        open: false,
+        profile: [],
         musicas: [],
         renderizer: false
     }
 
-    editMusic = () => {
-        // TODO
+    removeMusic = (e) => {
+        console.log(e.target.value);
+        let removeId = e.target.value;
+
+        let formdata = new FormData();
+        formdata.append("idmusica", removeId);
+        formdata.append("usuario", this.state.profile.name);
+        formdata.append("idusuario", this.state.profile.id);
+
+        api.post('/musicas/remove', formdata)
+        .then(
+            response => {
+                console.log(response);
+                this.setState({musicas:response.data.musicas});
+            }
+        ).catch(
+            error => console.log(error)
+        )
     }
 
-    removeMusic = () => {
-        // TODO
-    }
+    handleOpen = (e) => {
+        this.setState({ open: true });
+        console.log(e.target);
+
+        let d = document.getElementById(e.target.value);
+        
+        console.log(d);
+
+        let nomemusica = d.querySelector("th").innerHTML;
+        let eleme = d.querySelectorAll("[identity]");
+        let criadoem = eleme[0].innerHTML;
+        let icon = eleme[1].innerHTML;
+        let arr = [{
+                'musica':nomemusica,
+                'criado': criadoem,
+                'icon': icon 
+            }];
+        this.setState({dadosedit: arr});
+
+      };
+    
+    handleClose = () => {
+    this.setState({ open: false });
+    };
+
     componentWillMount(){
             let data = localStorage.getItem('user');
             let new_data = JSON.parse(data);
+            this.setState({profile:new_data});
             let n = new_data.id;
-            // api.get(`/musicas/artista/${n}`).then(
-            // passar caminho de cima
-            api.get(`/musicas/artista/3`).then(
-                  response => {
-                    this.setState({musicas:response.data.musicas});
-                  }
-              ).catch(
-                error => {
+            api.get(`/musicas/artista/${n}`).then(
+                // passar caminho de cima
+                // api.get(`/musicas/artista/3`).then(
+                    response => {
+                        this.setState({musicas:response.data.musicas});
+                        console.log(this.state.profile);
+                    }
+                    ).catch(
+                        error => {
                   console.log(error);
                 }
               )
@@ -104,20 +171,49 @@ const styles = theme => ({
                                     <TableBody>
                                         {
                                             this.state.musicas.map(musica => (
-                                                <TableRow key={musica.id}>
+                                                <TableRow key={musica.id} id={musica.id}>
                                                     <TableCell component="th" scope="row">
                                                         {musica.nomemusica}
                                                     </TableCell>
-                                                    <TableCell>{musica.created_at}</TableCell>
-                                                    <TableCell>{musica.filepath_avatar}</TableCell>
-                                                    <TableCell className={classes.hoverButton} onClick={this.editMusic}><EditIcon/></TableCell>
-                                                    <TableCell className={classes.hoverButton} onClick={this.removeMusic}><DeleteIcon/></TableCell>
+                                                    <TableCell identity={musica.id}>{musica.created_at}</TableCell>
+                                                    <TableCell identity={musica.id}>{musica.filepath_avatar}</TableCell>
+                                                    <TableCell className={classes.hoverButton} onClick={this.handleOpen}><EditIcon/><input type="button" id={musica.id} value={musica.id}/></TableCell>
+                                                    <TableCell className={classes.hoverButton}><DeleteIcon key={musica.id}/><input type="button" id={musica.id} value={musica.id} onClick={this.removeMusic}/></TableCell>
                                                 </TableRow>
                                             ))
                                         }
                                     </TableBody>
                                 </Table>
                             </Paper>
+                            <div>
+                                <Modal
+                                aria-labelledby="simple-modal-title"
+                                aria-describedby="simple-modal-description"
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                >
+                                <div style={getModalStyle()} className={classes.paper}>
+                                    { 
+                                        (this.state.dadosedit[0]) ?
+                                            this.state.dadosedit.map(dados => (
+                                                <React.Fragment key={dados.icon}>
+                                                    <Typography variant="h6" id="modal-title">
+                                                        {dados.musica}
+                                                    </Typography>
+                                                    <Typography variant="subtitle1" id="simple-modal-description">
+                                                        {dados.criado}
+                                                    </Typography>
+                                                    <Typography variant="subtitle1" id="simple-modal-description">
+                                                        {dados.icon}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            ))
+                                        :
+                                            'Nenhum dado para atualizar'
+                                    }
+                                </div>
+                                </Modal>
+                            </div>
                         </Grid>
                         :
                         <Grid xs={8}>
