@@ -54,6 +54,7 @@ class UploadMusicas extends Component{
   _handleImageChange(e) {
     e.preventDefault();
 
+    console.log(e.target.files[0].name);
     let reader = new FileReader();
     let file = e.target.files[0];
 
@@ -104,6 +105,7 @@ class UploadMusicas extends Component{
 
     var formdata = new FormData();
     formdata.append("audio", this.state.file, this.state.file.name);
+    formdata.append("image", this.state.fileimage, this.state.fileimage.name);
     formdata.append('id_user', n);
     api.post('/upload', formdata, {
       onUploadProgress: progressEvent => {
@@ -126,7 +128,6 @@ class UploadMusicas extends Component{
       if (imagePreviewUrl) {
         $imagePreview = (<img src={imagePreviewUrl} width="200px"/>);
       }
-      console.log(this.state.profile);
         return(
           <React.Fragment>
             <HeaderLayout/>

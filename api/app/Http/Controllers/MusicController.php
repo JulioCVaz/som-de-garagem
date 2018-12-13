@@ -251,48 +251,58 @@ class MusicController extends Controller
 
     // metodo upload musicas
     public function uploadMusicas(Request $request){
-
-        // inserir em todas essas tabelas 
-
-        /*
-            select * from musica;
-
-            select * from artistas_has_musicas;
-
-            select * from musica_has_genero;
-        */
-
         // get audio da request
         $id = $request->input('id_user');
         // get id da request
         $sound = $request->file('audio');
 
+        $image = $request->file('image');
+
         $filename = $sound->getClientOriginalName();
 
-        $count = DB::table('musica')
-        ->select(DB::raw('count(id) as count'))->where('artistaID', '=', 3)->get();
-
-        $convert = (int)$count[0]->count + 1;
+        $filenameimage = $image->getClientOriginalName();
         
         $location = storage_path('app/sdg/audio/' . (string)$id . '/');
 
-        $directories = Storage::disk('custom')->makeDirectory( (string)$id . '/images');
-             
         $sound->move($location,$filename);
-
+        
+        $locationimage = storage_path('app/sdg/audio/' . (string)$id . '/images' .'/');
+        
+        // $directories = Storage::disk('custom')->makeDirectory( (string)$id . '/images');
+        
+        $image->move($locationimage, $filenameimage);
+        
         // insert
-        DB::table('musica')->insert(
-            [
-                'albumID' => 0,
-                'artistaID'=> $id,
-                'filepath' => $id,
-                'filepath_avatar' => $id,
-                'created_at' => date('d/m/y h:i:s a', time()),
-                'updated_at' => '',
-                'deleted_at' => '',
-                'nomemusica' => $filename
-            ]
-        );
+        // DB::table('musica')->insert(
+        //     [
+        //         'albumID' => 0,
+        //         'artistaID'=> $id,
+        //         'filepath' => 'audios/'.(string)$id . $filename,
+        //         'filepath_avatar' => 'audios/' .(string)$id . '/images' . '/' . $filenameimage,
+        //         'created_at' => date('d/m/y h:i:s a', time()),
+        //         'updated_at' => '',
+        //         'deleted_at' => '',
+        //         'nomemusica' => $filename
+        //     ]
+        // );
+
+        // OCC - PESQUISAR
+
+        // $idmusicaartista = DB::table('musica')->select('id')->where('artistaID', '=', $id)->orderByRaw('created_at DESC');
+
+        // DB::table('artistas_has_musicas')->insert(
+        //     [
+        //         'artistaID' => $id = $request->input('id_user'),
+        //         'musicaID' => $idmusicaartista
+        //     ]
+        // );
+
+        // DB::table('musica_has_genero')->insert(
+        //     [
+        //         'musicaID' => $idmusica,
+        //         'generoID' => 1
+        //     ]
+        // );
 
         return response()->json([
             'response' => 'OK'
