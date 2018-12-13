@@ -11,7 +11,7 @@
 
 .player{
     color: black;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-color: #f1f3f4;
     width: 100%;

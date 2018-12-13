@@ -293,23 +293,13 @@ class Home extends Component{
                 <Search/>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
-                    </Badge>
-                </IconButton>
-                <IconButton color="inherit">
-                    <Badge badgeContent={17} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 <IconButton
                     aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                     aria-haspopup="true"
                     onClick={this.handleProfileMenuOpen}
                     color="inherit"
                 >
-                    <ExitToApp onClick={this.exitApp}/>
+                    Logout<ExitToApp onClick={this.exitApp}/>
                 </IconButton>
                 </div>
             </div>

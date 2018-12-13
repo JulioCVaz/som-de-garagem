@@ -251,6 +251,17 @@ class MusicController extends Controller
 
     // metodo upload musicas
     public function uploadMusicas(Request $request){
+
+        // inserir em todas essas tabelas 
+
+        /*
+            select * from musica;
+
+            select * from artistas_has_musicas;
+
+            select * from musica_has_genero;
+        */
+
         // get audio da request
         $id = $request->input('id_user');
         // get id da request
@@ -264,6 +275,8 @@ class MusicController extends Controller
         $convert = (int)$count[0]->count + 1;
         
         $location = storage_path('app/sdg/audio/' . (string)$id . '/');
+
+        $directories = Storage::disk('custom')->makeDirectory( (string)$id . '/images');
              
         $sound->move($location,$filename);
 

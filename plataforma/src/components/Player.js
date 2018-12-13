@@ -47,45 +47,12 @@ class Player extends Component{
             console.log('erro');
         }
 
-        // if(props.musicas !== state.musicas){
-        //     if(nextProps.musicas[0].status == 'true'){
-        //         this.setState({musicas:nextProps.musicas});
-        //         setTimeout(()=>{
-        //             this.alteraPlay('true');
-        //         },100);
-        //     }else{
-        //         setTimeout(()=>{
-        //             this.alteraPlay('false');
-        //         }, 100);
-        //     }
-        // }
+        
     }
 
-    // static getDerivedStateFromProps(props, state){
-    //     let  nexState = {};
-    //     if(props.musicas !== state.musicas){
-    //         if(props.musicas[0] !== undefined){
-    //             if(props.musicas[0].nomemusica !== undefined){
-    //                 nexState = {
-    //                     status: 'true',
-    //                     musicas:props.musicas
-    //                 }
-    //             }else{
-    //                 nexState = {
-    //                     status: 'false',
-    //                     musicas:state.musicas
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return nexState
-    // }
-
-    // componentDidUpdate(){
-    //     this.alteraPlay();
-    // }
     
     render(){
+        console.log(this.state.musicas);
         return(
             <div className="player">
                 {
@@ -100,7 +67,8 @@ class Player extends Component{
                     style={{
                         width:'60%'
                     }}
-                    src='audios/9/06 Vida Boa (ao vivo).mp3'
+                    //'audios/'
+                    src={musica.filepath}
                     controls
                     />
                     </React.Fragment>

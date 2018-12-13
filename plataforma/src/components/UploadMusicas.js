@@ -30,12 +30,42 @@ const styles = theme => ({
 
 class UploadMusicas extends Component{
 
+  constructor(props){
+    super(props);
+    this._handleImageChange = this._handleImageChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
   state = {
     user: '',
     file: 0,
+    fileimage:'',
     completed: 0,
-    responseComplete: false
+    responseComplete: false,
+    file: '',
+    imagePreviewUrl: ''
   };
+
+  _handleSubmit(e) {
+    e.preventDefault();
+    // TODO: do something with -> this.state.file
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        fileimage: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
 
   handleFile = (e) => {
     if(e.target.files.length > 0){
@@ -91,6 +121,11 @@ class UploadMusicas extends Component{
   }
   render(){
       const {classes, theme} = this.props;
+      let {imagePreviewUrl} = this.state;
+      let $imagePreview = null;
+      if (imagePreviewUrl) {
+        $imagePreview = (<img src={imagePreviewUrl} width="200px"/>);
+      }
       console.log(this.state.profile);
         return(
           <React.Fragment>
@@ -146,9 +181,16 @@ class UploadMusicas extends Component{
                   </Grid>
                   <Grid xs={4} direction="row">
                   </Grid>
+                    <Grid>
+                      <form onSubmit={this._handleSubmit}>
+                        <input type="file" onChange={this._handleImageChange} />
+                        <button type="submit" onClick={this._handleSubmit}>Upload Image</button>
+                      </form>
+                      {$imagePreview}
+                  </Grid>
                 </Grid>
               </Grid>
-            </div>
+              </div>
           </React.Fragment>  
         );
     }
