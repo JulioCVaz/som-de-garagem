@@ -18,6 +18,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 // import tileData from './tileData';
@@ -70,7 +71,7 @@ const styles = theme => ({
     height: 450,
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+    color: 'black',
   },
 });
 
@@ -219,7 +220,7 @@ class LandingPage extends React.Component {
                         title={tile.title}
                         actionIcon={
                           <IconButton className={classes.icon}>
-                            <InfoIcon />
+                            <PlayArrowIcon color="secondary"/>
                           </IconButton>
                         }
                       />
