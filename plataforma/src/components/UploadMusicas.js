@@ -26,6 +26,18 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
   },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    minHeight: '100vh'
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
 });
 
 class UploadMusicas extends Component{
@@ -129,70 +141,87 @@ class UploadMusicas extends Component{
         $imagePreview = (<img src={imagePreviewUrl} width="200px"/>);
       }
         return(
-          <React.Fragment>
-            <HeaderLayout/>
-            <div className={classes.paddingWrapper}>
-              <Grid container justify="center" alignItems="flex-start">
-                <Grid xs={8}>
-                  <Grid xs={8}>
-                    <Typography variant="h5" gutterBottom>
-                        Upload de Músicas
-                    </Typography>
-                  </Grid>
-                  <hr/>
-                  <Grid xs={8} direction="row">
-                  <div>
-                    <Paper className={classes.root} elevation={1}>
-                      <Typography variant="h5" component="h3">
-                        Título: {(this.state.file != 0) ? this.state.file.name : ''}
+          <div>
+          <HeaderLayout/>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+              <div className={classes.paddingWrapper}>
+                <Grid container xs={12} justify="center" alignItems="flex-start">
+                  <Grid xs={10}>
+                    <Grid xs={8}>
+                      <Typography variant="h5" gutterBottom>
+                          Upload de Músicas
                       </Typography>
-                      <Typography component="p">
-                        Tamanho do arquivo: {(this.state.file != 0) ?
-                          (this.state.file.size).toString().substring(0,1) + ' MB'
-                          : ''}
-                      </Typography>
-                      <Typography component="p">
-                        Tipo Arquivo: {(this.state.file != 0) ? this.state.file.type : ''}
-                      </Typography>
-                    </Paper>
-                  </div>
-                    <Divider/>
-                    <input
-                      accept="audio/*"
-                      className={classes.input}
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={this.handleFile}
-                    />
-                    <label htmlFor="contained-button-file">
-                      <Button variant="contained" component="span" className={classes.button}>
-                        Upload
-                      </Button>
-                      <Button onClick={this.handleSend} variant="contained" component="span" className={classes.button}>Enviar</Button>
-                    </label>
-                    <br/>
-                    { 
-                      (this.state.completed > 0) ?
-                        <LinearProgress color="secondary" value={this.state.completed} />
-                        :
-                        (this.state.responseComplete) ? 
-                          'Upload efetuado com sucesso' : ''               
-                    }
-                  </Grid>
-                  <Grid xs={4} direction="row">
-                  </Grid>
-                    <Grid>
-                      <form onSubmit={this._handleSubmit}>
-                        <input type="file" onChange={this._handleImageChange} />
-                        <button type="submit" onClick={this._handleSubmit}>Upload Image</button>
-                      </form>
-                      {$imagePreview}
+                    </Grid>
+                    <hr/>
+                    <Grid xs={8}>
+                      <div style={{
+                        'display': 'flex',
+                        'flex-directon': 'row',
+                        'align-items': 'center',
+                        'justify-content': 'space-between',
+                        
+                      }}>
+                        <Grid xs={8}> 
+                          <Paper className={classes.root} elevation={1}>
+                            <Typography variant="h5" component="h3">
+                              Título: {(this.state.file != 0) ? this.state.file.name : ''}
+                            </Typography>
+                            <Typography component="p">
+                              Tamanho do arquivo: {(this.state.file != 0) ?
+                                (this.state.file.size).toString().substring(0,1) + ' MB'
+                                : ''}
+                            </Typography>
+                            <Typography component="p">
+                              Tipo Arquivo: {(this.state.file != 0) ? this.state.file.type : ''}
+                            </Typography>
+                          </Paper>
+                        </Grid>
+                        <Grid xs={2}>
+                            {$imagePreview}
+                        </Grid>
+                      </div>
+                      <Divider/>
+                      <input
+                        accept="audio/*"
+                        className={classes.input}
+                        id="contained-button-file"
+                        multiple
+                        type="file"
+                        onChange={this.handleFile}
+                      />
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="image-button-file"
+                        multiple
+                        type="file"
+                        onChange={this._handleImageChange}
+                      />
+                      <label htmlFor="contained-button-file">
+                        <Button variant="contained" color="secondary" component="span" className={classes.button}>
+                          Selecione uma música
+                        </Button>
+                      </label>
+                      <label htmlFor="image-button-file">
+                        <Button variant="contained" color="secondary" component="span" className={classes.button}>
+                          Selecione uma Thumbnail
+                        </Button>
+                      </label>
+                      <Button onClick={this.handleSend} color="primary" variant="contained" component="span" className={classes.button}>Enviar</Button>
+                      { 
+                        (this.state.completed > 0) ?
+                          <LinearProgress color="secondary" value={this.state.completed} />
+                          :
+                          (this.state.responseComplete) ? 
+                            'Upload efetuado com sucesso' : ''               
+                      }
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
               </div>
-          </React.Fragment>  
+          </main>
+        </div>
         );
     }
 }

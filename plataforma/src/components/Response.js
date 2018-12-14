@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -18,7 +17,6 @@ import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions/listen';
-import decaidos from '../img/decaidos_logo.jpeg';
 
 
 
@@ -141,7 +139,6 @@ class Response extends Component{
                             <CardMedia
                                 className={classes.cover}
                                 image={musica.filepath_avatar}
-                                title="Live from space album cover"
                             />
                         </Card>
                     </Grid>
