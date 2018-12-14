@@ -34,6 +34,7 @@ export default class Register extends Component{
             email: '',
             nome: ''
         },
+        tipousuario:'',
         checkedA: true,
         checked:false,
         open: false,
@@ -61,6 +62,7 @@ export default class Register extends Component{
     };
 
     handleChangeSwitch = name => event => {
+        console.log(event.target.checked);
         this.setState({ [name]: event.target.checked });
         setTimeout(()=>{
             if(this.state.checkedA){
@@ -84,6 +86,12 @@ export default class Register extends Component{
         this.setState({loading: true})
 
         setTimeout(()=>{
+            let tusuario = '';
+            if(this.state.tipousuario == true){
+                tusuario = 2; 
+            }else{
+                tusuario = 1;
+            }
             if(!user.nome || !user.email || !user.password){
                 this.setState({error: "Preencha todos os campos"});
             }else{
@@ -92,7 +100,7 @@ export default class Register extends Component{
                         formData.append('name', user.nome);
                         formData.append('email', user.email);
                         formData.append('password', user.password);
-                        formData.append('tipousuario', this.state.checkedA);
+                        formData.append('tipousuario', tusuario);
                         console.log(document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
                     api.post('/register', formData).then( (response) => {
                         console.log(response);
@@ -221,9 +229,9 @@ export default class Register extends Component{
                             <FormGroup row style={{'align-items':'center'}}>
                                 <span className="ouvinte">Ouvinte</span>
                                 <Switch
-                                checked={this.state.checkedA}
-                                onChange={this.handleChangeSwitch('checkedA')}
-                                value="checkedA"
+                                checked={this.state.tipousuario}
+                                onChange={this.handleChangeSwitch('tipousuario')}
+                                value="tipousuario"
                                 />
                                 <span className="artista">Artista</span>
                             </FormGroup>
@@ -234,7 +242,7 @@ export default class Register extends Component{
                                     <Checkbox
                                         checked={this.state.checked}
                                         onClick={this.handleClickOpen}
-                                        value="checkedA"
+                                        value="tipousuario"
                                     />
                                     }
                                     label="aceito os termos de contrato"

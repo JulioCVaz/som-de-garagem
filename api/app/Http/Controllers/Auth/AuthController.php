@@ -44,7 +44,7 @@ class AuthController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
-        $tipousuario = ($request->tipousuario == true) ? 2 : 1; // 2 para artista e 1 para ouvinte
+        $tipousuario = $request->tipousuario; // 2 para artista e 1 para ouvinte
         
         $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password), 'tipousuario' => $tipousuario]);
         $verification_code = str_random(30); //Generate verification code
