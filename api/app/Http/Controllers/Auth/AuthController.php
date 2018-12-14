@@ -32,7 +32,7 @@ class AuthController extends Controller
         
         // header('Access-Control-Allow-Headers: Authorization, Content-Type, X-Auth-Token', 'X-CSRF-TOKEN');
 
-        $credentials = $request->only('name', 'email', 'password');
+        $credentials = $request->only('name', 'email', 'password', 'tipousuario');
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
@@ -44,8 +44,9 @@ class AuthController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
+        $tipousuario = ($request->tipousuario == true) ? 2 : 1; // 2 para artista e 1 para ouvinte
         
-        $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+        $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password), 'tipousuario' => $tipousuario]);
         $verification_code = str_random(30); //Generate verification code
         DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Cadastro plataforma SOM DE GARAGEM";
@@ -127,7 +128,7 @@ class AuthController extends Controller
             $token = self::getToken($request->email, $request->password);
             $user->remember_token = $token;
             $user->save();
-            $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->remember_token,'name'=>$user->name, 'email'=>$user->email]];           
+            $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->remember_token,'name'=>$user->name, 'email'=>$user->email, 'tipousuario' => $user->tipousuario]];           
         }
         else {
           $response = ['success'=>false, 'data'=>'Record doesnt exists'];

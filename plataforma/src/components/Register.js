@@ -6,7 +6,7 @@ import api from "../services/api";
 import logo from '../img/logo-som-de-garagem.png';
 import loadinggif from '../img/loading.gif';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { Checkbox, FormGroup, FormControlLabel} from '@material-ui/core';
+import { Checkbox, FormGroup, FormControlLabel, FormHelperText} from '@material-ui/core';
 import ReCAPTCHA from "react-google-recaptcha";
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Switch from '@material-ui/core/Switch';
 
 
 const style = {
@@ -33,7 +34,7 @@ export default class Register extends Component{
             email: '',
             nome: ''
         },
-        loading: false,
+        checkedA: true,
         checked:false,
         open: false,
         showPassword: false,
@@ -59,6 +60,19 @@ export default class Register extends Component{
         this.setState({ user });
     };
 
+    handleChangeSwitch = name => event => {
+        this.setState({ [name]: event.target.checked });
+        setTimeout(()=>{
+            if(this.state.checkedA){
+                document.querySelector('.artista').style.fontSize ='22px';
+                document.querySelector('.ouvinte').style.fontSize='13px';
+            }else{
+                document.querySelector('.artista').style.fontSize='13px';
+                document.querySelector('.ouvinte').style.fontSize='22px';
+            }
+        },300);
+      };
+
     handleClickShowPassword = () => {
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
@@ -78,6 +92,7 @@ export default class Register extends Component{
                         formData.append('name', user.nome);
                         formData.append('email', user.email);
                         formData.append('password', user.password);
+                        formData.append('tipousuario', this.state.checkedA);
                         console.log(document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
                     api.post('/register', formData).then( (response) => {
                         console.log(response);
@@ -197,7 +212,23 @@ export default class Register extends Component{
                             value={user.repeatPassword}
                         />
                         <div>
-                            <FormGroup row>
+                            <div>
+                                <Typography variant="body2" gutterBottom>
+                                   Selecione um tipo de perfil 
+                                </Typography>
+                            </div>
+                        <div>
+                            <FormGroup row style={{'align-items':'center'}}>
+                                <span className="ouvinte">Ouvinte</span>
+                                <Switch
+                                checked={this.state.checkedA}
+                                onChange={this.handleChangeSwitch('checkedA')}
+                                value="checkedA"
+                                />
+                                <span className="artista">Artista</span>
+                            </FormGroup>
+                        </div>
+                            <FormGroup row >
                                 <FormControlLabel 
                                     control={
                                     <Checkbox

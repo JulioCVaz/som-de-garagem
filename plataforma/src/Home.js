@@ -182,6 +182,7 @@ class Home extends Component{
         error: '',
         profile: [],
         musicas: [],
+        user: '',
         open: false,
         anchorEl: null,
         mobileMoreAnchorEl: null,
@@ -239,10 +240,13 @@ class Home extends Component{
 
         let data = localStorage.getItem('user');
         let new_data = JSON.parse(data);
-        var name = new_data.name;
+        let name = new_data.name;
+        let tipousuario = new_data.tipousuario;
         // arrumar isso aqui amanhã
+
+        this.setState({user:tipousuario});
          
-        var arrayNomes = name.split(" ");
+        let arrayNomes = name.split(" ");
         let nname = `Olá ${arrayNomes[0]} ${arrayNomes[1]}`;
         this.setState({profile:nname});
       }
@@ -339,18 +343,26 @@ class Home extends Component{
                 <ListItemIcon onClick={this.resetHome}><HomeRoundedIcon/></ListItemIcon>
                 <ListItemText primary={'Início'}/>
               </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <LibraryMusicIcon onClick={this.goToUpload}/>
-                </ListItemIcon>
-                <ListItemText primary={'Upload de Músicas'}/>
-              </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <ListIcon onClick={this.goToList}/>
-                </ListItemIcon>
-                <ListItemText primary={'Lista de Músicas'}/>
-              </ListItem>
+              {
+                (this.state.user == 2) ?
+                  <React.Fragment>
+                    <ListItem button>
+                      <ListItemIcon>
+                        <LibraryMusicIcon onClick={this.goToUpload}/>
+                      </ListItemIcon>
+                      <ListItemText primary={'Upload de Músicas'}/>
+                    </ListItem>
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ListIcon onClick={this.goToList}/>
+                      </ListItemIcon>
+                      <ListItemText primary={'Lista de Músicas'}/>
+                    </ListItem>
+                  </React.Fragment>
+                :
+                ''
+              }
+              
               <Divider />
               <ListItem button>
                 <ListItemIcon><PlaylistPlay/></ListItemIcon>
