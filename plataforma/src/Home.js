@@ -43,6 +43,7 @@ import {logout} from './services/auth';
 import * as Actions from './actions/listen';
 import { bindActionCreators } from 'redux';
 import nofoto from './img/nofoto.png';
+import UploadMusicas from './components/UploadMusicas';
 
 
 const drawerWidth = 240;
@@ -182,6 +183,7 @@ class Home extends Component{
         error: '',
         profile: [],
         musicas: [],
+        upload : false,
         user: '',
         open: false,
         anchorEl: null,
@@ -226,10 +228,12 @@ class Home extends Component{
 
       resetHome = () => {
         this.reset();
+        this.setState({upload:false});
       }
 
       goToUpload = () => {
-        this.props.history.push(`${window.location.pathname}/upload`);
+        // this.props.history.push(`${window.location.pathname}/upload`);
+        this.setState({upload:true});
       }
 
       goToList = () => {
@@ -411,6 +415,8 @@ class Home extends Component{
                     </h1>
                   </Grid>
                 </Grid>
+              : (this.state.upload) ? 
+                <UploadMusicas/>
               :
                 <LandingPage/>
               }

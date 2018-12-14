@@ -142,7 +142,7 @@ class UploadMusicas extends Component{
       }
         return(
           <div>
-          <HeaderLayout/>
+          {/* <HeaderLayout/> */}
           <main className={classes.content}>
             <div className={classes.toolbar} />
               <div className={classes.paddingWrapper}>
