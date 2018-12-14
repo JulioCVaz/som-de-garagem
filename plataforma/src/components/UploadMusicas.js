@@ -12,7 +12,7 @@ import api from "../services/api";
 
 const styles = theme => ({
   paddingWrapper: {
-    marginTop: 100
+    marginTop: 0
   },
   input: {
     display: 'none',
@@ -29,7 +29,8 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    minHeight: '100vh'
+    minHeight: '100vh',
+    'background-color': 'white'
   },
   toolbar: {
     display: 'flex',
@@ -149,7 +150,7 @@ class UploadMusicas extends Component{
                 <Grid container xs={12} justify="center" alignItems="flex-start">
                   <Grid xs={10}>
                     <Grid xs={8}>
-                      <Typography variant="h5" gutterBottom>
+                      <Typography variant="h4" gutterBottom>
                           Upload de Músicas
                       </Typography>
                     </Grid>

@@ -44,6 +44,7 @@ import * as Actions from './actions/listen';
 import { bindActionCreators } from 'redux';
 import nofoto from './img/nofoto.png';
 import UploadMusicas from './components/UploadMusicas';
+import ListMusics from './components/ListMusics';
 
 
 const drawerWidth = 240;
@@ -184,6 +185,7 @@ class Home extends Component{
         profile: [],
         musicas: [],
         upload : false,
+        list: false,
         user: '',
         open: false,
         anchorEl: null,
@@ -229,19 +231,24 @@ class Home extends Component{
       resetHome = () => {
         this.reset();
         this.setState({upload:false});
+        this.setState({list:false});
       }
 
       goToUpload = () => {
+        console.log('fui clicado');
         // this.props.history.push(`${window.location.pathname}/upload`);
-        this.setState({upload:true});
+          this.setState({list:false});
+          this.setState({upload:true});
       }
 
       goToList = () => {
-        this.props.history.push(`${window.location.pathname}/lista-musicas`);
+        console.log('fui clicado');
+          this.setState({upload:false});
+          this.setState({list:true});
       }
 
       goToStream = () => {
-        this.props.history.push(`${window.location.pathname}/stream`);
+        // this.props.history.push(`${window.location.pathname}/stream`);
       }
 
       componentWillMount(){
@@ -391,9 +398,8 @@ class Home extends Component{
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-
             {
-              (this.state.musicas.length > 0) ?
+              ((this.state.musicas.length > 0 && !this.state.upload) && (this.state.musicas.length > 0 && !this.state.list)) ?
                 <Grid container spacing={8} justify="center" alignItems="center">
                   <br/>
                   <Grid item xs={10}>
@@ -404,7 +410,26 @@ class Home extends Component{
                   </Grid>
                   <Player/>
                 </Grid>
-              : (this.state.error.length > 0) ?
+              : 
+                (this.state.musicas.length > 0 && this.state.upload) ? 
+                <Grid container spacing={8} justify="center" alignItems="center">
+                  <br/>
+                  <Grid item xs={10}>
+                    <UploadMusicas/>
+                  </Grid>
+                  <Player/>
+                </Grid>
+              :
+                (this.state.musicas.length > 0 && this.state.list) ?
+                <Grid container spacing={8} justify="center" alignItems="center">
+                  <br/>
+                  <Grid item xs={10}>
+                    <ListMusics/>
+                  </Grid>
+                  <Player/>
+                </Grid>
+                :
+              (this.state.error.length > 0) ?
                 <Grid container spacing={8} justify="center" alignItems="center">
                   <br/>
                   <Grid item xs={10}>
@@ -415,8 +440,10 @@ class Home extends Component{
                     </h1>
                   </Grid>
                 </Grid>
-              : (this.state.upload) ? 
+              : (this.state.upload && this.state.musicas.length == 0) ?
                 <UploadMusicas/>
+              : (this.state.list && this.state.musicas.length == 0) ?
+                <ListMusics/>
               :
                 <LandingPage/>
               }

@@ -31,7 +31,8 @@ const styles = theme => ({
       overflowX: 'auto',
     },
     paddingWrapper: {
-        marginTop: 100
+        marginTop: 30,
+        'background-color': 'white'
       },
     table: {
       minWidth: 700,
@@ -179,7 +180,7 @@ const styles = theme => ({
                     >
                         { (this.state.renderizer) ?
                         <Grid xs={8}>
-                            <Typography variant="h3" gutterBottom>
+                            <Typography variant="h3" gutterBottom style={{'paddingTop': '50px'}}>
                                 Minhas músicas
                             </Typography>
                             <Paper className={classes.root}>
@@ -257,7 +258,9 @@ const styles = theme => ({
                         </Grid>
                         :
                         <Grid xs={8}>
-                            <Typography component="h2" variant="display1" gutterBottom>
+                            <Typography component="h2" variant="display1" gutterBottom style={{
+                                'paddingTop': '30px'
+                            }}>
                                     Carregando Músicas
                             </Typography>
                             <div className={classes.progress}>
