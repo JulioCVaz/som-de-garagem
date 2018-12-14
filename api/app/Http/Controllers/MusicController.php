@@ -277,7 +277,7 @@ class MusicController extends Controller
             [
                 'albumID' => 0,
                 'artistaID'=> $id,
-                'filepath' => 'audios/'.(string)$id . $filename,
+                'filepath' => 'audios/'.(string)$id . '/' . $filename,
                 'filepath_avatar' => 'audios/' .(string)$id . '/images' . '/' . $filenameimage,
                 'created_at' => date('d/m/y h:i:s a', time()),
                 'updated_at' => '',
@@ -288,18 +288,18 @@ class MusicController extends Controller
 
         // OCC - PESQUISAR
 
-        $idmusicaartista = DB::table('musica')->select('id')->where('artistaID', '=', $id)->orderByRaw('created_at DESC');
+        $idmusicaartista = DB::table('musica')->select('id')->where('artistaID', '=', $id)->orderByRaw('created_at DESC')->get();
 
         DB::table('artistas_has_musicas')->insert(
             [
-                'artistaID' => $id = $request->input('id_user'),
-                'musicaID' => $idmusicaartista
+                'artistaID' => 2, // (int)$request->input('id_user')
+                'musicaID' => $idmusicaartista[0]->id
             ]
         );
 
         DB::table('musica_has_genero')->insert(
             [
-                'musicaID' => $idmusica,
+                'musicaID' => $idmusicaartista[0]->id,
                 'generoID' => 1
             ]
         );
@@ -323,6 +323,10 @@ class MusicController extends Controller
                 'error' => 'música não localizada, erro!'
             ]);
         }
+
+        DB::table('musica_has_genero')->where('musicaID', '=', $dados['idmusica'])->delete();
+
+        DB::table('artistas_has_musicas')->where('musicaID', '=', $dados['idmusica'])->delete();
 
         DB::table('musica')->where('id', '=', $dados['idmusica'])->delete();
 

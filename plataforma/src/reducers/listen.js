@@ -15,12 +15,7 @@ export default function listen(state=[], action){
                         desc_artista: action.musicas.find.music.artista[0].desc_artista,
                         filepath: action.musicas.find.music.artista[0].filepath,
                         created_at: action.musicas.find.music.artista[0].created_at,
-                    },
-                    album: {
-                        id: action.musicas.find.music.album[0].id,
-                        desc_album: action.musicas.find.music.album[0].desc_album,
-                        filepath_avatar: action.musicas.find.music.album[0].filepath_avatar,
-                    },
+                    }
                 },
                 metadados: {
                     artistas_metadados: action.musicas.metadados.artistasgeneros,

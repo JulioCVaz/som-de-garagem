@@ -73,7 +73,7 @@ const styles = theme => ({
     }
 
     removeMusic = (e) => {
-        console.log(e.target.value);
+        console.log(this.state);
         let removeId = e.target.value;
 
         let formdata = new FormData();

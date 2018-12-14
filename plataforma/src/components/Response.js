@@ -140,7 +140,7 @@ class Response extends Component{
                             </div>
                             <CardMedia
                                 className={classes.cover}
-                                image={decaidos}
+                                image={musica.filepath_avatar}
                                 title="Live from space album cover"
                             />
                         </Card>
