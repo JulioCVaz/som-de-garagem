@@ -260,6 +260,31 @@ class MusicController extends Controller
         return response()->json($musica);
     }
 
+    public function buscaByGenero($data){
+        $genero = $data;
+
+        
+        $generos = DB::table('generos')->select('id')->where('desc_genero', 'LIKE', '%'.$genero.'%')->get();
+        
+        // dd($generos);
+
+        $resultgenero = $generos[0]->id;
+
+        $musicasgenero = DB::table('musica_has_genero')->select('musicaID')->where('generoID', '=', $resultgenero)->get();
+
+        $arr = [];
+
+        foreach($musicasgenero as $key => $value){
+            array_push($arr, $value->musicaID);
+        }
+
+        $select = DB::table('musica')->whereIn('id', $arr)->get();
+
+        return response()->json([
+            'result' => $select
+        ]);
+    }
+
     public function atualizaMusicaById(Request $request){
 
         $id = $request->input('id_user');
@@ -290,14 +315,10 @@ class MusicController extends Controller
         };
 
         $musicas = self::retornaMusicasArtistaCallBack($id);
-
-
+        
         return response()->json([
             'musicas' => $musicas
         ]);
-
-
-
     }
 
     // metodo upload musicas

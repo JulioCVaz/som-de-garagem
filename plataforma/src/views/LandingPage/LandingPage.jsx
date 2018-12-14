@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -41,7 +42,10 @@ import reggae from '../../assets/img/examples/reggae.jpg';
 import rock from '../../assets/img/examples/rock.jpg';
 import samba from '../../assets/img/examples/samba.jpg';
 import sertanejo from '../../assets/img/examples/sertanejo.jpg';
-
+// api
+import api from './../../services/api';
+//actions
+import * as Actions from '../../actions/listen';
 
 import landingPageStyle from "../../assets/jss/material-kit-react/views/landingPage.jsx";
 
@@ -169,6 +173,31 @@ const tileData = [
    ];
 
 class LandingPage extends React.Component {
+
+  state = {
+    data : '',
+    musicas: ''
+  }
+
+  // addMusic = () => {
+  //   return this.props.listenGenererMusic(this.state.data);
+  // }
+
+  _handleSearchGeneres = (data) => {
+    console.log('fui clicado');
+      // api.get(`/musicas/generos/${data}`)
+      // .then(
+      //     response => {
+      //       this.setState({musicas:response})
+      //       this.addMusic();
+      //     }
+      // )
+      // .catch(
+      //   error => console.log(error)
+      // )
+  };
+
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -214,17 +243,17 @@ class LandingPage extends React.Component {
             <div className={classes.root}>
                 <GridList cols={3} spacing={12} spacellHeight={180} className={classes.gridList}>
                   {tileData.map(tile => (
-                    <GridListTile key={tile.img}>
-                      <img src={tile.img} alt={tile.title} />
-                      <GridListTileBar
-                        title={tile.title}
-                        actionIcon={
-                          <IconButton className={classes.icon}>
-                            <PlayArrowIcon color="secondary"/>
-                          </IconButton>
-                        }
-                      />
-                    </GridListTile>
+                      <GridListTile key={tile.img}>
+                        <img src={tile.img} alt={tile.title} />
+                        <GridListTileBar
+                          title={tile.title}
+                          actionIcon={
+                            <IconButton className={classes.icon}>
+                              <PlayArrowIcon color="secondary" onClick={this._handleSearchGeneres(tile.title)}/>
+                            </IconButton>
+                          }
+                        />
+                      </GridListTile>
                   ))}
                 </GridList>
             </div>
@@ -236,4 +265,8 @@ class LandingPage extends React.Component {
   }
 }
 
-export default withStyles(landingPageStyle)(LandingPage);
+const mapStateToProps = state => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps)(withStyles(landingPageStyle)(LandingPage));

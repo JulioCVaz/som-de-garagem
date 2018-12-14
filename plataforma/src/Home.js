@@ -236,6 +236,10 @@ class Home extends Component{
         this.props.history.push(`${window.location.pathname}/lista-musicas`);
       }
 
+      goToStream = () => {
+        this.props.history.push(`${window.location.pathname}/stream`);
+      }
+
       componentWillMount(){
 
         let data = localStorage.getItem('user');
@@ -302,8 +306,7 @@ class Home extends Component{
                     aria-haspopup="true"
                     onClick={this.handleProfileMenuOpen}
                     color="inherit"
-                >
-                    Logout<ExitToApp onClick={this.exitApp}/>
+                ><ExitToApp onClick={this.exitApp}/>
                 </IconButton>
                 </div>
             </div>
@@ -370,7 +373,7 @@ class Home extends Component{
               </ListItem>
               {/* TODO: fazer a logica do tipo de perfil */}
               <ListItem button>
-                <ListItemIcon><CommentIcon/></ListItemIcon>
+                <ListItemIcon><CommentIcon onClick={this.goToStream}/></ListItemIcon>
                 <ListItemText primary={'Mensagens'}/>
               </ListItem>
           </List>

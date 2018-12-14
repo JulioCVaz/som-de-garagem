@@ -59,3 +59,10 @@ export function ProfileApplication(profile){
         profile
     }
 }
+
+export function listenGenererMusic(data){
+    return{
+        type: 'LISTEN_GENERO',
+        data
+    }
+}

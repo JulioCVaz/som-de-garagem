@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import MessageConfirme from './components/MessageConfirme';
 import UploadMusicas from './components/UploadMusicas';
 import ListMusics from './components/ListMusics';
+import StreamMusic from './components/Stream';
 
 // animate : https://hackernoon.com/animated-page-transitions-with-react-router-4-reacttransitiongroup-and-animated-1ca17bd97a1a
 
@@ -30,6 +31,7 @@ const Routes = () => (
             <Route path="/mensagem-confirmacao" component={MessageConfirme} />
             <Route path="/sdg/upload" component={UploadMusicas}/>
             <Route path="/sdg/lista-musicas" component={ListMusics}/>
+            <Route path="/sdg/stream" component={StreamMusic}/>
             <PrivateRoute path="/sdg" component={Home}/>
             <Route path="/landing" component={Landing}/>
             <Route path="*" component={() => <h1>Página não encontrada</h1>}/>
