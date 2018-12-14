@@ -151,6 +151,7 @@ const styles = theme => ({
                     direction="row"
                     justify="center"
                     alignItems="center"
+                    style={{paddingBottom: 100}}
                     >
                         { (this.state.renderizer) ?
                         <Grid xs={8}>

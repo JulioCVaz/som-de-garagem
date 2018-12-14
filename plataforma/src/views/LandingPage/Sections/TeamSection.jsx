@@ -17,9 +17,9 @@ import CardFooter from "../../../components-landing/Card/CardFooter.jsx";
 
 import teamStyle from "../../../assets/jss/material-kit-react/views/landingPageSections/teamStyle.jsx";
 
-import team1 from "../../../assets/img/faces/avatar.jpg";
-import team2 from "../../../assets/img/faces/christian.jpg";
-import team3 from "../../../assets/img/faces/kendall.jpg";
+import team1 from "../../../assets/img/faces/Guga.jpg";
+import team2 from "../../../assets/img/faces/decaidos.jpeg";
+import team3 from "../../../assets/img/faces/joaopedro.png";
 
 
 
@@ -42,16 +42,13 @@ class TeamSection extends React.Component {
                   <img src={team1} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Gigi Hadid
+                  Guga Pine
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
+                  <small className={classes.smallTitle}>Levante a Cabeça</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                  Guga Pine, o novo cantor de MPB que está começando a bombar nas redes sociais, lançou o seu primeiro álbum recentemente, chamado Levante a Cabeça
                   </p>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
@@ -85,16 +82,13 @@ class TeamSection extends React.Component {
                   <img src={team2} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Christian Louboutin
+                  Decaídos de Plutão
                   <br />
-                  <small className={classes.smallTitle}>Designer</small>
+                  <small className={classes.smallTitle}>Olá Terráqueos</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                    Com seu novo estilo de tocar rock in roll com blues, esses garotos vem ganhando a atenção de todos, eles vieram para dominar.
                   </p>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
@@ -121,16 +115,13 @@ class TeamSection extends React.Component {
                   <img src={team3} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Kendall Jenner
+                  João Pedro
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
+                  <small className={classes.smallTitle}>Especialista</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                  Artista, multi-instrumentista, produtor musical e compositor de trilha sonora, João Pedro Pinheiro.
                   </p>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
