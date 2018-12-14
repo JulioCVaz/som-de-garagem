@@ -61,15 +61,26 @@ class MusicController extends Controller
         ]);
     }
 
-    // retorna músicas de um id(artista) especifico
-
-    public function retornaMusicasArtista($id){
-
+    // callback atualiza
+    public function retornaMusicasArtistaCallBack($id){
         $idartista = $id;
 
         $musicas = DB::table('musica')->where('artistaID', '=', $idartista)
                         ->select('*')
-                        ->get();  
+                        ->get();
+
+        return $musicas;
+    }
+
+    // retorna músicas de um id(artista) especifico
+
+    public function retornaMusicasArtista($id){
+        $idartista = $id;
+
+        $musicas = DB::table('musica')->where('artistaID', '=', $idartista)
+                        ->select('*')
+                        ->get();
+         
 
         return response()->json([
             'musicas' => $musicas
@@ -247,6 +258,46 @@ class MusicController extends Controller
     public function index(){
         $musica = Musica::all();
         return response()->json($musica);
+    }
+
+    public function atualizaMusicaById(Request $request){
+
+        $id = $request->input('id_user');
+
+        $newname = $request->input('newname');
+
+        $oldname = $request->input('oldname');
+
+        $nname = $newname . '.mp3';
+
+        $idmusica = DB::table('musica')->select('id')->where('nomemusica' , 'LIKE', '%' . $oldname . '%')->get();
+
+        $idm = $idmusica[0]->id;
+
+        $update = DB::table('musica')->where('id', $idm)->update(
+            [
+                'nomemusica' => $nname
+            ]
+        );
+        
+        // ver com o bruno sobre esse move
+        // Storage::move(storage_path('app/sdg/audio/' . (string)$id . '/' . $oldname), storage_path('app/sdg/audio/' . (string)$id . '/' . $nname));
+
+        if(!$update){
+            return response()->json([
+                'erro'
+            ]);
+        };
+
+        $musicas = self::retornaMusicasArtistaCallBack($id);
+
+
+        return response()->json([
+            'musicas' => $musicas
+        ]);
+
+
+
     }
 
     // metodo upload musicas

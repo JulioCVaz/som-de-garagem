@@ -15,7 +15,13 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import api from "../services/api";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const styles = theme => ({
@@ -47,20 +53,7 @@ const styles = theme => ({
       },
   });
 
-  function rand() {
-    return Math.round(Math.random() * 20) - 10;
-  }
   
-  function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
 
   class ListMusic extends Component{
 
@@ -69,6 +62,7 @@ const styles = theme => ({
         open: false,
         profile: [],
         musicas: [],
+        newname:'',
         renderizer: false
     }
 
@@ -92,7 +86,7 @@ const styles = theme => ({
         )
     }
 
-    handleOpen = (e) => {
+    handleClickOpen = (e) => {
         this.setState({ open: true });
         console.log(e.target);
 
@@ -110,12 +104,43 @@ const styles = theme => ({
                 'icon': icon 
             }];
         this.setState({dadosedit: arr});
+      };
+    
+      handleAtualiza = () => {
+        
+        let t = document.querySelector('label');
+
+        let oldname = t.innerHTML;
+
+        let formdata = new FormData();
+        formdata.append('id_user', this.state.profile.id);
+        formdata.append('newname', this.state.newname);
+        formdata.append('oldname', oldname);
+
+        api.post('/musicas/atualiza', formdata)
+        .then((response) =>{ 
+            this.handleClose();
+            this.setState({musicas:response.data.musicas})
+            }
+        )
+        .catch(
+            error => console.log(error)
+        );
+      }
+      handleClose = () => {
+        this.setState({ open: false });
+      };
+
+    handleOpen = (e) => {
+        this.setState({ open: true });
+        
 
       };
     
     handleClose = () => {
     this.setState({ open: false });
     };
+
 
     componentWillMount(){
             let data = localStorage.getItem('user');
@@ -141,7 +166,6 @@ const styles = theme => ({
 
     render(){
         const { classes } = this.props;
-        console.log(this.state.musicas);
         return(
             <React.Fragment>
                 <HeaderLayout/>
@@ -177,8 +201,10 @@ const styles = theme => ({
                                                         {musica.nomemusica}
                                                     </TableCell>
                                                     <TableCell identity={musica.id}>{musica.created_at}</TableCell>
-                                                    <TableCell identity={musica.id}>{musica.filepath_avatar}</TableCell>
-                                                    <TableCell className={classes.hoverButton} onClick={this.handleOpen}><EditIcon/><input type="button" id={musica.id} value={musica.id}/></TableCell>
+                                                    <TableCell identity={musica.id}>
+                                                    <img src={musica.filepath_avatar} style={{width: 50, height: 55}}/>
+                                                    </TableCell>
+                                                    <TableCell className={classes.hoverButton} onClick={this.handleClickOpen}><EditIcon/><input type="button" id={musica.id} value={musica.id}/></TableCell>
                                                     <TableCell className={classes.hoverButton}><DeleteIcon key={musica.id}/><input type="button" id={musica.id} value={musica.id} onClick={this.removeMusic}/></TableCell>
                                                 </TableRow>
                                             ))
@@ -187,34 +213,47 @@ const styles = theme => ({
                                 </Table>
                             </Paper>
                             <div>
-                                <Modal
-                                aria-labelledby="simple-modal-title"
-                                aria-describedby="simple-modal-description"
-                                open={this.state.open}
-                                onClose={this.handleClose}
-                                >
-                                <div style={getModalStyle()} className={classes.paper}>
+
                                     { 
                                         (this.state.dadosedit[0]) ?
                                             this.state.dadosedit.map(dados => (
                                                 <React.Fragment key={dados.icon}>
-                                                    <Typography variant="h6" id="modal-title">
-                                                        {dados.musica}
-                                                    </Typography>
-                                                    <Typography variant="subtitle1" id="simple-modal-description">
-                                                        {dados.criado}
-                                                    </Typography>
-                                                    <Typography variant="subtitle1" id="simple-modal-description">
-                                                        {dados.icon}
-                                                    </Typography>
-                                                </React.Fragment>
+                                                <Dialog
+                                                    open={this.state.open}
+                                                    onClose={this.handleClose}
+                                                    aria-labelledby="form-dialog-title"
+                                                >
+                                                    <DialogTitle id="form-dialog-title">Atualizar</DialogTitle>
+                                                    <DialogContent>
+                                                    <DialogContentText>
+                                                        edite informações da música
+                                                    </DialogContentText>
+                                                    <TextField
+                                                        autoFocus
+                                                        margin="dense"
+                                                        id="name"
+                                                        label={dados.musica}
+                                                        type="text"
+                                                        fullWidth
+                                                        onChange={e => this.setState({ newname:e.target.value })}
+                                                    />
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                    <Button onClick={this.handleClose} color="primary">
+                                                        Cancelar
+                                                    </Button>
+                                                    <Button onClick={this.handleAtualiza} color="primary">
+                                                        Atualizar
+                                                    </Button>
+                                                    </DialogActions>
+                                                </Dialog>
+                                            </React.Fragment>
                                             ))
                                         :
-                                            'Nenhum dado para atualizar'
+                                            ''
                                     }
                                 </div>
-                                </Modal>
-                            </div>
+                            
                         </Grid>
                         :
                         <Grid xs={8}>

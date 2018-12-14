@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'api/'), function(){
     Route::get('musicas/artista/{id}', 'MusicController@retornaMusicasArtista');
     Route::get('musicas/dir/{id}', 'MusicController@retornaMusicaById');
     Route::post('musicas/remove', 'MusicController@removeMusicaById');
+    Route::post('musicas/atualiza', 'MusicController@atualizaMusicaById');
     
     // routes only albums
     Route::get('album/{string}', 'AlbumController@showbylike'); // arrumar
