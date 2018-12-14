@@ -169,7 +169,6 @@ const styles = theme => ({
         const { classes } = this.props;
         return(
             <React.Fragment>
-                <HeaderLayout/>
                 <div className={classes.paddingWrapper}>
                     <Grid
                     container
@@ -179,7 +178,7 @@ const styles = theme => ({
                     style={{paddingBottom: 100}}
                     >
                         { (this.state.renderizer) ?
-                        <Grid xs={8}>
+                        <Grid xs={10}>
                             <Typography variant="h3" gutterBottom style={{'paddingTop': '50px'}}>
                                 Minhas músicas
                             </Typography>

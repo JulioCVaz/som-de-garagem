@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
+import prof from '../assets/img/profile1.jpg';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions/listen';
@@ -192,7 +193,7 @@ class Response extends Component{
                                         alt="Contemplative Reptile"
                                         className={classes.media}
                                         height="140"
-                                        image="/static/images/cards/contemplative-reptile.jpg"
+                                        image={prof}
                                         title="Contemplative Reptile"
                                         />
                                         <CardContent>
