@@ -2,7 +2,7 @@
 
 
 
-**Impulsionar a carreira musical de artistas amadores**
+**Impulsionar a carreira musical de artistas independentes**
 
 
 
