@@ -6,9 +6,9 @@
 
 
 
-Devido aos grandes serviços de **stream** de músicas da atualidade, artistas amadores não possuem um canal específico com possíveis apreciadores de suas músicas. Então, como impulsionar a carreira de artistas amadores no meio musical e auxiliar na divulgação de suas músicas, composições e shows?
+Devido aos grandes serviços de **stream** de músicas da atualidade, artistas independentes não possuem um canal específico com possíveis apreciadores de suas músicas. Então, como impulsionar a carreira desses artistas no meio musical e auxiliar na divulgação de suas músicas, composições e shows?
 
-O objetivo deste trabalho é desenvolver uma plataforma de divulgação, onde artistas amadores possam compartilhar suas músicas e composições, utilizando parâmetros, como estilos **musicais, artistas e playlists**, divulgar suas agendas de shows e ainda fazer stream através da plataforma.
+O objetivo deste trabalho é desenvolver uma plataforma de divulgação, onde artistas amadores possam compartilhar suas músicas e composições, utilizando parâmetros, como estilos **musicais, artistas e playlists**, divulgar suas agendas de shows e ainda fazer streams através da plataforma.
 
 
 
