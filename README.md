@@ -29,7 +29,7 @@ O objetivo deste trabalho é desenvolver uma plataforma de divulgação, onde ar
 
 ## Navegação site e tela de cadastro
 
-![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/navegacao-site.png)
+![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/navegacao-site.PNG)
 
 # Publicação
 
