@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/logo-som-de-garagem.png)
+
 # SOM DE GARAGEM
 
 
@@ -19,15 +21,15 @@ O objetivo deste trabalho é desenvolver uma plataforma de divulgação, onde ar
 
 ## Protótipo da plataforma
 
-
-
+![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/plataforma.png)
 
 ## Protótipo aplicativo mobile
 
-
+![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/mobile.png)
 
 ## Navegação site e tela de cadastro
 
+![alt text](https://raw.githubusercontent.com/JulioCVaz/som-de-garagem/master/documentacao/imgs/navegacao-site.png)
 
 # Publicação
 
